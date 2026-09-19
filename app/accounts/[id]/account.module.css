@@ -1,0 +1,134 @@
+.page {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 56px 32px 80px;
+  position: relative;
+  z-index: 1;
+}
+
+.gameTag {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  border: 1px solid var(--line-bright);
+  padding: 4px 10px;
+  margin-bottom: 14px;
+}
+
+.title {
+  font-size: 30px;
+  color: var(--text);
+  margin-bottom: 24px;
+}
+
+.statRow {
+  display: flex;
+  gap: 28px;
+  padding: 18px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 28px;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.statLabel {
+  font-size: 12px;
+  color: var(--text-faint);
+}
+
+.statValue {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.section {
+  margin-bottom: 28px;
+}
+
+.sectionTitle {
+  font-size: 16px;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+
+.skinTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.skinTag {
+  font-size: 13px;
+  color: var(--text-muted);
+  border: 1px solid var(--line);
+  padding: 5px 12px;
+}
+
+.body {
+  color: var(--text-muted);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.buyBox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  background: var(--bg-panel);
+  border: 1px solid var(--line);
+  padding: 24px;
+  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
+}
+
+.price {
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.priceNote {
+  font-size: 12px;
+  color: var(--text-faint);
+  margin-top: 4px;
+}
+
+.errorText {
+  color: var(--danger);
+  font-size: 14px;
+  margin-top: 14px;
+}
+
+@media (max-width: 640px) {
+  .page {
+    padding: 32px 16px 60px;
+  }
+  .title {
+    font-size: 22px;
+    margin-bottom: 18px;
+  }
+  .statRow {
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .buyBox {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+    padding: 20px 16px;
+  }
+  .buyBox a {
+    width: 100%;
+    text-align: center;
+  }
+}

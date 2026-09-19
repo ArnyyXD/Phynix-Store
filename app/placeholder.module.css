@@ -1,0 +1,19 @@
+.page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 80px 32px;
+  position: relative;
+  z-index: 1;
+}
+
+.heading {
+  font-size: 34px;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+
+.body {
+  color: var(--text-muted);
+  font-size: 15px;
+  line-height: 1.7;
+}

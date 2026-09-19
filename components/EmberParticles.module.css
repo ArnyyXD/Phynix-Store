@@ -1,0 +1,48 @@
+.wrap {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ember {
+  position: absolute;
+  bottom: -20px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff7ec 0%, var(--ember) 35%, var(--accent) 65%, transparent 75%);
+  box-shadow: 0 0 8px var(--accent-glow);
+  opacity: 0;
+  animation-name: emberRise;
+  animation-timing-function: ease-in;
+  animation-iteration-count: infinite;
+  will-change: transform, opacity;
+}
+
+@keyframes emberRise {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0;
+  }
+  8% {
+    opacity: 0.85;
+  }
+  55% {
+    transform: translate3d(var(--drift), -55vh, 0);
+    opacity: 0.6;
+  }
+  92% {
+    opacity: 0.2;
+  }
+  100% {
+    transform: translate3d(calc(var(--drift) * 1.6), -105vh, 0);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ember {
+    animation: none;
+    display: none;
+  }
+}

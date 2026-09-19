@@ -1,0 +1,126 @@
+.page {
+  max-width: 440px;
+  margin: 0 auto;
+  padding: 90px 24px;
+  position: relative;
+  z-index: 1;
+}
+
+.card {
+  background: var(--bg-panel);
+  border: 1px solid var(--line);
+  padding: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.heading {
+  font-size: 28px;
+  color: var(--text);
+}
+
+.subheading {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-top: -8px;
+}
+
+.googleBtn {
+  width: 100%;
+  background: var(--text);
+  color: #14161d;
+  border: none;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 15px;
+  padding: 13px;
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+  transition: opacity 0.15s ease;
+}
+
+.googleBtn:hover {
+  opacity: 0.9;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--text-faint);
+  font-size: 12px;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.input {
+  background: var(--bg);
+  border: 1px solid var(--line-bright);
+  color: var(--text);
+  padding: 12px 14px;
+  font-size: 15px;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.error {
+  color: var(--danger);
+  font-size: 13px;
+}
+
+.sentNote {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.backLink {
+  background: none;
+  border: none;
+  color: var(--text-faint);
+  font-size: 13px;
+  text-decoration: underline;
+  padding: 4px 0;
+  align-self: flex-start;
+}
+
+@media (max-width: 480px) {
+  .page {
+    padding: 40px 16px;
+  }
+  .card {
+    padding: 24px 18px;
+    gap: 16px;
+  }
+  .heading {
+    font-size: 24px;
+  }
+  .input {
+    font-size: 16px; /* Prevents mobile Safari zoom */
+  }
+}

@@ -1,0 +1,201 @@
+.page {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 56px 32px 80px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero {
+  margin-bottom: 40px;
+}
+
+.heading {
+  font-size: 36px;
+  line-height: 1.1;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+
+.subheading {
+  color: var(--text-muted);
+  font-size: 15px;
+  max-width: 540px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.section {
+  background: var(--bg-panel);
+  border: 1px solid var(--line);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.sectionTitle {
+  font-size: 18px;
+  color: var(--text);
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line);
+}
+
+.sectionNote {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: -8px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.input,
+.textarea {
+  background: var(--bg);
+  border: 1px solid var(--line-bright);
+  color: var(--text);
+  padding: 12px 14px;
+  font-size: 14px;
+  font-family: var(--font-body);
+  width: 100%;
+}
+
+.input:focus,
+.textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.textarea {
+  resize: vertical;
+}
+
+.typeToggle {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.typeBtn {
+  width: 100%;
+  background: transparent;
+  border: 1px solid var(--line-bright);
+  color: var(--text-muted);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 14px;
+  padding: 12px 8px;
+  transition: border-color 0.18s ease, color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.typeBtn:hover {
+  color: var(--text);
+  box-shadow: 0 0 14px var(--accent-soft);
+}
+
+.typeBtnActive {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent-bright);
+  box-shadow: 0 0 14px var(--accent-soft);
+}
+
+.gameBtnIcon {
+  font-size: 11px;
+  margin-right: 4px;
+}
+
+.errorText {
+  color: var(--danger);
+  font-size: 14px;
+  text-align: center;
+}
+
+.submitBtn {
+  width: 100%;
+  padding: 16px;
+  font-size: 17px;
+}
+
+.confirmBox {
+  background: var(--bg-panel);
+  border: 1px solid var(--line);
+  padding: 48px 36px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.confirmHeading {
+  font-size: 26px;
+  color: var(--text);
+}
+
+.confirmBody {
+  color: var(--text-muted);
+  font-size: 15px;
+  max-width: 440px;
+}
+
+.backLink {
+  background: none;
+  border: none;
+  color: var(--text-faint);
+  font-size: 13px;
+  text-decoration: underline;
+  padding: 4px 0;
+}
+
+@media (max-width: 768px) {
+  .typeToggle {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .page {
+    padding: 36px 16px 60px;
+  }
+  .section {
+    padding: 20px 16px;
+  }
+  .row {
+    grid-template-columns: 1fr;
+  }
+  .heading {
+    font-size: 28px;
+  }
+  .input,
+  .textarea {
+    font-size: 16px; /* Prevents auto-zoom on iOS mobile Safari */
+  }
+  .confirmBox {
+    padding: 32px 18px;
+  }
+}

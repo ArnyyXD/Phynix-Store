@@ -1,0 +1,58 @@
+.wrap {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+  mix-blend-mode: normal;
+}
+
+.blob {
+  position: fixed;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  filter: blur(90px);
+  mix-blend-mode: screen;
+  will-change: transform;
+  transition: opacity 0.4s ease;
+}
+
+.purple {
+  width: 560px;
+  height: 560px;
+  background: radial-gradient(circle, var(--crimson) 0%, transparent 70%);
+  opacity: 0.4;
+}
+
+.crimson {
+  width: 480px;
+  height: 480px;
+  background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+  opacity: 0.45;
+}
+
+.violet {
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(circle, var(--ember) 0%, transparent 70%);
+  opacity: 0.3;
+}
+
+@media (max-width: 720px) {
+  .blob {
+    filter: blur(60px);
+  }
+  .purple {
+    width: 360px;
+    height: 360px;
+  }
+  .crimson {
+    width: 320px;
+    height: 320px;
+  }
+  .violet {
+    width: 280px;
+    height: 280px;
+  }
+}

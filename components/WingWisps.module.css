@@ -1,0 +1,69 @@
+.wrap {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.wing {
+  position: absolute;
+  top: 50%;
+  width: 42vw;
+  height: 70vh;
+  transform: translateY(-50%);
+  animation: breathe 9s ease-in-out infinite;
+}
+
+.left {
+  left: -14vw;
+}
+
+.right {
+  right: -14vw;
+  transform: translateY(-50%) scaleX(-1);
+}
+
+.feather {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 55%;
+  height: 92%;
+  background: linear-gradient(180deg, transparent 0%, var(--crimson-dim) 45%, var(--bg) 100%);
+  filter: blur(28px);
+  border-radius: 50% 50% 45% 45% / 60% 60% 40% 40%;
+  opacity: 0.45;
+  transform-origin: bottom center;
+  transform: translate(-50%, -50%) rotate(calc(-18deg + var(--i) * 12deg))
+    scale(calc(1 - var(--i) * 0.12));
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    opacity: 0.7;
+    transform: translateY(-50%) scale(1);
+  }
+  50% {
+    opacity: 0.95;
+    transform: translateY(-50%) scale(1.04);
+  }
+}
+
+.right .feather {
+  transform: translate(-50%, -50%) rotate(calc(18deg - var(--i) * 12deg))
+    scale(calc(1 - var(--i) * 0.12));
+}
+
+@media (max-width: 720px) {
+  .wing {
+    width: 60vw;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wing {
+    animation: none;
+  }
+}
