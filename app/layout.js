@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 import Navbar from "../components/Navbar";
 import Providers from "./providers";
@@ -6,9 +7,9 @@ import EmberParticles from "../components/EmberParticles";
 import WingWisps from "../components/WingWisps";
 
 export const metadata = {
-  title: "Phynix Store — Valorant, Clash of Clans & BGMI Account Marketplace",
+  title: "Phynix Store — Valorant, Clash of Clans, BGMI & Free Fire Account Marketplace",
   description:
-    "Buy, sell, rent or EMI Valorant, Clash of Clans, and BGMI accounts, with a middleman escrow flow and seller KYC before payout.",
+    "Buy, sell, rent or EMI Valorant, Clash of Clans, BGMI, and Free Fire accounts, with a middleman escrow flow and seller KYC before payout.",
   icons: {
     icon: "/logo.png",
   },
@@ -32,6 +33,7 @@ export default function RootLayout({ children }) {
           <CursorGlow />
           <Navbar />
           <main>{children}</main>
+          <Analytics />
         </Providers>
       </body>
     </html>
