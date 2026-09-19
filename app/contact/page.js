@@ -15,9 +15,17 @@ export default function ContactPage() {
           confirmation ready to share.
         </p>
         <div className={styles.contactBox}>
-          <strong>WhatsApp (priority):</strong> +91 99486 33426
+          <strong>WhatsApp (priority):</strong>{" "}
+          <a
+            href="https://wa.me/919948633426?text=Hi%2C%20I%20have%20an%20active%20trade%20dispute%20on%20Phynix%20Store"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            +91 99486 33426
+          </a>
           <br />
-          <strong>Email:</strong> [support@phynixstore.com]
+          <strong>Email:</strong>{" "}
+          <a href="mailto:phynixstore1@gmail.com">phynixstore1@gmail.com</a>
           <br />
           <strong>Hours:</strong> Available 24/7
           <br />
@@ -33,9 +41,25 @@ export default function ContactPage() {
           within 1 hour.
         </p>
         <div className={styles.contactBox}>
-          <strong>Phone / WhatsApp:</strong> +91 99486 33426
+          <strong>Phone / WhatsApp:</strong>{" "}
+          <a
+            href="https://wa.me/919948633426"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            +91 99486 33426
+          </a>{" "}
+          |{" "}
+          <a
+            href="https://wa.me/919337974799"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            +91 93379 74799
+          </a>
           <br />
-          <strong>Email:</strong> [help@phynixstore.com]
+          <strong>Email:</strong>{" "}
+          <a href="mailto:cyvexpro@gmail.com">cyvexpro@gmail.com</a>
         </div>
       </section>
 

@@ -75,8 +75,14 @@
   color: var(--text);
 }
 
-.placeholder {
+.contactBox a {
   color: var(--accent-bright);
+  text-decoration: underline;
+  transition: color 0.18s ease;
+}
+
+.contactBox a:hover {
+  color: var(--accent);
 }
 
 @media (max-width: 640px) {
