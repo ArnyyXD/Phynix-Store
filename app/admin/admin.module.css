@@ -1,0 +1,370 @@
+.page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 28px;
+  gap: 16px;
+}
+
+.heading {
+  font-size: 32px;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.subtext {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.refreshBtn {
+  background: var(--bg-panel);
+  border: 1px solid var(--line-bright);
+  color: var(--text);
+  padding: 10px 16px;
+  font-size: 13px;
+  font-family: var(--font-display);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.refreshBtn:hover:not(:disabled) {
+  border-color: var(--accent);
+  color: var(--accent-bright);
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.statCard {
+  background: var(--bg-panel);
+  border: 1px solid var(--line);
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.statNumber {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.statLabel {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.controlsRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.filterGroup {
+  display: flex;
+  gap: 8px;
+}
+
+.filterBtn {
+  background: var(--bg-panel);
+  border: 1px solid var(--line);
+  color: var(--text-muted);
+  padding: 8px 16px;
+  font-size: 13px;
+  font-family: var(--font-display);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filterBtn:hover {
+  color: var(--text);
+  border-color: var(--line-bright);
+}
+
+.filterActive {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent-bright);
+}
+
+.searchInput {
+  background: var(--bg);
+  border: 1px solid var(--line-bright);
+  color: var(--text);
+  padding: 10px 16px;
+  font-size: 14px;
+  width: 320px;
+  outline: none;
+}
+
+.searchInput:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.tableWrap {
+  background: var(--bg-panel);
+  border: 1px solid var(--line);
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 14px;
+}
+
+.table th {
+  background: var(--bg);
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--line);
+}
+
+.table td {
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--line);
+  color: var(--text);
+  vertical-align: middle;
+}
+
+.rowSold {
+  opacity: 0.65;
+}
+
+.listingCell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.tableThumb {
+  width: 56px;
+  height: 36px;
+  object-fit: cover;
+  border: 1px solid var(--line-bright);
+  flex-shrink: 0;
+}
+
+.tableThumbPlaceholder {
+  width: 56px;
+  height: 36px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.titleLink {
+  color: var(--text);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.titleLink:hover {
+  color: var(--accent-bright);
+  text-decoration: underline;
+}
+
+.metaSub {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 3px;
+}
+
+.gameBadge {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.priceText {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--text);
+  font-size: 15px;
+}
+
+.sellerCell {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sellerName {
+  font-weight: 500;
+}
+
+.sellerEmail {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.statusBadge {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 2px;
+  letter-spacing: 0.5px;
+}
+
+.statusLive {
+  background: rgba(34, 197, 94, 0.15);
+  color: #4ade80;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.statusSold {
+  background: rgba(234, 179, 8, 0.15);
+  color: #fde047;
+  border: 1px solid rgba(234, 179, 8, 0.3);
+}
+
+.dateText {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.actionGroup {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.toggleBtn {
+  background: transparent;
+  border: 1px solid var(--line-bright);
+  color: var(--text-muted);
+  padding: 6px 12px;
+  font-size: 12px;
+  font-family: var(--font-display);
+  cursor: pointer;
+  transition: all 0.18s ease;
+  white-space: nowrap;
+}
+
+.toggleBtn:hover:not(:disabled) {
+  border-color: #eab308;
+  color: #fde047;
+}
+
+.deleteBtn {
+  background: rgba(220, 38, 38, 0.1);
+  border: 1px solid rgba(220, 38, 38, 0.4);
+  color: #ef4444;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-family: var(--font-display);
+  cursor: pointer;
+  transition: all 0.18s ease;
+  white-space: nowrap;
+}
+
+.deleteBtn:hover:not(:disabled) {
+  background: rgba(220, 38, 38, 0.25);
+  border-color: #ef4444;
+  color: #fff;
+}
+
+.deleteBtn:disabled,
+.toggleBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.emptyBox {
+  background: var(--bg-panel);
+  border: 1px solid var(--line);
+  padding: 48px;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.errorMessage {
+  background: rgba(220, 38, 38, 0.15);
+  border: 1px solid rgba(220, 38, 38, 0.4);
+  color: #f87171;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--accent);
+  color: #fff;
+  padding: 14px 20px;
+  font-size: 14px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  z-index: 100;
+}
+
+.accessDeniedCard {
+  background: var(--bg-panel);
+  border: 1px solid var(--line);
+  padding: 48px 32px;
+  text-align: center;
+  max-width: 500px;
+  margin: 40px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.lockIcon {
+  font-size: 44px;
+}
+
+.loadingBox {
+  text-align: center;
+  padding: 80px 20px;
+  color: var(--text-muted);
+  font-family: var(--font-display);
+  font-size: 18px;
+}
+
+@media (max-width: 768px) {
+  .controlsRow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .searchInput {
+    width: 100%;
+  }
+  .statsGrid {
+    grid-template-columns: 1fr;
+  }
+}

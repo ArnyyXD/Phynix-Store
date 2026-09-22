@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
+import { isAdminEmail } from "../lib/admin";
 import styles from "./Navbar.module.css";
 
 const LINKS = [
@@ -19,6 +20,12 @@ export default function Navbar() {
   const pathname = usePathname();
   const { data: session, status } = useSession();
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const isAdmin = status === "authenticated" && isAdminEmail(session?.user?.email);
+
+  const navLinks = isAdmin
+    ? [...LINKS, { href: "/admin", label: "Admin Panel" }]
+    : LINKS;
 
   // Close mobile menu on page navigation
   useEffect(() => {
@@ -41,7 +48,7 @@ export default function Navbar() {
         </Link>
 
         <nav className={`${styles.links} ${menuOpen ? styles.linksOpen : ""}`}>
-          {LINKS.map((link) => (
+          {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
