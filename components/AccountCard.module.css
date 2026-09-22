@@ -11,6 +11,16 @@
   transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
 }
 
+.cardThumb {
+  width: calc(100% + 44px);
+  margin: -22px -22px 0;
+  height: 140px;
+  object-fit: cover;
+  display: block;
+  border-bottom: 1px solid var(--line);
+  opacity: 0.92;
+}
+
 .card::after {
   content: "";
   position: absolute;

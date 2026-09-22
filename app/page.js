@@ -8,7 +8,7 @@ export default function HomePage() {
       <Banner />
       <section className={styles.hero}>
         <h1 className={styles.heading}>
-          Buy, sell, rent or EMI game accounts — safely.
+          Buy, sell or EMI game accounts — safely.
         </h1>
         <p className={styles.subheading}>
           Valorant, Clash of Clans, BGMI &amp; Free Fire. Verified sellers, a middleman
@@ -18,9 +18,6 @@ export default function HomePage() {
         <div className={styles.ctaRow}>
           <Link href="/buy" className="btn-primary">
             Buy accounts
-          </Link>
-          <Link href="/rent" className="btn-primary">
-            Rent accounts
           </Link>
           <Link href="/sell" className="btn-ghost">
             List your account

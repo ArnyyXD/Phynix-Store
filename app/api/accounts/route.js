@@ -87,6 +87,7 @@ export async function POST(request) {
       rentPeriodDays: body.rentPeriodDays ? Number(body.rentPeriodDays) : null,
       emiMonths: body.emiMonths ? Number(body.emiMonths) : null,
       description: body.description || null,
+      images: Array.isArray(body.images) ? body.images : [],
       status: "live", // auto-live; add manual review step later if needed
     },
   });

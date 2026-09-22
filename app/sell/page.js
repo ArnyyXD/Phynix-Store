@@ -26,6 +26,7 @@ const initialForm = {
 export default function SellPage() {
   const { data: session, status } = useSession();
   const [form, setForm] = useState(initialForm);
+  const [images, setImages] = useState([]); // Array of { name, dataUrl }
   const [submitted, setSubmitted] = useState(false);
   const [newListing, setNewListing] = useState(null);
   const [error, setError] = useState("");
@@ -39,6 +40,23 @@ export default function SellPage() {
   function handleGameChange(gameId) {
     const config = getGameConfig(gameId);
     setForm((prev) => ({ ...prev, game: gameId, rank: config.ranks[0] }));
+  }
+
+  function handleImageChange(e) {
+    const files = Array.from(e.target.files).slice(0, 5); // max 5 images
+    const readers = files.map(
+      (file) =>
+        new Promise((resolve) => {
+          const reader = new FileReader();
+          reader.onload = (ev) => resolve({ name: file.name, dataUrl: ev.target.result });
+          reader.readAsDataURL(file);
+        })
+    );
+    Promise.all(readers).then(setImages);
+  }
+
+  function removeImage(index) {
+    setImages((prev) => prev.filter((_, i) => i !== index));
   }
 
   async function handleSubmit(e) {
@@ -58,6 +76,7 @@ export default function SellPage() {
         body: JSON.stringify({
           ...form,
           skinNames,
+          images: images.map((img) => img.dataUrl),
           // Note: UPI ID / WhatsApp are collected here so a listing has
           // payout details ready, but should be reviewed/verified by an
           // admin step before being shown to buyers — see the payment
@@ -138,9 +157,9 @@ export default function SellPage() {
   return (
     <div className={styles.page}>
       <section className={styles.hero}>
-        <h1 className={styles.heading}>List your account for sale or rent</h1>
+        <h1 className={styles.heading}>List your account for sale</h1>
         <p className={styles.subheading}>
-          Fill in accurate details — choose whether to sell, rent out, or offer EMI for your Valorant, Clash of Clans, BGMI, or Free Fire account.
+          Fill in accurate details — choose to sell outright or offer EMI for your Valorant, Clash of Clans, BGMI, or Free Fire account.
         </p>
       </section>
 
@@ -247,9 +266,34 @@ export default function SellPage() {
           </label>
 
           <label className={styles.field}>
-            <span className={styles.label}>Screenshots (rank, inventory, level)</span>
-            <input className={styles.input} type="file" multiple accept="image/*" />
+            <span className={styles.label}>Screenshots (rank, inventory, level) — max 5</span>
+            <input
+              className={styles.input}
+              type="file"
+              multiple
+              accept="image/*"
+              onChange={handleImageChange}
+            />
           </label>
+
+          {images.length > 0 && (
+            <div className={styles.imagePreviewGrid}>
+              {images.map((img, i) => (
+                <div key={i} className={styles.imagePreviewItem}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={img.dataUrl} alt={img.name} className={styles.imagePreviewThumb} />
+                  <button
+                    type="button"
+                    className={styles.imageRemoveBtn}
+                    onClick={() => removeImage(i)}
+                    aria-label={`Remove ${img.name}`}
+                  >
+                    ✕
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
         <div className={styles.section}>
@@ -274,9 +318,7 @@ export default function SellPage() {
 
           <div className={styles.row}>
             <label className={styles.field}>
-              <span className={styles.label}>
-                {form.listingType === "rent" ? "Rent price (₹) *" : "Estimated price (₹) *"}
-              </span>
+              <span className={styles.label}>Estimated price (₹) *</span>
               <input
                 className={styles.input}
                 type="number"
@@ -287,21 +329,6 @@ export default function SellPage() {
                 required
               />
             </label>
-
-            {form.listingType === "rent" && (
-              <label className={styles.field}>
-                <span className={styles.label}>Rent period (days)</span>
-                <input
-                  className={styles.input}
-                  type="number"
-                  min="1"
-                  placeholder="e.g. 30"
-                  value={form.rentPeriodDays}
-                  onChange={(e) => update("rentPeriodDays", e.target.value)}
-                  required
-                />
-              </label>
-            )}
 
             {form.listingType === "emi" && (
               <label className={styles.field}>

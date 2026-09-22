@@ -73,6 +73,24 @@ export default function AccountDetailPage() {
         </div>
       </div>
 
+      {account.images?.length > 0 && (
+        <div className={styles.section}>
+          <h2 className={styles.sectionTitle}>Screenshots</h2>
+          <div className={styles.gallery}>
+            {account.images.map((src, i) => (
+              /* eslint-disable-next-line @next/next/no-img-element */
+              <img
+                key={i}
+                src={src}
+                alt={`Listing screenshot ${i + 1}`}
+                className={styles.galleryImg}
+                onClick={() => window.open(src, "_blank")}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+
       {account.skinNames?.length > 0 && (
         <div className={styles.section}>
           <h2 className={styles.sectionTitle}>{gameConfig.itemsLabel}</h2>

@@ -9,7 +9,6 @@ import styles from "./Navbar.module.css";
 
 const LINKS = [
   { href: "/buy", label: "Buy" },
-  { href: "/rent", label: "Rent" },
   { href: "/sell", label: "Sell" },
   { href: "/policies/payment-security", label: "Payment Security" },
   { href: "/policies/privacy-refund", label: "Privacy & Refunds" },

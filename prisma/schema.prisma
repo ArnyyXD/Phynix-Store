@@ -94,11 +94,12 @@ model GameAccount {
   skinNames      String[] // skins, notable items, or maxed heroes/troops
   agentsUnlocked String?
   region         String   @default("India")
-  listingType    String // "buy" | "rent" | "emi"
+  listingType    String // "buy" | "emi"
   price          Int // estimated price in INR
   rentPeriodDays Int?
   emiMonths      Int?
   description    String?
+  images         String[] // Base64 data URIs or hosted URLs of uploaded screenshots
 
   // pending: awaiting review, live: visible in /buy, sold: no longer available,
   // rejected: failed review

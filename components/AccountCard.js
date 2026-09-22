@@ -22,6 +22,7 @@ export default function AccountCard({ account }) {
     emiMonths,
     seller,
     verified,
+    images,
   } = account;
 
   const gameConfig = getGameConfig(game);
@@ -30,6 +31,7 @@ export default function AccountCard({ account }) {
   const extraSkinCount = skinList.length - visibleSkins.length;
   const sellerName =
     typeof seller === "string" ? seller : seller?.name || seller?.email || "seller";
+  const thumbSrc = images && images.length > 0 ? images[0] : null;
 
   return (
     <article
@@ -37,6 +39,11 @@ export default function AccountCard({ account }) {
       style={{ "--accent-rgb": hexToRgb(gameConfig.accent) }}
     >
       <div className={styles.accentBar} style={{ background: gameConfig.accent }} />
+
+      {thumbSrc && (
+        /* eslint-disable-next-line @next/next/no-img-element */
+        <img src={thumbSrc} alt="Listing screenshot" className={styles.cardThumb} />
+      )}
 
       <div className={styles.cardTop}>
         <div className={styles.gameBadge} style={{ color: gameConfig.accent }}>
