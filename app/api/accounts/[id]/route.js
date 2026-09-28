@@ -30,17 +30,25 @@ export async function DELETE(request, { params }) {
 
   const { id } = await params;
 
-  const account = await prisma.gameAccount.findUnique({ where: { id } });
+  const account = await prisma.gameAccount.findUnique({
+    where: { id },
+    include: {
+      seller: { select: { id: true, email: true } },
+    },
+  });
+
   if (!account) {
     return NextResponse.json({ error: "Listing not found" }, { status: 404 });
   }
 
-  const isOwner = account.sellerId === session.user.id;
+  const isOwner =
+    account.sellerId === session.user.id ||
+    (session.user.email && account.seller?.email?.toLowerCase() === session.user.email.toLowerCase());
   const isAdmin = isAdminEmail(session.user.email);
 
   if (!isOwner && !isAdmin) {
     return NextResponse.json(
-      { error: "Forbidden: Admin access required to delete listings." },
+      { error: "Forbidden: You can only delete your own listings." },
       { status: 403 }
     );
   }

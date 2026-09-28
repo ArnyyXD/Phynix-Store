@@ -7,6 +7,28 @@ const REQUIRED_FIELDS = ["game", "rank", "skinNames", "price", "listingType"];
 
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
+  const mine = searchParams.get("mine");
+
+  if (mine === "true") {
+    const session = await getServerSession(authOptions);
+    if (!session?.user?.id && !session?.user?.email) {
+      return NextResponse.json([]);
+    }
+    const myAccounts = await prisma.gameAccount.findMany({
+      where: {
+        OR: [
+          ...(session.user.id ? [{ sellerId: session.user.id }] : []),
+          ...(session.user.email ? [{ seller: { email: session.user.email } }] : []),
+        ],
+      },
+      orderBy: { createdAt: "desc" },
+      include: {
+        seller: { select: { name: true, email: true } },
+      },
+    });
+    return NextResponse.json(myAccounts);
+  }
+
   const minPrice = searchParams.get("minPrice");
   const maxPrice = searchParams.get("maxPrice");
   const listingType = searchParams.get("listingType");

@@ -1,10 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSession, signIn } from "next-auth/react";
+import AccountCard from "../../components/AccountCard";
 import { LISTING_TYPES } from "../../lib/mockAccounts";
 import { GAMES, getGameConfig } from "../../lib/games";
 import { buildWhatsAppLink, sellerVerificationMessage } from "../../lib/whatsapp";
+import { compressImage } from "../../lib/imageCompressor";
 import styles from "./sell.module.css";
 
 const initialForm = {
@@ -16,7 +18,6 @@ const initialForm = {
   region: "India",
   listingType: "buy",
   price: "",
-  rentPeriodDays: "",
   emiMonths: "",
   upiId: "",
   whatsapp: "",
@@ -31,7 +32,42 @@ export default function SellPage() {
   const [newListing, setNewListing] = useState(null);
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [compressing, setCompressing] = useState(false);
+  const [activeTab, setActiveTab] = useState("list"); // "list" | "myListings"
+  const [myListings, setMyListings] = useState([]);
+  const [loadingListings, setLoadingListings] = useState(false);
+
   const gameConfig = getGameConfig(form.game);
+
+  useEffect(() => {
+    if (status === "authenticated") {
+      fetchMyListings();
+    }
+  }, [status]);
+
+  async function fetchMyListings() {
+    setLoadingListings(true);
+    try {
+      const res = await fetch("/api/accounts?mine=true");
+      if (res.ok) {
+        const data = await res.json();
+        setMyListings(data);
+      }
+    } catch (e) {
+      console.error("Failed to fetch seller listings:", e);
+    } finally {
+      setLoadingListings(false);
+    }
+  }
+
+  async function handleDeleteMyListing(id) {
+    const res = await fetch(`/api/accounts/${id}`, { method: "DELETE" });
+    if (!res.ok) {
+      const data = await res.json();
+      throw new Error(data.error || "Failed to delete listing");
+    }
+    setMyListings((prev) => prev.filter((a) => a.id !== id));
+  }
 
   function update(field, value) {
     setForm((prev) => ({ ...prev, [field]: value }));
@@ -42,17 +78,19 @@ export default function SellPage() {
     setForm((prev) => ({ ...prev, game: gameId, rank: config.ranks[0] }));
   }
 
-  function handleImageChange(e) {
-    const files = Array.from(e.target.files).slice(0, 5); // max 5 images
-    const readers = files.map(
-      (file) =>
-        new Promise((resolve) => {
-          const reader = new FileReader();
-          reader.onload = (ev) => resolve({ name: file.name, dataUrl: ev.target.result });
-          reader.readAsDataURL(file);
-        })
-    );
-    Promise.all(readers).then(setImages);
+  async function handleImageChange(e) {
+    const files = Array.from(e.target.files).slice(0, 5);
+    if (!files.length) return;
+    setCompressing(true);
+    try {
+      const processed = await Promise.all(files.map((file) => compressImage(file)));
+      const valid = processed.filter(Boolean);
+      setImages((prev) => [...prev, ...valid].slice(0, 5));
+    } catch (err) {
+      console.error("Image processing error:", err);
+    } finally {
+      setCompressing(false);
+    }
   }
 
   function removeImage(index) {
@@ -77,10 +115,6 @@ export default function SellPage() {
           ...form,
           skinNames,
           images: images.map((img) => img.dataUrl),
-          // Note: UPI ID / WhatsApp are collected here so a listing has
-          // payout details ready, but should be reviewed/verified by an
-          // admin step before being shown to buyers — see the payment
-          // security policy page.
         }),
       });
 
@@ -93,12 +127,39 @@ export default function SellPage() {
       const created = await res.json();
       setNewListing(created);
       setSubmitted(true);
+      fetchMyListings();
     } catch (err) {
       setError("Something went wrong submitting the listing.");
     } finally {
       setSubmitting(false);
     }
   }
+
+  // Live preview account for the card in selling section
+  const previewAccount = {
+    id: "preview",
+    title:
+      form.title ||
+      `${form.rank} account — ${
+        form.skinNames
+          ? form.skinNames.split(",").filter(Boolean).length
+          : 0
+      } items`,
+    game: form.game,
+    rank: form.rank,
+    level: form.level ? Number(form.level) : null,
+    skinNames: form.skinNames
+      ? form.skinNames.split(",").map((s) => s.trim()).filter(Boolean)
+      : [],
+    region: form.region || "India",
+    listingType: form.listingType,
+    price: Number(form.price) || 0,
+    emiMonths: form.emiMonths ? Number(form.emiMonths) : null,
+    seller: session?.user?.name || session?.user?.email || "You",
+    verified: false,
+    images: images.map((img) => img.dataUrl),
+    status: "live",
+  };
 
   if (status === "loading") {
     return <div className={styles.page} />;
@@ -143,6 +204,7 @@ export default function SellPage() {
             className={styles.backLink}
             onClick={() => {
               setForm(initialForm);
+              setImages([]);
               setSubmitted(false);
               setNewListing(null);
             }}
@@ -157,244 +219,368 @@ export default function SellPage() {
   return (
     <div className={styles.page}>
       <section className={styles.hero}>
-        <h1 className={styles.heading}>List your account for sale</h1>
+        <h1 className={styles.heading}>Seller Dashboard</h1>
         <p className={styles.subheading}>
-          Fill in accurate details — choose to sell outright or offer EMI for your Valorant, Clash of Clans, BGMI, or Free Fire account.
+          List new game accounts or manage your active &amp; sold listings.
         </p>
+
+        {/* Seller Tab Navigation */}
+        <div className={styles.tabBar}>
+          <button
+            type="button"
+            className={`${styles.tabBtn} ${
+              activeTab === "list" ? styles.tabBtnActive : ""
+            }`}
+            onClick={() => setActiveTab("list")}
+          >
+            📝 List an Account
+          </button>
+          <button
+            type="button"
+            className={`${styles.tabBtn} ${
+              activeTab === "myListings" ? styles.tabBtnActive : ""
+            }`}
+            onClick={() => {
+              setActiveTab("myListings");
+              fetchMyListings();
+            }}
+          >
+            📦 My Listings {myListings.length > 0 && `(${myListings.length})`}
+          </button>
+        </div>
       </section>
 
-      <form className={styles.form} onSubmit={handleSubmit}>
-        <div className={styles.section}>
-          <h2 className={styles.sectionTitle}>Account details</h2>
-
-          <label className={styles.field}>
-            <span className={styles.label}>Game *</span>
-            <div className={styles.typeToggle}>
-              {GAMES.map((g) => (
-                <button
-                  type="button"
-                  key={g.id}
-                  className={
-                    form.game === g.id
-                      ? `${styles.typeBtn} ${styles.typeBtnActive}`
-                      : styles.typeBtn
-                  }
-                  style={
-                    form.game === g.id
-                      ? { borderColor: g.accent, background: `${g.accent}22`, color: g.accent }
-                      : undefined
-                  }
-                  onClick={() => handleGameChange(g.id)}
-                >
-                  <span className={styles.gameBtnIcon}>{g.icon}</span> {g.label}
-                </button>
-              ))}
+      {/* ── My Listings Tab ────────────────────────── */}
+      {activeTab === "myListings" && (
+        <section className={styles.myListingsSection}>
+          <div className={styles.myListingsHeader}>
+            <div>
+              <h2 className={styles.sectionTitle}>Your Listed Accounts</h2>
+              <p className={styles.sectionNote}>
+                Manage your accounts. When an account gets sold out, you can delete it immediately using the Delete button.
+              </p>
             </div>
-          </label>
-
-          <label className={styles.field}>
-            <span className={styles.label}>Listing title (optional)</span>
-            <input
-              className={styles.input}
-              type="text"
-              placeholder="e.g. Immortal 2 — Full Ready-Up Skin Vault"
-              value={form.title}
-              onChange={(e) => update("title", e.target.value)}
-            />
-          </label>
-
-          <div className={styles.row}>
-            <label className={styles.field}>
-              <span className={styles.label}>{gameConfig.rankLabel} *</span>
-              <select
-                className={styles.input}
-                value={form.rank}
-                onChange={(e) => update("rank", e.target.value)}
-              >
-                {gameConfig.ranks.map((r) => (
-                  <option key={r} value={r}>
-                    {r}
-                  </option>
-                ))}
-              </select>
-            </label>
-
-            <label className={styles.field}>
-              <span className={styles.label}>{gameConfig.levelLabel}</span>
-              <input
-                className={styles.input}
-                type="number"
-                min="1"
-                placeholder="e.g. 187"
-                value={form.level}
-                onChange={(e) => update("level", e.target.value)}
-              />
-            </label>
+            <button
+              type="button"
+              className={styles.refreshBtn}
+              onClick={fetchMyListings}
+              disabled={loadingListings}
+            >
+              {loadingListings ? "Refreshing..." : "🔄 Refresh"}
+            </button>
           </div>
 
-          <label className={styles.field}>
-            <span className={styles.label}>{gameConfig.itemsLabel} *</span>
-            <input
-              className={styles.input}
-              type="text"
-              placeholder={gameConfig.itemsPlaceholder}
-              value={form.skinNames}
-              onChange={(e) => update("skinNames", e.target.value)}
-              required
-            />
-          </label>
-
-          <label className={styles.field}>
-            <span className={styles.label}>Region</span>
-            <input
-              className={styles.input}
-              type="text"
-              value={form.region}
-              onChange={(e) => update("region", e.target.value)}
-            />
-          </label>
-
-          <label className={styles.field}>
-            <span className={styles.label}>Description</span>
-            <textarea
-              className={styles.textarea}
-              rows={4}
-              placeholder="Competitive history, notable bundles, anything a buyer should know."
-              value={form.description}
-              onChange={(e) => update("description", e.target.value)}
-            />
-          </label>
-
-          <label className={styles.field}>
-            <span className={styles.label}>Screenshots (rank, inventory, level) — max 5</span>
-            <input
-              className={styles.input}
-              type="file"
-              multiple
-              accept="image/*"
-              onChange={handleImageChange}
-            />
-          </label>
-
-          {images.length > 0 && (
-            <div className={styles.imagePreviewGrid}>
-              {images.map((img, i) => (
-                <div key={i} className={styles.imagePreviewItem}>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={img.dataUrl} alt={img.name} className={styles.imagePreviewThumb} />
-                  <button
-                    type="button"
-                    className={styles.imageRemoveBtn}
-                    onClick={() => removeImage(i)}
-                    aria-label={`Remove ${img.name}`}
-                  >
-                    ✕
-                  </button>
-                </div>
+          {loadingListings ? (
+            <div className={styles.emptyState}>Loading your listings...</div>
+          ) : myListings.length === 0 ? (
+            <div className={styles.emptyState}>
+              <p>You haven't listed any accounts yet.</p>
+              <button
+                type="button"
+                className="btn-primary"
+                style={{ marginTop: 14 }}
+                onClick={() => setActiveTab("list")}
+              >
+                List Your First Account
+              </button>
+            </div>
+          ) : (
+            <div className={styles.myListingsGrid}>
+              {myListings.map((acc) => (
+                <AccountCard
+                  key={acc.id}
+                  account={acc}
+                  onDelete={handleDeleteMyListing}
+                />
               ))}
             </div>
           )}
-        </div>
+        </section>
+      )}
 
-        <div className={styles.section}>
-          <h2 className={styles.sectionTitle}>Listing type & estimated price</h2>
+      {/* ── List an Account Tab ────────────────────────── */}
+      {activeTab === "list" && (
+        <form className={styles.form} onSubmit={handleSubmit}>
+          <div className={styles.section}>
+            <h2 className={styles.sectionTitle}>Account details</h2>
 
-          <div className={styles.typeToggle}>
-            {LISTING_TYPES.map((type) => (
-              <button
-                type="button"
-                key={type.id}
-                className={
-                  form.listingType === type.id
-                    ? `${styles.typeBtn} ${styles.typeBtnActive}`
-                    : styles.typeBtn
-                }
-                onClick={() => update("listingType", type.id)}
-              >
-                {type.label}
-              </button>
-            ))}
-          </div>
-
-          <div className={styles.row}>
             <label className={styles.field}>
-              <span className={styles.label}>Estimated price (₹) *</span>
+              <span className={styles.label}>Game *</span>
+              <div className={styles.typeToggle}>
+                {GAMES.map((g) => (
+                  <button
+                    type="button"
+                    key={g.id}
+                    className={
+                      form.game === g.id
+                        ? `${styles.typeBtn} ${styles.typeBtnActive}`
+                        : styles.typeBtn
+                    }
+                    style={
+                      form.game === g.id
+                        ? {
+                            borderColor: g.accent,
+                            background: `${g.accent}22`,
+                            color: g.accent,
+                          }
+                        : undefined
+                    }
+                    onClick={() => handleGameChange(g.id)}
+                  >
+                    <span className={styles.gameBtnIcon}>{g.icon}</span>{" "}
+                    {g.label}
+                  </button>
+                ))}
+              </div>
+            </label>
+
+            <label className={styles.field}>
+              <span className={styles.label}>Listing title (optional)</span>
               <input
                 className={styles.input}
-                type="number"
-                min="0"
-                placeholder="e.g. 4500"
-                value={form.price}
-                onChange={(e) => update("price", e.target.value)}
-                required
+                type="text"
+                placeholder="e.g. Immortal 2 — Full Ready-Up Skin Vault"
+                value={form.title}
+                onChange={(e) => update("title", e.target.value)}
               />
             </label>
 
-            {form.listingType === "emi" && (
+            <div className={styles.row}>
               <label className={styles.field}>
-                <span className={styles.label}>EMI duration (months)</span>
+                <span className={styles.label}>{gameConfig.rankLabel} *</span>
+                <select
+                  className={styles.input}
+                  value={form.rank}
+                  onChange={(e) => update("rank", e.target.value)}
+                >
+                  {gameConfig.ranks.map((r) => (
+                    <option key={r} value={r}>
+                      {r}
+                    </option>
+                  ))}
+                </select>
+              </label>
+
+              <label className={styles.field}>
+                <span className={styles.label}>{gameConfig.levelLabel}</span>
                 <input
                   className={styles.input}
                   type="number"
                   min="1"
-                  placeholder="e.g. 3"
-                  value={form.emiMonths}
-                  onChange={(e) => update("emiMonths", e.target.value)}
-                  required
+                  placeholder="e.g. 187"
+                  value={form.level}
+                  onChange={(e) => update("level", e.target.value)}
                 />
               </label>
-            )}
-          </div>
-        </div>
+            </div>
 
-        <div className={styles.section}>
-          <h2 className={styles.sectionTitle}>Payout details</h2>
-          <p className={styles.sectionNote}>
-            Buyers pay our middleman directly — never you — so this UPI ID is
-            only used when we pay you out after a sale. Before payout, we'll
-            ask you to verify ownership with your account's original email
-            or a government ID (see the{" "}
-            <a href="/policies/payment-security">Payment Security</a> page).
-            Nothing here goes live to buyers.
-          </p>
-
-          <div className={styles.row}>
             <label className={styles.field}>
-              <span className={styles.label}>Your UPI ID (for payout)</span>
+              <span className={styles.label}>{gameConfig.itemsLabel} *</span>
               <input
                 className={styles.input}
                 type="text"
-                placeholder="yourname@upi"
-                value={form.upiId}
-                onChange={(e) => update("upiId", e.target.value)}
+                placeholder={gameConfig.itemsPlaceholder}
+                value={form.skinNames}
+                onChange={(e) => update("skinNames", e.target.value)}
                 required
               />
             </label>
 
             <label className={styles.field}>
-              <span className={styles.label}>WhatsApp number</span>
+              <span className={styles.label}>Region</span>
               <input
                 className={styles.input}
-                type="tel"
-                placeholder="+91 XXXXX XXXXX"
-                value={form.whatsapp}
-                onChange={(e) => update("whatsapp", e.target.value)}
-                required
+                type="text"
+                value={form.region}
+                onChange={(e) => update("region", e.target.value)}
               />
             </label>
+
+            <label className={styles.field}>
+              <span className={styles.label}>Description</span>
+              <textarea
+                className={styles.textarea}
+                rows={4}
+                placeholder="Competitive history, notable bundles, anything a buyer should know."
+                value={form.description}
+                onChange={(e) => update("description", e.target.value)}
+              />
+            </label>
+
+            {/* Screenshot Upload Card Area */}
+            <div className={styles.uploadCard}>
+              <div className={styles.uploadHeader}>
+                <span className={styles.label}>
+                  📸 Account Screenshots (Rank, Inventory, Level) — max 5
+                </span>
+                <span className={styles.uploadTip}>
+                  Screenshots show directly within your listing card!
+                </span>
+              </div>
+
+              <div className={styles.uploadBox}>
+                <input
+                  id="screenshot-input"
+                  className={styles.fileInputHidden}
+                  type="file"
+                  multiple
+                  accept="image/*"
+                  onChange={handleImageChange}
+                  disabled={compressing}
+                />
+                <label htmlFor="screenshot-input" className={styles.uploadDropzone}>
+                  <span className={styles.uploadIcon}>📷</span>
+                  <span className={styles.uploadMainText}>
+                    {compressing
+                      ? "Processing & optimizing screenshots..."
+                      : "Click to upload screenshots"}
+                  </span>
+                  <span className={styles.uploadSubText}>
+                    PNG, JPG, WebP supported • Up to 5 screenshots
+                  </span>
+                </label>
+              </div>
+
+              {images.length > 0 && (
+                <div className={styles.imagePreviewGrid}>
+                  {images.map((img, i) => (
+                    <div key={i} className={styles.imagePreviewItem}>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={img.dataUrl}
+                        alt={img.name}
+                        className={styles.imagePreviewThumb}
+                      />
+                      <button
+                        type="button"
+                        className={styles.imageRemoveBtn}
+                        onClick={() => removeImage(i)}
+                        aria-label={`Remove ${img.name}`}
+                      >
+                        ✕
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Live Card Preview Section */}
+            <div className={styles.livePreviewSection}>
+              <div className={styles.previewHeader}>
+                <span className={styles.previewBadge}>Live Card Preview</span>
+                <span className={styles.previewHint}>
+                  {images.length > 0
+                    ? "Uploaded screenshot is displayed within the card below:"
+                    : "Upload a screenshot above to see it appear inside this card:"}
+                </span>
+              </div>
+              <div className={styles.previewCardWrap}>
+                <AccountCard account={previewAccount} />
+              </div>
+            </div>
           </div>
-        </div>
 
-        {error && <p className={styles.errorText}>{error}</p>}
+          <div className={styles.section}>
+            <h2 className={styles.sectionTitle}>Listing type &amp; estimated price</h2>
 
-        <button
-          type="submit"
-          className={`btn-primary ${styles.submitBtn}`}
-          disabled={submitting}
-        >
-          {submitting ? "Submitting..." : "Submit listing for review"}
-        </button>
-      </form>
+            <div className={styles.typeToggle}>
+              {LISTING_TYPES.map((type) => (
+                <button
+                  type="button"
+                  key={type.id}
+                  className={
+                    form.listingType === type.id
+                      ? `${styles.typeBtn} ${styles.typeBtnActive}`
+                      : styles.typeBtn
+                  }
+                  onClick={() => update("listingType", type.id)}
+                >
+                  {type.label}
+                </button>
+              ))}
+            </div>
+
+            <div className={styles.row}>
+              <label className={styles.field}>
+                <span className={styles.label}>Estimated price (₹) *</span>
+                <input
+                  className={styles.input}
+                  type="number"
+                  min="0"
+                  placeholder="e.g. 4500"
+                  value={form.price}
+                  onChange={(e) => update("price", e.target.value)}
+                  required
+                />
+              </label>
+
+              {form.listingType === "emi" && (
+                <label className={styles.field}>
+                  <span className={styles.label}>EMI duration (months)</span>
+                  <input
+                    className={styles.input}
+                    type="number"
+                    min="1"
+                    placeholder="e.g. 3"
+                    value={form.emiMonths}
+                    onChange={(e) => update("emiMonths", e.target.value)}
+                    required
+                  />
+                </label>
+              )}
+            </div>
+          </div>
+
+          <div className={styles.section}>
+            <h2 className={styles.sectionTitle}>Payout details</h2>
+            <p className={styles.sectionNote}>
+              Buyers pay our middleman directly — never you — so this UPI ID is
+              only used when we pay you out after a sale. Before payout, we'll
+              ask you to verify ownership with your account's original email or a
+              government ID (see the{" "}
+              <a href="/policies/payment-security">Payment Security</a> page).
+              Nothing here goes live to buyers.
+            </p>
+
+            <div className={styles.row}>
+              <label className={styles.field}>
+                <span className={styles.label}>Your UPI ID (for payout)</span>
+                <input
+                  className={styles.input}
+                  type="text"
+                  placeholder="yourname@upi"
+                  value={form.upiId}
+                  onChange={(e) => update("upiId", e.target.value)}
+                  required
+                />
+              </label>
+
+              <label className={styles.field}>
+                <span className={styles.label}>WhatsApp number</span>
+                <input
+                  className={styles.input}
+                  type="tel"
+                  placeholder="+91 XXXXX XXXXX"
+                  value={form.whatsapp}
+                  onChange={(e) => update("whatsapp", e.target.value)}
+                  required
+                />
+              </label>
+            </div>
+          </div>
+
+          {error && <p className={styles.errorText}>{error}</p>}
+
+          <button
+            type="submit"
+            className={`btn-primary ${styles.submitBtn}`}
+            disabled={submitting || compressing}
+          >
+            {submitting ? "Submitting..." : "Submit listing for review"}
+          </button>
+        </form>
+      )}
     </div>
   );
 }
