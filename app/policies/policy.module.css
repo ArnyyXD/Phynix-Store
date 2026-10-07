@@ -28,6 +28,31 @@
   line-height: 1.6;
 }
 
+.mmBanner {
+  background: linear-gradient(135deg, rgba(230,57,96,0.18) 0%, rgba(74,10,20,0.35) 100%);
+  border: 1px solid var(--accent);
+  border-left: 4px solid var(--accent);
+  padding: 16px 22px;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--accent-bright);
+  margin-bottom: 36px;
+  text-align: center;
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+}
+
+.subTitle {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 12px;
+  margin-top: 20px;
+}
+
+
 .section {
   margin-bottom: 36px;
 }

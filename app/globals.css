@@ -32,8 +32,8 @@
   --danger: #F0556C;
   --danger-soft: rgba(240, 85, 108, 0.14);
 
-  --font-display: "Rajdhani", "Arial Narrow", sans-serif;
-  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-display: "Orbitron", "Rajdhani", "Arial Narrow", sans-serif;
+  --font-body: "Rajdhani", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
   --cut: 10px;
 }
