@@ -1,9 +1,18 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./ValorantBG.module.css";
 
 export default function ValorantBG() {
   const canvasRef = useRef(null);
+  const [videoError, setVideoError] = useState(false);
+  const [hasVideo, setHasVideo] = useState(true);
+
+  // Check if custom video file exists in public/
+  const videoSources = [
+    "/valorant-bg.mp4",
+    "/valorant.mp4",
+    "/bg.mp4"
+  ];
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -42,14 +51,12 @@ export default function ValorantBG() {
       p.maxLife = 0.003 + Math.random() * 0.005;
     }
 
-    // ── Sweeping Energy Waves (Valorant Plasma Streams) ───────────────────
     const waves = [
       { amplitude: 40, frequency: 0.002, speed: 0.02, color: "rgba(230, 57, 96, 0.18)", yRatio: 0.3 },
       { amplitude: 60, frequency: 0.0015, speed: -0.015, color: "rgba(255, 46, 62, 0.14)", yRatio: 0.5 },
       { amplitude: 35, frequency: 0.0025, speed: 0.025, color: "rgba(255, 138, 61, 0.12)", yRatio: 0.7 },
     ];
 
-    // ── Tactical Geometry & Beams ─────────────────────────────────────────
     const beams = [
       { y: 0.15, speed: 0.00015, phase: 0, width: 0.35 },
       { y: 0.38, speed: 0.00011, phase: Math.PI * 0.5, width: 0.25 },
@@ -57,47 +64,40 @@ export default function ValorantBG() {
       { y: 0.85, speed: 0.00012, phase: Math.PI * 1.5, width: 0.28 },
     ];
 
-    // ── Drawing Tactical Crosshair HUD Accent ────────────────────────────
     function drawHUDAccents() {
       const W = canvas.width, H = canvas.height;
       ctx.save();
       ctx.strokeStyle = "rgba(230, 57, 96, 0.25)";
       ctx.lineWidth = 1;
 
-      // Top Left Coordinate Readout
       ctx.font = "10px 'Orbitron', sans-serif";
       ctx.fillStyle = "rgba(230, 57, 96, 0.4)";
       ctx.fillText(`SYS.LOC // 88.4° N [VALORANT_STORE_CORE]`, 35, 45);
 
-      // Corner Brackets
       const bSize = 40;
       const margin = 25;
       const pulse = 0.4 + 0.4 * Math.sin(t * 0.02);
 
       ctx.strokeStyle = `rgba(230, 57, 96, ${pulse})`;
 
-      // Top Left Corner
       ctx.beginPath();
       ctx.moveTo(margin, margin + bSize);
       ctx.lineTo(margin, margin);
       ctx.lineTo(margin + bSize, margin);
       ctx.stroke();
 
-      // Top Right Corner
       ctx.beginPath();
       ctx.moveTo(W - margin - bSize, margin);
       ctx.lineTo(W - margin, margin);
       ctx.lineTo(W - margin, margin + bSize);
       ctx.stroke();
 
-      // Bottom Left Corner
       ctx.beginPath();
       ctx.moveTo(margin, H - margin - bSize);
       ctx.lineTo(margin, H - margin);
       ctx.lineTo(margin + bSize, H - margin);
       ctx.stroke();
 
-      // Bottom Right Corner
       ctx.beginPath();
       ctx.moveTo(W - margin - bSize, H - margin);
       ctx.lineTo(W - margin, H - margin);
@@ -107,7 +107,6 @@ export default function ValorantBG() {
       ctx.restore();
     }
 
-    // ── Render Wave Stream ────────────────────────────────────────────────
     function drawWave(wave) {
       const W = canvas.width, H = canvas.height;
       const baseY = wave.yRatio * H;
@@ -125,7 +124,6 @@ export default function ValorantBG() {
       ctx.restore();
     }
 
-    // ── Render Energy Beams ───────────────────────────────────────────────
     function drawBeam(beam) {
       const W = canvas.width, H = canvas.height;
       const progress = (Math.sin(t * beam.speed + beam.phase) + 1) / 2;
@@ -146,18 +144,15 @@ export default function ValorantBG() {
       ctx.restore();
     }
 
-    // ── Main Animation Loop ───────────────────────────────────────────────
     function render() {
       const W = canvas.width, H = canvas.height;
       t++;
 
       ctx.clearRect(0, 0, W, H);
 
-      // Base Dark Canvas Background matching Phynix Store theme
       ctx.fillStyle = "#0A0808";
       ctx.fillRect(0, 0, W, H);
 
-      // Central Ambient Radial Glows
       const radGlow1 = ctx.createRadialGradient(W * 0.5, H * 0.4, 0, W * 0.5, H * 0.4, W * 0.6);
       radGlow1.addColorStop(0, "rgba(230, 57, 96, 0.16)");
       radGlow1.addColorStop(0.5, "rgba(74, 10, 20, 0.12)");
@@ -171,13 +166,9 @@ export default function ValorantBG() {
       ctx.fillStyle = radGlow2;
       ctx.fillRect(0, 0, W, H);
 
-      // Draw Animated Waves
       for (const w of waves) drawWave(w);
-
-      // Draw Energy Beams
       for (const b of beams) drawBeam(b);
 
-      // Draw Ember Sparks
       for (const p of particles) {
         p.life += p.maxLife;
         if (p.life > 1) resetParticle(p);
@@ -200,10 +191,8 @@ export default function ValorantBG() {
         ctx.restore();
       }
 
-      // Tactical HUD Overlay
       drawHUDAccents();
 
-      // Scanline Effect Overlay
       ctx.save();
       ctx.fillStyle = "rgba(0, 0, 0, 0.04)";
       for (let y = 0; y < H; y += 4) {
@@ -222,5 +211,24 @@ export default function ValorantBG() {
     };
   }, []);
 
-  return <canvas ref={canvasRef} className={styles.canvas} aria-hidden="true" />;
+  return (
+    <div className={styles.wrap} aria-hidden="true">
+      {hasVideo && !videoError && (
+        <video
+          className={styles.video}
+          autoPlay
+          loop
+          muted
+          playsInline
+          onError={() => setVideoError(true)}
+        >
+          {videoSources.map((src) => (
+            <source key={src} src={src} type="video/mp4" />
+          ))}
+        </video>
+      )}
+      <canvas ref={canvasRef} className={styles.canvas} />
+      <div className={styles.overlay} />
+    </div>
+  );
 }
