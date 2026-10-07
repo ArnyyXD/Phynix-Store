@@ -96,30 +96,64 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  background: var(--game-bg, var(--bg-panel));
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: var(--bg-panel);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
   padding: 20px;
-  gap: 12px;
+  gap: 14px;
   text-decoration: none;
   color: inherit;
-  transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, box-shadow 0.25s ease;
   cursor: pointer;
+  min-height: 240px;
 }
 
-.gameCard:hover {
-  transform: translateY(-5px);
-  border-color: var(--game-accent, var(--accent));
-  box-shadow: 0 12px 40px var(--game-glow, var(--accent-soft)), 0 0 0 1px var(--game-accent, var(--accent));
+.gameCardImageWrap {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.gameCardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.35;
+  filter: saturate(1.2) contrast(1.1);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+}
+
+.gameCard:hover .gameCardImage {
+  transform: scale(1.1);
+  opacity: 0.5;
+}
+
+.gameCardOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 8, 8, 0.45) 0%,
+    rgba(10, 8, 8, 0.85) 60%,
+    rgba(10, 8, 8, 0.98) 100%
+  );
 }
 
 .gameCardGlow {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at top left, var(--game-glow, rgba(230,57,96,0.2)) 0%, transparent 65%);
+  background: radial-gradient(ellipse at top left, var(--game-glow, rgba(230,57,96,0.3)) 0%, transparent 70%);
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.25s ease;
+  z-index: 1;
+}
+
+.gameCard:hover {
+  transform: translateY(-6px);
+  border-color: var(--game-accent, var(--accent));
+  box-shadow: 0 14px 45px var(--game-glow, var(--accent-soft)), 0 0 0 1px var(--game-accent, var(--accent));
 }
 
 .gameCard:hover .gameCardGlow {
@@ -127,42 +161,63 @@
 }
 
 .gameCardTop {
+  position: relative;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 8px;
 }
 
-.gameEmoji {
-  font-size: 28px;
+.gameIconWrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: rgba(10, 8, 8, 0.7);
+  border: 1px solid var(--game-accent, var(--accent));
   color: var(--game-accent, var(--accent));
-  line-height: 1;
-  filter: drop-shadow(0 0 8px var(--game-glow, rgba(230,57,96,0.5)));
+  box-shadow: 0 0 12px var(--game-glow, rgba(230,57,96,0.4));
+  transition: transform 0.25s ease;
+}
+
+.gameCard:hover .gameIconWrap {
+  transform: scale(1.1) rotate(-3deg);
 }
 
 .gameTag {
+  position: relative;
+  z-index: 2;
   font-family: var(--font-body);
-  font-size: 10px;
-  font-weight: 600;
+  font-size: 11px;
+  font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--text-faint);
-  background: rgba(255,255,255,0.05);
-  padding: 3px 7px;
-  border-radius: 3px;
+  color: var(--text);
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(8px);
+  padding: 4px 9px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .gameCardBody {
+  position: relative;
+  z-index: 2;
   flex: 1;
 }
 
 .gameLabel {
   font-family: var(--font-display);
-  font-size: 20px;
-  font-weight: 700;
+  font-size: 24px;
+  font-weight: 900;
   color: var(--text);
   margin-bottom: 6px;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  transition: color 0.2s ease;
 }
 
 .gameCard:hover .gameLabel {
@@ -170,14 +225,16 @@
 }
 
 .gameDesc {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--text-muted);
   line-height: 1.5;
 }
 
 .gameCardFooter {
-  border-top: 1px solid rgba(255,255,255,0.06);
-  padding-top: 10px;
+  position: relative;
+  z-index: 2;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding-top: 12px;
 }
 
 .browseLink {

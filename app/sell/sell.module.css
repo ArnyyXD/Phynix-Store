@@ -27,32 +27,66 @@
 /* ── Seller Tab Navigation ────────────────────────── */
 .tabBar {
   display: flex;
-  gap: 10px;
+  gap: 12px;
   border-bottom: 1px solid var(--line);
   padding-bottom: 12px;
 }
 
 .tabBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   background: var(--bg-panel);
   border: 1px solid var(--line-bright);
   color: var(--text-muted);
   font-family: var(--font-display);
   font-size: 14px;
-  font-weight: 600;
-  padding: 10px 18px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 12px 22px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+}
+
+.tabIcon {
+  color: var(--text-faint);
+  transition: color 0.2s ease, transform 0.22s ease;
 }
 
 .tabBtn:hover {
   border-color: var(--accent);
   color: var(--text);
+  box-shadow: 0 4px 20px var(--accent-soft);
+  transform: translateY(-2px);
+}
+
+.tabBtn:hover .tabIcon {
+  color: var(--accent);
+  transform: scale(1.15);
 }
 
 .tabBtnActive {
   background: var(--accent-soft);
   border-color: var(--accent);
+  color: #FFFFFF;
+  box-shadow: 0 0 20px var(--accent-glow);
+}
+
+.tabBtnActive .tabIcon {
   color: var(--accent-bright);
+}
+
+.tabBadge {
+  background: var(--accent);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 10px;
+  margin-left: 4px;
 }
 
 /* ── My Listings Section ─────────────────────────── */

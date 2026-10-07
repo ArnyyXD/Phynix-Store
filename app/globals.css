@@ -32,8 +32,8 @@
   --danger: #F0556C;
   --danger-soft: rgba(240, 85, 108, 0.14);
 
-  --font-display: "Bebas Neue", "Barlow Condensed", "Arial Narrow", sans-serif;
-  --font-body: "Barlow Condensed", "Barlow", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-display: "Orbitron", "Bebas Neue", "Barlow Condensed", sans-serif;
+  --font-body: "Rajdhani", "Barlow Condensed", "Segoe UI", sans-serif;
 
   --cut: 10px;
 }
@@ -71,7 +71,7 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: var(--font-body);
-  font-size: 16px;
+  font-size: 17px;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
@@ -88,8 +88,9 @@ h2,
 h3,
 h4 {
   font-family: var(--font-display);
-  font-weight: 400; /* Bebas Neue is single-weight; Barlow Condensed fallback is 700 */
-  letter-spacing: 0.04em;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
   margin: 0;
 }
 
