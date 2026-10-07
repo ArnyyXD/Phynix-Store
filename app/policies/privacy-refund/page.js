@@ -95,7 +95,7 @@ export default function PrivacyRefundPage() {
           <li>
             You can ask us to confirm what identity data we hold about you
             and request its erasure at any time, subject to any ongoing
-            dispute it's tied to (see Section 7).
+            dispute it's tied to.
           </li>
         </ul>
       </section>
@@ -122,39 +122,16 @@ export default function PrivacyRefundPage() {
       </section>
 
       <section className={styles.section}>
-        <h2 className={styles.sectionTitle}>7. Your rights &amp; grievance redressal</h2>
-        <p className={styles.body}>
-          Under the DPDP Act, you have the right to access the personal data
-          we hold about you, request correction of inaccurate data, request
-          erasure, and withdraw consent at any time (withdrawal doesn't
-          affect anything processed before that point). To exercise any of
-          these rights or raise a complaint, contact our Grievance Officer:
-        </p>
-        <div className={styles.contactBox}>
-          <strong>Grievance Officer:</strong> [NAME]
-          <br />
-          <strong>Email:</strong> grievance@phynixstore.com
-          <br />
-          <strong>Phone / WhatsApp:</strong> +91 99486 33426
-          <br />
-          <strong>Address:</strong> [REGISTERED BUSINESS ADDRESS]
-          <br />
-          <strong>Response time:</strong> Within 1 hour, available 24/7.
-        </div>
-      </section>
-
-      <section className={styles.section}>
-        <h2 className={styles.sectionTitle}>8. Age restriction</h2>
+        <h2 className={styles.sectionTitle}>7. Age restriction</h2>
         <p className={styles.body}>
           This platform is intended for users 18 years or older. We do not
           knowingly collect data from minors. If you believe a minor has
-          created an account, contact the Grievance Officer above so we can
-          remove it.
+          created an account, contact support so we can remove it.
         </p>
       </section>
 
       <section className={styles.section}>
-        <h2 className={styles.sectionTitle}>9. Security</h2>
+        <h2 className={styles.sectionTitle}>8. Security</h2>
         <p className={styles.body}>
           We use reasonable technical safeguards — encrypted connections,
           access controls on our database, and hashed/tokenized
@@ -165,7 +142,7 @@ export default function PrivacyRefundPage() {
       </section>
 
       <section className={styles.section}>
-        <h2 className={styles.sectionTitle}>10. Refund Policy</h2>
+        <h2 className={styles.sectionTitle}>9. Refund Policy</h2>
         <p className={styles.body}>
           Because a purchased Valorant account can be actioned by Riot Games
           at any time (this is a real risk of account trading — see the{" "}
@@ -212,7 +189,7 @@ export default function PrivacyRefundPage() {
       </section>
 
       <section className={styles.section}>
-        <h2 className={styles.sectionTitle}>11. Changes to this policy</h2>
+        <h2 className={styles.sectionTitle}>10. Changes to this policy</h2>
         <p className={styles.body}>
           We'll post any material changes to this page with an updated date
           at the top. Continued use of the platform after a change means you
