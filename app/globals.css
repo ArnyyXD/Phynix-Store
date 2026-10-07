@@ -32,8 +32,8 @@
   --danger: #F0556C;
   --danger-soft: rgba(240, 85, 108, 0.14);
 
-  --font-display: "Orbitron", "Bebas Neue", "Barlow Condensed", sans-serif;
-  --font-body: "Rajdhani", "Barlow Condensed", "Segoe UI", sans-serif;
+  --font-display: "Staatliches", sans-serif;
+  --font-body: "Staatliches", sans-serif;
 
   --cut: 10px;
 }
@@ -70,9 +70,12 @@ body {
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: var(--font-body);
-  font-size: 17px;
+  font-family: "Staatliches", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 18px;
   line-height: 1.5;
+  letter-spacing: 0.03em;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -87,8 +90,8 @@ h1,
 h2,
 h3,
 h4 {
-  font-family: var(--font-display);
-  font-weight: 800;
+  font-family: "Staatliches", sans-serif;
+  font-weight: 400;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   margin: 0;
@@ -99,14 +102,16 @@ p {
 }
 
 button {
-  font-family: var(--font-body);
+  font-family: "Staatliches", sans-serif;
+  font-weight: 400;
   cursor: pointer;
 }
 
 input,
 select,
 textarea {
-  font-family: var(--font-body);
+  font-family: "Staatliches", sans-serif;
+  font-weight: 400;
   color: var(--text);
 }
 

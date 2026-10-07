@@ -51,12 +51,6 @@ export default function ValorantBG() {
       p.maxLife = 0.003 + Math.random() * 0.005;
     }
 
-    const waves = [
-      { amplitude: 40, frequency: 0.002, speed: 0.02, color: "rgba(230, 57, 96, 0.18)", yRatio: 0.3 },
-      { amplitude: 60, frequency: 0.0015, speed: -0.015, color: "rgba(255, 46, 62, 0.14)", yRatio: 0.5 },
-      { amplitude: 35, frequency: 0.0025, speed: 0.025, color: "rgba(255, 138, 61, 0.12)", yRatio: 0.7 },
-    ];
-
     const beams = [
       { y: 0.15, speed: 0.00015, phase: 0, width: 0.35 },
       { y: 0.38, speed: 0.00011, phase: Math.PI * 0.5, width: 0.25 },
@@ -70,7 +64,7 @@ export default function ValorantBG() {
       ctx.strokeStyle = "rgba(230, 57, 96, 0.25)";
       ctx.lineWidth = 1;
 
-      ctx.font = "10px 'Orbitron', sans-serif";
+      ctx.font = "10px 'Staatliches', sans-serif";
       ctx.fillStyle = "rgba(230, 57, 96, 0.4)";
       ctx.fillText(`SYS.LOC // 88.4° N [VALORANT_STORE_CORE]`, 35, 45);
 
@@ -104,23 +98,6 @@ export default function ValorantBG() {
       ctx.lineTo(W - margin, H - margin - bSize);
       ctx.stroke();
 
-      ctx.restore();
-    }
-
-    function drawWave(wave) {
-      const W = canvas.width, H = canvas.height;
-      const baseY = wave.yRatio * H;
-      ctx.save();
-      ctx.beginPath();
-      ctx.moveTo(0, H);
-      for (let x = 0; x <= W; x += 10) {
-        const y = baseY + Math.sin(x * wave.frequency + t * wave.speed) * wave.amplitude;
-        ctx.lineTo(x, y);
-      }
-      ctx.lineTo(W, H);
-      ctx.closePath();
-      ctx.fillStyle = wave.color;
-      ctx.fill();
       ctx.restore();
     }
 
@@ -166,7 +143,6 @@ export default function ValorantBG() {
       ctx.fillStyle = radGlow2;
       ctx.fillRect(0, 0, W, H);
 
-      for (const w of waves) drawWave(w);
       for (const b of beams) drawBeam(b);
 
       for (const p of particles) {
