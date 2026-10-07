@@ -1,15 +1,13 @@
-﻿"use client";
+"use client";
 
 import { useMemo, useState } from "react";
 import AccountCard from "../../components/AccountCard";
-import { ACCOUNTS, BUDGET_TIERS, LISTING_TYPES } from "../../lib/mockAccounts";
+import { BUDGET_TIERS, LISTING_TYPES } from "../../lib/mockAccounts";
 import { GAMES } from "../../lib/games";
 import styles from "./buy.module.css";
 
 export default function BuyClient({ initialAccounts }) {
-  const hasRealAccounts = initialAccounts && initialAccounts.length > 0;
-  const [accounts] = useState(hasRealAccounts ? initialAccounts : ACCOUNTS);
-  const [usingFallback] = useState(!hasRealAccounts);
+  const [accounts] = useState(initialAccounts ?? []);
 
   const [query, setQuery] = useState("");
   const [activeGame, setActiveGame] = useState(null);
@@ -50,14 +48,10 @@ export default function BuyClient({ initialAccounts }) {
       <section className={styles.hero}>
         <h1 className={styles.heading}>Find an account that fits your budget</h1>
         <p className={styles.subheading}>
-          {accounts.length} accounts currently listed across Valorant, Clash
-          of Clans &amp; BGMI
+          {accounts.length > 0
+            ? `${accounts.length} accounts currently listed across Valorant, Clash of Clans & BGMI`
+            : "New listings added daily — check back soon."}
         </p>
-        {usingFallback && (
-          <p className={styles.fallbackNote}>
-            Showing sample listings — post a seller listing on /sell to see real accounts here.
-          </p>
-        )}
       </section>
 
       <section className={styles.controls}>
@@ -153,11 +147,22 @@ export default function BuyClient({ initialAccounts }) {
 
       {filtered.length === 0 ? (
         <div className={styles.empty}>
-          <p>No accounts match those filters right now.</p>
-          <p className={styles.emptySub}>
-            Try widening your budget range, or check back later — new listings
-            are added daily.
-          </p>
+          {accounts.length === 0 ? (
+            <>
+              <p>No accounts listed yet.</p>
+              <p className={styles.emptySub}>
+                Be the first to list — head to <strong>/sell</strong> to submit your account.
+              </p>
+            </>
+          ) : (
+            <>
+              <p>No accounts match those filters right now.</p>
+              <p className={styles.emptySub}>
+                Try widening your budget range, or check back later — new listings
+                are added daily.
+              </p>
+            </>
+          )}
         </div>
       ) : (
         <section className={styles.grid}>

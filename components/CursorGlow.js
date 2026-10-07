@@ -62,10 +62,10 @@ export default function CursorGlow() {
   }, []);
 
   return (
-    <div className={styles.wrap} aria-hidden="true">
-      <div ref={(el) => (blobRefs.current[0] = el)} className={`${styles.blob} ${styles.purple}`} />
-      <div ref={(el) => (blobRefs.current[1] = el)} className={`${styles.blob} ${styles.crimson}`} />
-      <div ref={(el) => (blobRefs.current[2] = el)} className={`${styles.blob} ${styles.violet}`} />
+    <div className={styles.wrap} aria-hidden="true" suppressHydrationWarning>
+      <div ref={(el) => (blobRefs.current[0] = el)} className={`${styles.blob} ${styles.purple}`} suppressHydrationWarning />
+      <div ref={(el) => (blobRefs.current[1] = el)} className={`${styles.blob} ${styles.crimson}`} suppressHydrationWarning />
+      <div ref={(el) => (blobRefs.current[2] = el)} className={`${styles.blob} ${styles.violet}`} suppressHydrationWarning />
     </div>
   );
 }

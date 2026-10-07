@@ -32,8 +32,8 @@
   --danger: #F0556C;
   --danger-soft: rgba(240, 85, 108, 0.14);
 
-  --font-display: "Orbitron", "Rajdhani", "Arial Narrow", sans-serif;
-  --font-body: "Rajdhani", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-display: "Bebas Neue", "Barlow Condensed", "Arial Narrow", sans-serif;
+  --font-body: "Barlow Condensed", "Barlow", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
   --cut: 10px;
 }
@@ -69,14 +69,6 @@ body {
 
 body {
   background: var(--bg);
-  background-image: radial-gradient(
-      circle at 50% 35%,
-      rgba(230, 57, 96, 0.16) 0%,
-      transparent 55%
-    ),
-    radial-gradient(circle at 8% 15%, rgba(74, 10, 20, 0.35) 0%, transparent 45%),
-    radial-gradient(circle at 92% 85%, rgba(74, 10, 20, 0.3) 0%, transparent 45%);
-  background-attachment: fixed;
   color: var(--text);
   font-family: var(--font-body);
   font-size: 16px;
@@ -84,17 +76,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  background-image: linear-gradient(var(--line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--line) 1px, transparent 1px);
-  background-size: 64px 64px;
-  opacity: 0.05;
-  z-index: 0;
-}
+/* Grid + scanlines now handled by the ValorantBG canvas component */
 
 a {
   color: inherit;
@@ -106,8 +88,8 @@ h2,
 h3,
 h4 {
   font-family: var(--font-display);
-  font-weight: 600;
-  letter-spacing: 0.01em;
+  font-weight: 400; /* Bebas Neue is single-weight; Barlow Condensed fallback is 700 */
+  letter-spacing: 0.04em;
   margin: 0;
 }
 
