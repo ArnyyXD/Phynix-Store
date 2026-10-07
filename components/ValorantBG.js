@@ -196,6 +196,11 @@ export default function ValorantBG() {
           loop
           muted
           playsInline
+          controls={false}
+          disablePictureInPicture
+          disableRemotePlayback
+          aria-hidden="true"
+          tabIndex="-1"
           onError={() => setVideoError(true)}
         >
           {videoSources.map((src) => (

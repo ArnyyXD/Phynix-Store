@@ -10,6 +10,8 @@
   z-index: 0;
   overflow: hidden;
   background: #0A0808;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .video {
@@ -26,7 +28,25 @@
   opacity: 0.5;
   filter: contrast(1.1) saturate(1.15);
   z-index: 0;
-  pointer-events: none;
+  pointer-events: none !important;
+  touch-action: none;
+  -webkit-touch-callout: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Hide native mobile browser video player controls, play/pause buttons & overlays */
+.video::-webkit-media-controls,
+.video::-webkit-media-controls-enclosure,
+.video::-webkit-media-controls-panel,
+.video::-webkit-media-controls-play-button,
+.video::-webkit-media-controls-start-playback-button,
+.video::-webkit-media-controls-overlay-play-button {
+  display: none !important;
+  -webkit-appearance: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
 }
 
 .canvas {
