@@ -35,7 +35,10 @@
   -webkit-user-select: none;
 }
 
-/* Hide native mobile browser video player controls, play/pause buttons & overlays */
+/* Best-effort only -- iOS Safari doesn't reliably honor this for the
+   native "start playback" button on every version, which is why the real
+   fix lives in ValorantBG.js (auto-resuming play() on visibility change
+   and the first user gesture) rather than depending on this CSS working. */
 .video::-webkit-media-controls,
 .video::-webkit-media-controls-enclosure,
 .video::-webkit-media-controls-panel,

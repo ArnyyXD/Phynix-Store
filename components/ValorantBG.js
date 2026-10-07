@@ -4,6 +4,7 @@ import styles from "./ValorantBG.module.css";
 
 export default function ValorantBG() {
   const canvasRef = useRef(null);
+  const videoRef = useRef(null);
   const [videoError, setVideoError] = useState(false);
   const [hasVideo, setHasVideo] = useState(true);
 
@@ -13,6 +14,64 @@ export default function ValorantBG() {
     "/valorant.mp4",
     "/bg.mp4"
   ];
+
+  // Mobile browsers routinely pause a background <video> when the screen
+  // locks, the tab backgrounds, or an autoplay heuristic silently blocks
+  // it on first load -- and never resume it on their own. This is the
+  // actual cause of "stuck on a frozen frame" on phones. We never rely on
+  // CSS to hide or fight the browser's own native play button; instead we
+  // just make sure play() actually gets (re)called whenever it matters.
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    // Belt-and-suspenders: some iOS versions don't reliably honor the
+    // `muted` HTML attribute in time for the autoplay check unless the JS
+    // property is also set explicitly before play() is called.
+    video.muted = true;
+    video.playsInline = true;
+
+    function tryPlay() {
+      const p = video.play();
+      if (p && typeof p.catch === "function") {
+        p.catch(() => {
+          // Autoplay was blocked (e.g. iOS Low Power Mode). It'll be
+          // retried on the next visibility change or user gesture below.
+        });
+      }
+    }
+
+    tryPlay();
+
+    function handleVisibility() {
+      if (document.visibilityState === "visible") tryPlay();
+    }
+
+    // Covers the "locked phone / switched apps, came back to a frozen
+    // frame" case directly.
+    document.addEventListener("visibilitychange", handleVisibility);
+    window.addEventListener("pageshow", tryPlay);
+
+    // Covers any lingering autoplay block: the first tap/click anywhere on
+    // the page counts as a user gesture under mobile autoplay policy, so
+    // this needs no visible button and doesn't require the video itself
+    // to be tappable (it intentionally stays pointer-events: none so it
+    // never blocks taps meant for the actual page).
+    function handleFirstGesture() {
+      tryPlay();
+      window.removeEventListener("touchstart", handleFirstGesture);
+      window.removeEventListener("click", handleFirstGesture);
+    }
+    window.addEventListener("touchstart", handleFirstGesture, { once: true, passive: true });
+    window.addEventListener("click", handleFirstGesture, { once: true });
+
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibility);
+      window.removeEventListener("pageshow", tryPlay);
+      window.removeEventListener("touchstart", handleFirstGesture);
+      window.removeEventListener("click", handleFirstGesture);
+    };
+  }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -191,11 +250,13 @@ export default function ValorantBG() {
     <div className={styles.wrap} aria-hidden="true">
       {hasVideo && !videoError && (
         <video
+          ref={videoRef}
           className={styles.video}
           autoPlay
           loop
           muted
           playsInline
+          preload="auto"
           controls={false}
           disablePictureInPicture
           disableRemotePlayback
