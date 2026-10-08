@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 import Banner from "../components/Banner";
 import styles from "./home.module.css";
@@ -49,10 +52,35 @@ const GAME_CARDS = [
   },
 ];
 
+const BUDGET_OPTIONS = [
+  {
+    id: "3-4k",
+    priceRange: "₹3k – ₹4k",
+    title: "Starter Ranks & Clean History",
+    desc: "Budget smurfs, entry-level ranks, and clean account histories.",
+  },
+  {
+    id: "5-7k",
+    priceRange: "₹5k – ₹7k",
+    title: "Mid Ranks & Stacked Skins",
+    desc: "Competitive ranks, stacked inventories, and popular skin bundles.",
+  },
+  {
+    id: "8-10k",
+    priceRange: "₹8k – ₹10k",
+    title: "High Rank & Premium Bundles",
+    desc: "Top-tier high rank accounts, exclusive collections, and maxed accounts.",
+  },
+];
+
 export default function HomePage() {
+  const [selectedGameId, setSelectedGameId] = useState("valorant");
+  const selectedGame = GAME_CARDS.find((g) => g.id === selectedGameId) || GAME_CARDS[0];
+
   return (
     <div className={styles.page}>
       <Banner />
+
       <section className={styles.hero}>
         <div className={styles.heroEyebrow}>TRUSTED GAME ACCOUNT MARKETPLACE</div>
         <h1 className={styles.heading}>
@@ -64,7 +92,7 @@ export default function HomePage() {
         </p>
         <div className={styles.ctaRow}>
           <Link href="/buy" className="btn-primary">
-            Browse Accounts
+            Browse All Accounts
           </Link>
           <Link href="/sell" className="btn-ghost">
             List Your Account
@@ -72,60 +100,111 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Game Cards */}
+      {/* Step 1: Select Game */}
       <section className={styles.gamesSection}>
-        <h2 className={styles.sectionTitle}>Browse by Game</h2>
-        <div className={styles.gamesGrid}>
-          {GAME_CARDS.map((g) => (
-            <Link
-              key={g.id}
-              href={`/buy?game=${g.id}`}
-              className={styles.gameCard}
-              style={{
-                "--game-accent": g.accent,
-                "--game-glow": g.glow,
-                "--game-bg": g.bg,
-              }}
-            >
-              <div className={styles.gameCardImageWrap}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={g.banner} alt={g.label} className={styles.gameCardImage} />
-                <div className={styles.gameCardOverlay} />
-              </div>
+        <div className={styles.sectionHeader}>
+          <span className={styles.stepBadge}>STEP 1</span>
+          <h2 className={styles.sectionTitle}>Select a Game</h2>
+        </div>
 
-              <div className={styles.gameCardTop}>
-                <span className={styles.gameIconWrap}>
+        <div className={styles.gamesGrid}>
+          {GAME_CARDS.map((g) => {
+            const isSelected = selectedGameId === g.id;
+            return (
+              <button
+                key={g.id}
+                type="button"
+                onClick={() => setSelectedGameId(g.id)}
+                className={`${styles.gameCard} ${isSelected ? styles.gameCardSelected : ""}`}
+                style={{
+                  "--game-accent": g.accent,
+                  "--game-glow": g.glow,
+                  "--game-bg": g.bg,
+                }}
+              >
+                <div className={styles.gameCardImageWrap}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={g.logoUrl} alt={`${g.label} Logo`} className={styles.gameCardLogoImg} />
-                </span>
-                <span className={styles.gameTag}>{g.tag}</span>
-              </div>
-              <div className={styles.gameCardBody}>
-                <h3 className={styles.gameLabel}>{g.label}</h3>
-                <p className={styles.gameDesc}>{g.desc}</p>
-              </div>
-              <div className={styles.gameCardFooter}>
-                <span className={styles.browseLink}>Browse accounts →</span>
-              </div>
-              <div className={styles.gameCardGlow} />
-            </Link>
-          ))}
+                  <img src={g.banner} alt={g.label} className={styles.gameCardImage} />
+                  <div className={styles.gameCardOverlay} />
+                </div>
+
+                <div className={styles.gameCardTop}>
+                  <span className={styles.gameIconWrap}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={g.logoUrl} alt={`${g.label} Logo`} className={styles.gameCardLogoImg} />
+                  </span>
+                  {isSelected ? (
+                    <span className={styles.selectedTag}>✓ Selected</span>
+                  ) : (
+                    <span className={styles.gameTag}>{g.tag}</span>
+                  )}
+                </div>
+
+                <div className={styles.gameCardBody}>
+                  <h3 className={styles.gameLabel}>{g.label}</h3>
+                  <p className={styles.gameDesc}>{g.desc}</p>
+                </div>
+
+                <div className={styles.gameCardFooter}>
+                  <span className={styles.selectBtnText}>
+                    {isSelected ? "Game Selected — Choose Budget Below ↓" : "Select Game →"}
+                  </span>
+                </div>
+
+                <div className={`${styles.gameCardGlow} ${isSelected ? styles.glowActive : ""}`} />
+              </button>
+            );
+          })}
         </div>
       </section>
 
-      {/* Price Tiers */}
-      <section className={styles.tiers}>
-        <div className={styles.tierCard}>
-          <span className={styles.tierPrice}>₹3k – ₹4k</span>
-          <span className={styles.tierLabel}>Starter ranks, clean history</span>
+      {/* Step 2: Choose Budget Tier for Selected Game */}
+      <section className={styles.budgetSection}>
+        <div className={styles.budgetSectionHeader}>
+          <div className={styles.stepTitleRow}>
+            <span className={styles.stepBadgeAccent}>STEP 2</span>
+            <h2 className={styles.budgetTitle}>
+              Select Budget for <span style={{ color: selectedGame.accent }}>{selectedGame.label}</span>
+            </h2>
+          </div>
+          <p className={styles.budgetSubtext}>
+            Click a price range below to filter live <strong>{selectedGame.label}</strong> accounts within your budget:
+          </p>
         </div>
-        <div className={styles.tierCard}>
-          <span className={styles.tierPrice}>₹5k – ₹7k</span>
-          <span className={styles.tierLabel}>Mid ranks, larger skin vaults</span>
+
+        <div className={styles.tiersGrid}>
+          {BUDGET_OPTIONS.map((tier) => (
+            <Link
+              key={tier.id}
+              href={`/buy?game=${selectedGame.id}&budget=${tier.id}`}
+              className={styles.tierCard}
+              style={{ "--tier-accent": selectedGame.accent, "--tier-glow": selectedGame.glow }}
+            >
+              <div className={styles.tierTop}>
+                <span className={styles.tierPrice}>{tier.priceRange}</span>
+                <span className={styles.tierGameBadge} style={{ color: selectedGame.accent }}>
+                  {selectedGame.label}
+                </span>
+              </div>
+              <h4 className={styles.tierTitle}>{tier.title}</h4>
+              <p className={styles.tierDesc}>{tier.desc}</p>
+              <div className={styles.tierActionRow}>
+                <span className={styles.tierActionText} style={{ color: selectedGame.accent }}>
+                  Browse {tier.priceRange} {selectedGame.label} Accounts →
+                </span>
+              </div>
+            </Link>
+          ))}
         </div>
-        <div className={styles.tierCard}>
-          <span className={styles.tierPrice}>₹8k – ₹10k</span>
-          <span className={styles.tierLabel}>High rank, premium bundles</span>
+
+        <div className={styles.viewAllRow}>
+          <Link
+            href={`/buy?game=${selectedGame.id}`}
+            className="btn-ghost"
+            style={{ borderColor: selectedGame.accent, color: "#fff" }}
+          >
+            Browse All {selectedGame.label} Listings →
+          </Link>
         </div>
       </section>
     </div>

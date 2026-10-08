@@ -246,64 +246,222 @@
   padding-top: 12px;
 }
 
-.browseLink {
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.stepBadge {
   font-family: var(--font-display);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--text-faint);
+  background: var(--bg-panel);
+  border: 1px solid var(--line-bright);
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+.stepBadgeAccent {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--accent-bright);
+  background: var(--accent-soft);
+  border: 1px solid var(--accent);
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+.gameCardSelected {
+  border-color: var(--game-accent, var(--accent)) !important;
+  box-shadow: 0 0 35px var(--game-glow, var(--accent-soft)), 0 0 0 2px var(--game-accent, var(--accent)) !important;
+  transform: translateY(-4px) !important;
+}
+
+.gameCardSelected .gameCardImage {
+  opacity: 0.65 !important;
+  transform: scale(1.08) !important;
+}
+
+.glowActive {
+  opacity: 1 !important;
+}
+
+.selectedTag {
+  position: relative;
+  z-index: 2;
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--game-accent, var(--accent));
+  padding: 4px 10px;
+  border-radius: 4px;
+  box-shadow: 0 0 12px var(--game-glow, var(--accent-soft));
+}
+
+.selectBtnText {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
   color: var(--game-accent, var(--accent));
-  opacity: 0;
-  transition: opacity 0.2s ease;
 }
 
-.gameCard:hover .browseLink {
-  opacity: 1;
+/* ── Budget Tier Options Section ── */
+.budgetSection {
+  margin-top: 64px;
+  background: linear-gradient(180deg, var(--bg-panel) 0%, rgba(10, 8, 8, 0.95) 100%);
+  border: 1px solid var(--line-bright);
+  border-radius: 12px;
+  padding: 36px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
 }
 
-/* ── Price Tiers ── */
-.tiers {
+.budgetSectionHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.stepTitleRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.budgetTitle {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--text);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.budgetSubtext {
+  font-size: 15px;
+  color: var(--text-muted);
+}
+
+.tiersGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 }
 
 .tierCard {
-  background: var(--bg-panel);
-  border: 1px solid var(--line);
-  padding: 24px;
+  background: var(--bg);
+  border: 1px solid var(--line-bright);
+  padding: 26px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
-  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  gap: 12px;
+  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  position: relative;
 }
 
 .tierCard:hover {
-  border-color: var(--accent-dim);
-  box-shadow: 0 8px 28px rgba(230, 57, 96, 0.2);
-  transform: translateY(-4px);
+  border-color: var(--tier-accent, var(--accent));
+  box-shadow: 0 12px 35px var(--tier-glow, var(--accent-soft)), 0 0 0 1px var(--tier-accent, var(--accent));
+  transform: translateY(-6px);
+}
+
+.tierTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
 }
 
 .tierPrice {
   font-family: var(--font-display);
-  font-size: 26px;
-  font-weight: 700;
-  color: var(--accent);
-  transition: text-shadow 0.2s ease;
+  font-size: 32px;
+  font-weight: 900;
+  color: var(--text);
+  letter-spacing: 0.02em;
+  transition: color 0.2s ease;
 }
 
 .tierCard:hover .tierPrice {
-  text-shadow: 0 0 16px var(--accent-glow);
+  color: var(--tier-accent, var(--accent));
+  text-shadow: 0 0 20px var(--tier-glow, var(--accent-glow));
 }
 
-.tierLabel {
+.tierGameBadge {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.tierTitle {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+}
+
+.tierDesc {
   font-size: 13px;
   color: var(--text-muted);
+  line-height: 1.5;
+  margin: 0;
+  flex: 1;
+}
+
+.tierActionRow {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 12px;
+}
+
+.tierActionText {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  transition: transform 0.2s ease;
+  display: inline-block;
+}
+
+.tierCard:hover .tierActionText {
+  transform: translateX(4px);
+}
+
+.viewAllRow {
+  display: flex;
+  justify-content: center;
+  margin-top: 12px;
 }
 
 /* ── Responsive ── */
 @media (max-width: 1024px) {
   .gamesGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .tiersGrid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
@@ -314,6 +472,12 @@
   }
   .heading {
     font-size: 38px;
+  }
+  .budgetSection {
+    padding: 24px 20px;
+  }
+  .budgetTitle {
+    font-size: 22px;
   }
 }
 
@@ -340,7 +504,7 @@
     grid-template-columns: 1fr;
     gap: 12px;
   }
-  .tiers {
+  .tiersGrid {
     grid-template-columns: 1fr;
     gap: 14px;
   }
@@ -348,6 +512,6 @@
     padding: 18px;
   }
   .tierPrice {
-    font-size: 22px;
+    font-size: 26px;
   }
 }

@@ -1,19 +1,31 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import AccountCard from "../../components/AccountCard";
 import { BUDGET_TIERS, LISTING_TYPES } from "../../lib/mockAccounts";
 import { GAMES } from "../../lib/games";
 import styles from "./buy.module.css";
 
-export default function BuyClient({ initialAccounts }) {
+function BuyClientContent({ initialAccounts }) {
+  const searchParams = useSearchParams();
+  const urlGame = searchParams.get("game");
+  const urlBudget = searchParams.get("budget");
+  const urlMinPrice = searchParams.get("minPrice");
+  const urlMaxPrice = searchParams.get("maxPrice");
+
   const [accounts] = useState(initialAccounts ?? []);
 
   const [query, setQuery] = useState("");
-  const [activeGame, setActiveGame] = useState(null);
-  const [activeBudget, setActiveBudget] = useState(null);
+  const [activeGame, setActiveGame] = useState(urlGame || null);
+  const [activeBudget, setActiveBudget] = useState(urlBudget || null);
   const [activeType, setActiveType] = useState(null);
   const [sortBy, setSortBy] = useState("newest");
+
+  useEffect(() => {
+    if (urlGame) setActiveGame(urlGame);
+    if (urlBudget) setActiveBudget(urlBudget);
+  }, [urlGame, urlBudget]);
 
   const filtered = useMemo(() => {
     const result = accounts.filter((acc) => {
@@ -24,9 +36,17 @@ export default function BuyClient({ initialAccounts }) {
 
       const matchesGame = !activeGame || acc.game === activeGame;
 
-      const budget = BUDGET_TIERS.find((b) => b.id === activeBudget);
-      const matchesBudget =
-        !budget || (acc.price >= budget.min && acc.price <= budget.max);
+      let matchesBudget = true;
+      if (activeBudget) {
+        const budget = BUDGET_TIERS.find((b) => b.id === activeBudget);
+        if (budget) {
+          matchesBudget = acc.price >= budget.min && acc.price <= budget.max;
+        }
+      } else if (urlMinPrice || urlMaxPrice) {
+        const min = urlMinPrice ? Number(urlMinPrice) : 0;
+        const max = urlMaxPrice ? Number(urlMaxPrice) : Infinity;
+        matchesBudget = acc.price >= min && acc.price <= max;
+      }
 
       const matchesType = !activeType || acc.listingType === activeType;
 
@@ -41,7 +61,7 @@ export default function BuyClient({ initialAccounts }) {
     }
 
     return sorted;
-  }, [accounts, query, activeGame, activeBudget, activeType, sortBy]);
+  }, [accounts, query, activeGame, activeBudget, urlMinPrice, urlMaxPrice, activeType, sortBy]);
 
   return (
     <div className={styles.page}>
@@ -172,5 +192,13 @@ export default function BuyClient({ initialAccounts }) {
         </section>
       )}
     </div>
+  );
+}
+
+export default function BuyClient(props) {
+  return (
+    <Suspense fallback={<div className={styles.page}>Loading marketplace...</div>}>
+      <BuyClientContent {...props} />
+    </Suspense>
   );
 }
