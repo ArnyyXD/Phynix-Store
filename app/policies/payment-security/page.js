@@ -12,41 +12,7 @@ export default function PaymentSecurityPage() {
         MIDDLEMAN FEES: <strong>₹75–₹100 per person</strong>
       </div>
 
-      {/* ══════════════════════════════════════════════
-          SECTION A — Community Group Rules & ToS
-          ══════════════════════════════════════════════ */}
-      <section className={styles.section}>
-        <h2 className={styles.sectionTitle}>Community Group Rules &amp; Terms of Service</h2>
 
-        <h3 className={styles.subTitle}>Community Rules</h3>
-        <ul className={styles.list}>
-          <li>
-            <strong>Rule 1 — Respect.</strong> Respect all sellers. Do not spam DMs
-            or call sellers without their consent.
-          </li>
-          <li>
-            <strong>Rule 2 — No harassment.</strong> Foul language used in a
-            harassing way is strictly not allowed.
-          </li>
-          <li>
-            <strong>Rule 3 — No NSFW.</strong> Pornographic, adult, or NSFW material
-            of any kind is strictly prohibited.
-          </li>
-          <li>
-            <strong>Rule 4 — No external links.</strong> Do not share or give away
-            links for any kinds of services.
-          </li>
-          <li>
-            <strong>Rule 5 — No self-promotion.</strong> You cannot promote your own
-            business without admin consent.
-          </li>
-          <li>
-            <strong>Rule 6 — Middleman is mandatory.</strong> Always deal with a
-            middleman. Only admins can act as Middleman (MM). Dealing without an MM
-            will result in a <strong>permanent ban</strong>.
-          </li>
-        </ul>
-      </section>
 
       {/* ══════════════════════════════════════════════
           SECTION B — T.O.S
