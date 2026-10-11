@@ -1,0 +1,55 @@
+<svg width="1200" height="675" viewBox="0 0 1200 675" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg_bgmi" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#14171A"/>
+      <stop offset="50%" stop-color="#24211D"/>
+      <stop offset="100%" stop-color="#0E1012"/>
+    </linearGradient>
+    <radialGradient id="amber_glow" cx="50%" cy="40%" r="55%">
+      <stop offset="0%" stop-color="#FF8A3D" stop-opacity="0.45"/>
+      <stop offset="70%" stop-color="#D95300" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#0E1012" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="helmet_glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="12" stdDeviation="20" flood-color="#FF8A3D" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="1200" height="675" fill="url(#bg_bgmi)"/>
+  <circle cx="600" cy="290" r="460" fill="url(#amber_glow)"/>
+
+  <!-- Military / Airdrop Stripes Background -->
+  <g opacity="0.12" fill="#FF8A3D">
+    <rect x="-100" y="280" width="1400" height="15" transform="rotate(-15 600 300)"/>
+    <rect x="-100" y="320" width="1400" height="8" transform="rotate(-15 600 300)"/>
+    <rect x="-100" y="350" width="1400" height="25" transform="rotate(-15 600 300)"/>
+  </g>
+
+  <!-- Level 3 Helmet Icon Art in Center -->
+  <g transform="translate(600, 260)" filter="url(#helmet_glow)">
+    <!-- Helmet Dome Outer -->
+    <path d="M-130 50 C-130 -90 -80 -150 0 -150 C80 -150 130 -90 130 50 C130 110 80 140 0 140 C-80 140 -130 110 -130 50 Z" fill="#20252C" stroke="#FF8A3D" stroke-width="8"/>
+    <!-- Visor Guard Plate -->
+    <path d="M-115 10 H115 V65 C115 75 105 85 90 85 H-90 C-105 85 -115 75 -115 65 Z" fill="#0E1217" stroke="#FF9A4A" stroke-width="4"/>
+    <!-- Visor Slit -->
+    <rect x="-85" y="30" width="170" height="18" rx="4" fill="#FF8A3D" opacity="0.95"/>
+    <rect x="-80" y="33" width="70" height="6" rx="2" fill="#FFFFFF" opacity="0.8"/>
+    <!-- Helmet Ear Protectors -->
+    <rect x="-142" y="25" width="22" height="65" rx="6" fill="#15191E" stroke="#FF8A3D" stroke-width="3"/>
+    <rect x="120" y="25" width="22" height="65" rx="6" fill="#15191E" stroke="#FF8A3D" stroke-width="3"/>
+  </g>
+
+  <!-- Typography -->
+  <text x="600" y="525" font-family="'Impact', 'Arial Black', sans-serif" font-size="78" font-weight="900" fill="#FFFFFF" letter-spacing="14" text-anchor="middle">BGMI</text>
+  <text x="600" y="575" font-family="'Impact', 'Arial Black', sans-serif" font-size="20" fill="#FF8A3D" letter-spacing="8" text-anchor="middle">BATTLEGROUNDS MOBILE INDIA</text>
+  <text x="600" y="610" font-family="monospace" font-size="14" fill="#B39A98" letter-spacing="4" text-anchor="middle">ACE • CONQUEROR • GLACIER M416 • X-SUIT</text>
+
+  <!-- Crosshair Accents -->
+  <circle cx="150" cy="150" r="40" stroke="#FF8A3D" stroke-width="2" opacity="0.4"/>
+  <line x1="150" y1="90" x2="150" y2="210" stroke="#FF8A3D" stroke-width="2" opacity="0.4"/>
+  <line x1="90" y1="150" x2="210" y2="150" stroke="#FF8A3D" stroke-width="2" opacity="0.4"/>
+  <circle cx="1050" cy="150" r="40" stroke="#FF8A3D" stroke-width="2" opacity="0.4"/>
+  <line x1="1050" y1="90" x2="1050" y2="210" stroke="#FF8A3D" stroke-width="2" opacity="0.4"/>
+  <line x1="990" y1="150" x2="1110" y2="150" stroke="#FF8A3D" stroke-width="2" opacity="0.4"/>
+</svg>

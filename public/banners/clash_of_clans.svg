@@ -1,0 +1,55 @@
+<svg width="1200" height="675" viewBox="0 0 1200 675" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg_coc" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E192B"/>
+      <stop offset="40%" stop-color="#2D1B36"/>
+      <stop offset="100%" stop-color="#140D1B"/>
+    </linearGradient>
+    <radialGradient id="gold_glow" cx="50%" cy="35%" r="55%">
+      <stop offset="0%" stop-color="#FFA800" stop-opacity="0.4"/>
+      <stop offset="70%" stop-color="#FF5A00" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#140D1B" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="shield_shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="15" stdDeviation="25" flood-color="#FFA800" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="1200" height="675" fill="url(#bg_coc)"/>
+  <circle cx="600" cy="300" r="480" fill="url(#gold_glow)"/>
+
+  <!-- Fortress Battlements Silhouette Backing -->
+  <path d="M0 450 L120 450 L120 410 L180 410 L180 450 L300 450 L300 400 L370 400 L370 450 L520 450 L520 390 L600 390 L680 390 L680 450 L830 450 L830 400 L900 400 L900 450 L1020 450 L1020 410 L1080 410 L1080 450 L1200 450 L1200 675 L0 675 Z" fill="#0D0712" opacity="0.6"/>
+
+  <!-- Crossed Golden Swords -->
+  <g transform="translate(600, 240)">
+    <!-- Sword 1 -->
+    <path d="M-180 -120 L180 120" stroke="#FFD700" stroke-width="14" stroke-linecap="round" opacity="0.4"/>
+    <path d="M-180 -120 L180 120" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" opacity="0.7"/>
+    <!-- Sword 2 -->
+    <path d="M180 -120 L-180 120" stroke="#FFD700" stroke-width="14" stroke-linecap="round" opacity="0.4"/>
+    <path d="M180 -120 L-180 120" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" opacity="0.7"/>
+  </g>
+
+  <!-- Main Clash Crest / Town Hall Shield -->
+  <g transform="translate(600, 250)" filter="url(#shield_shadow)">
+    <!-- Shield Outer -->
+    <path d="M0 -150 L120 -80 V30 C120 110 0 170 0 170 C0 170 -120 110 -120 30 V-80 L0 -150 Z" fill="#1C2630" stroke="#FFB800" stroke-width="10"/>
+    <!-- Shield Inner -->
+    <path d="M0 -130 L100 -70 V25 C100 95 0 150 0 150 C0 150 -100 95 -100 25 V-70 L0 -130 Z" fill="#E88C00"/>
+    <!-- Crown Emblem inside Shield -->
+    <path d="M-55 35 L-40 -40 L-15 0 L0 -50 L15 0 L40 -40 L55 35 Z" fill="#FFD700" stroke="#FFFFFF" stroke-width="4"/>
+    <circle cx="0" cy="-60" r="10" fill="#FFD700"/>
+    <circle cx="-42" cy="-50" r="7" fill="#FFD700"/>
+    <circle cx="42" cy="-50" r="7" fill="#FFD700"/>
+  </g>
+
+  <!-- Title Banner -->
+  <text x="600" y="530" font-family="'Impact', 'Arial Black', sans-serif" font-size="64" font-weight="900" fill="#FFD700" stroke="#2B1500" stroke-width="4" letter-spacing="8" text-anchor="middle">CLASH OF CLANS</text>
+  <text x="600" y="580" font-family="'Arial Black', sans-serif" font-size="16" fill="#FFA800" letter-spacing="6" text-anchor="middle">TOWN HALL 9-17 • MAX HEROES • WAR BASES</text>
+
+  <!-- Sparkles -->
+  <polygon points="320,180 325,195 340,200 325,205 320,220 315,205 300,200 315,195" fill="#FFD700"/>
+  <polygon points="880,160 884,172 896,176 884,180 880,192 876,180 864,176 876,172" fill="#FFD700"/>
+</svg>

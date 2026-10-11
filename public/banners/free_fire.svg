@@ -1,0 +1,46 @@
+<svg width="1200" height="675" viewBox="0 0 1200 675" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg_ff" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1F0D08"/>
+      <stop offset="50%" stop-color="#2D1107"/>
+      <stop offset="100%" stop-color="#0E0502"/>
+    </linearGradient>
+    <radialGradient id="fire_glow" cx="50%" cy="40%" r="55%">
+      <stop offset="0%" stop-color="#FF4500" stop-opacity="0.55"/>
+      <stop offset="50%" stop-color="#FF8A00" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#0E0502" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="flame_glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="10" stdDeviation="25" flood-color="#FF4500" flood-opacity="0.65"/>
+    </filter>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="1200" height="675" fill="url(#bg_ff)"/>
+  <circle cx="600" cy="270" r="480" fill="url(#fire_glow)"/>
+
+  <!-- Ember Particles -->
+  <circle cx="200" cy="400" r="4" fill="#FF8A00" opacity="0.6"/>
+  <circle cx="280" cy="250" r="6" fill="#FF4500" opacity="0.7"/>
+  <circle cx="340" cy="480" r="3" fill="#FFD700" opacity="0.8"/>
+  <circle cx="920" cy="280" r="5" fill="#FF4500" opacity="0.7"/>
+  <circle cx="980" cy="420" r="4" fill="#FF8A00" opacity="0.6"/>
+  <circle cx="860" cy="460" r="6" fill="#FFD700" opacity="0.5"/>
+
+  <!-- Giant Multi-Layer Fire Crest -->
+  <g transform="translate(600, 250)" filter="url(#flame_glow)">
+    <!-- Outer Deep Flame -->
+    <path d="M0 -170 C40 -90 150 -50 150 60 C150 140 85 190 0 190 C-85 190 -150 140 -150 60 C-150 -50 -40 -90 0 -170 Z" fill="#991500" opacity="0.7"/>
+    <!-- Main Orange Flame -->
+    <path d="M0 -150 C30 -80 120 -30 120 50 C120 120 70 170 0 170 C-70 170 -120 120 -120 50 C-120 -30 -30 -80 0 -150 Z" fill="#FF4500"/>
+    <!-- Yellow Heart Core -->
+    <path d="M0 -100 C20 -50 75 -20 75 35 C75 85 45 120 0 120 C-45 120 -75 85 -75 35 C-75 -20 -20 -50 0 -100 Z" fill="#FFB800"/>
+    <!-- Bright White Hot Center -->
+    <path d="M0 -50 C10 -20 40 -5 40 25 C40 55 25 75 0 75 C-25 75 -40 55 -40 25 C-40 -5 -10 -20 0 -50 Z" fill="#FFF2A8"/>
+  </g>
+
+  <!-- Typography -->
+  <text x="600" y="525" font-family="'Impact', 'Arial Black', sans-serif" font-size="76" font-weight="900" fill="#FFFFFF" letter-spacing="14" text-anchor="middle">FREE FIRE</text>
+  <text x="600" y="575" font-family="'Impact', 'Arial Black', sans-serif" font-size="20" fill="#FF4500" letter-spacing="8" text-anchor="middle">BATTLE ROYALE • MAX</text>
+  <text x="600" y="610" font-family="monospace" font-size="14" fill="#B39A98" letter-spacing="4" text-anchor="middle">HEROIC • GRANDMASTER • COBRA MP40 • EVO GUNS</text>
+</svg>
