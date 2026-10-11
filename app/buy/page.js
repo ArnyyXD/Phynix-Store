@@ -1,7 +1,8 @@
-﻿import prisma from "../../lib/prisma";
+import prisma from "../../lib/prisma";
 import BuyClient from "./BuyClient";
 
-export const dynamic = "force-dynamic";
+// Revalidate every 30 seconds so Vercel caches responses at edge (eliminates 2-4s Neon cold start lag)
+export const revalidate = 30;
 
 export default async function BuyPage() {
   let accounts = [];

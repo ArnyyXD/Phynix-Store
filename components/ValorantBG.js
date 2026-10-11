@@ -80,6 +80,13 @@ export default function ValorantBG() {
     let animId;
     let t = 0;
 
+    // Detect mobile or reduced motion preference to save CPU/GPU cycles
+    const isMobile = window.innerWidth < 768;
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    
+    // Reduce particles drastically on mobile (20 vs 80) to avoid lag
+    const PARTICLE_COUNT = isMobile || prefersReducedMotion ? 20 : 70;
+
     function resize() {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
@@ -88,7 +95,6 @@ export default function ValorantBG() {
     window.addEventListener("resize", resize);
 
     // ── Particle Sparks ──────────────────────────────────────────────────
-    const PARTICLE_COUNT = 80;
     const particles = Array.from({ length: PARTICLE_COUNT }, () => ({
       x: Math.random() * window.innerWidth,
       y: Math.random() * window.innerHeight,
@@ -110,7 +116,7 @@ export default function ValorantBG() {
       p.maxLife = 0.003 + Math.random() * 0.005;
     }
 
-    const beams = [
+    const beams = isMobile ? [] : [
       { y: 0.15, speed: 0.00015, phase: 0, width: 0.35 },
       { y: 0.38, speed: 0.00011, phase: Math.PI * 0.5, width: 0.25 },
       { y: 0.62, speed: 0.00018, phase: Math.PI, width: 0.4 },
@@ -118,6 +124,7 @@ export default function ValorantBG() {
     ];
 
     function drawHUDAccents() {
+      if (isMobile) return;
       const W = canvas.width, H = canvas.height;
       ctx.save();
       ctx.strokeStyle = "rgba(230, 57, 96, 0.25)";
@@ -181,6 +188,12 @@ export default function ValorantBG() {
     }
 
     function render() {
+      // Pause completely if tab is not visible to prevent CPU burn
+      if (document.hidden) {
+        animId = requestAnimationFrame(render);
+        return;
+      }
+
       const W = canvas.width, H = canvas.height;
       t++;
 
@@ -196,13 +209,15 @@ export default function ValorantBG() {
       ctx.fillStyle = radGlow1;
       ctx.fillRect(0, 0, W, H);
 
-      const radGlow2 = ctx.createRadialGradient(W * 0.85, H * 0.2, 0, W * 0.85, H * 0.2, W * 0.35);
-      radGlow2.addColorStop(0, "rgba(255, 46, 62, 0.12)");
-      radGlow2.addColorStop(1, "rgba(0, 0, 0, 0)");
-      ctx.fillStyle = radGlow2;
-      ctx.fillRect(0, 0, W, H);
+      if (!isMobile) {
+        const radGlow2 = ctx.createRadialGradient(W * 0.85, H * 0.2, 0, W * 0.85, H * 0.2, W * 0.35);
+        radGlow2.addColorStop(0, "rgba(255, 46, 62, 0.12)");
+        radGlow2.addColorStop(1, "rgba(0, 0, 0, 0)");
+        ctx.fillStyle = radGlow2;
+        ctx.fillRect(0, 0, W, H);
 
-      for (const b of beams) drawBeam(b);
+        for (const b of beams) drawBeam(b);
+      }
 
       for (const p of particles) {
         p.life += p.maxLife;
@@ -228,13 +243,6 @@ export default function ValorantBG() {
 
       drawHUDAccents();
 
-      ctx.save();
-      ctx.fillStyle = "rgba(0, 0, 0, 0.04)";
-      for (let y = 0; y < H; y += 4) {
-        ctx.fillRect(0, y, W, 1);
-      }
-      ctx.restore();
-
       animId = requestAnimationFrame(render);
     }
 
@@ -256,7 +264,7 @@ export default function ValorantBG() {
           loop
           muted
           playsInline
-          preload="auto"
+          preload="metadata"
           controls={false}
           disablePictureInPicture
           disableRemotePlayback
