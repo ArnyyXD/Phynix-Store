@@ -1,0 +1,277 @@
+.page {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 64px 24px 100px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero {
+  margin-bottom: 36px;
+  text-align: center;
+}
+
+.badge {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--accent-bright);
+  background: var(--accent-soft);
+  border: 1px solid var(--accent);
+  padding: 6px 14px;
+  border-radius: 4px;
+  margin-bottom: 16px;
+}
+
+.heading {
+  font-size: 46px;
+  line-height: 1.15;
+  color: var(--text);
+  margin-bottom: 14px;
+}
+
+.subheading {
+  font-size: 19px;
+  color: #D6C7C5;
+  max-width: 680px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.mmBanner {
+  background: linear-gradient(135deg, rgba(230, 57, 96, 0.22) 0%, rgba(74, 10, 20, 0.45) 100%);
+  border: 1.5px solid var(--accent);
+  border-left: 5px solid var(--accent);
+  padding: 22px 28px;
+  border-radius: 12px;
+  margin-bottom: 40px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  box-shadow: 0 8px 30px rgba(230, 57, 96, 0.2);
+}
+
+.mmAlertIcon {
+  font-size: 32px;
+  flex-shrink: 0;
+}
+
+.mmAlertText strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 18px;
+  letter-spacing: 0.05em;
+  color: var(--accent-bright);
+  margin-bottom: 6px;
+}
+
+.mmAlertText p {
+  font-size: 16px;
+  color: #F5EDEC;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.quickNav {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 48px;
+  padding: 14px 20px;
+  background: var(--bg-panel);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+
+.navChip {
+  font-family: var(--font-display);
+  font-size: 14px;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--line-bright);
+  padding: 8px 16px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  letter-spacing: 0.03em;
+}
+
+.navChip:hover {
+  color: var(--text);
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  transform: translateY(-2px);
+}
+
+.section {
+  margin-bottom: 52px;
+  background: var(--bg-panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 36px 32px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.sectionTitle {
+  font-size: 26px;
+  color: var(--text);
+  margin-bottom: 22px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line);
+  letter-spacing: 0.04em;
+}
+
+.stepGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.stepCard {
+  background: var(--bg);
+  border: 1px solid var(--line-bright);
+  padding: 24px;
+  border-radius: 10px;
+  position: relative;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.stepCard:hover {
+  border-color: var(--accent);
+  transform: translateY(-3px);
+}
+
+.stepNum {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--accent);
+  opacity: 0.9;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.stepCardTitle {
+  font-family: var(--font-display);
+  font-size: 20px;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.stepCardDesc {
+  font-size: 15px;
+  color: #D6C7C5;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.body {
+  color: #D6C7C5;
+  font-size: 17px;
+  line-height: 1.75;
+  margin-bottom: 16px;
+}
+
+.list,
+.numberedList {
+  color: #D6C7C5;
+  font-size: 17px;
+  line-height: 1.75;
+  padding-left: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 0;
+}
+
+.list li::marker {
+  color: var(--accent);
+}
+
+.numberedList li::marker {
+  color: var(--accent-bright);
+  font-weight: bold;
+}
+
+.policyBox {
+  background: rgba(255, 255, 255, 0.02);
+  border-left: 4px solid var(--accent);
+  padding: 20px 24px;
+  border-radius: 0 8px 8px 0;
+}
+
+.contactCard {
+  background: linear-gradient(180deg, var(--bg-panel) 0%, rgba(20, 10, 14, 0.95) 100%);
+  border: 1px solid var(--line-bright);
+  border-radius: 14px;
+  padding: 40px 32px;
+  text-align: center;
+  margin-top: 56px;
+}
+
+.contactTitle {
+  font-size: 28px;
+  color: var(--text);
+  margin-bottom: 10px;
+  letter-spacing: 0.03em;
+}
+
+.contactDesc {
+  font-size: 17px;
+  color: var(--text-muted);
+  max-width: 560px;
+  margin: 0 auto 28px;
+  line-height: 1.6;
+}
+
+.contactButtons {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .stepGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .page {
+    padding: 40px 16px 72px;
+  }
+  .heading {
+    font-size: 32px;
+  }
+  .subheading {
+    font-size: 16px;
+  }
+  .section {
+    padding: 24px 18px;
+    margin-bottom: 36px;
+  }
+  .sectionTitle {
+    font-size: 22px;
+  }
+  .body,
+  .list,
+  .numberedList {
+    font-size: 16px;
+  }
+  .mmBanner {
+    flex-direction: column;
+    padding: 18px 20px;
+    text-align: center;
+    gap: 10px;
+  }
+  .contactButtons {
+    flex-direction: column;
+  }
+  .contactButtons a {
+    width: 100%;
+    text-align: center;
+  }
+}

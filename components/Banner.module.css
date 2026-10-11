@@ -4,53 +4,163 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 14px;
-  padding: 40px 20px 56px;
+  gap: 16px;
+  padding: 56px 40px 68px;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
 }
 
+/* ── Animated ambient background blobs ── */
+.banner::before,
+.banner::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.banner::before {
+  width: 480px;
+  height: 480px;
+  top: -120px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: radial-gradient(
+    circle,
+    rgba(230, 57, 96, 0.22) 0%,
+    rgba(230, 57, 96, 0.08) 45%,
+    transparent 72%
+  );
+  filter: blur(50px);
+  animation: blobPulse 6s ease-in-out infinite;
+}
+
+.banner::after {
+  width: 320px;
+  height: 320px;
+  bottom: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: radial-gradient(
+    circle,
+    rgba(255, 100, 50, 0.12) 0%,
+    transparent 70%
+  );
+  filter: blur(40px);
+  animation: blobPulse 8s ease-in-out infinite reverse;
+}
+
+@keyframes blobPulse {
+  0%, 100% { transform: translateX(-50%) scale(1); opacity: 0.8; }
+  50%       { transform: translateX(-50%) scale(1.18); opacity: 1; }
+}
+
+/* ── Glow Ring behind logo ── */
 .glowRing {
   position: absolute;
-  top: -40px;
-  width: 260px;
-  height: 260px;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300px;
+  height: 300px;
   border-radius: 50%;
   background: radial-gradient(
     circle,
     var(--accent-glow) 0%,
-    rgba(230, 57, 96, 0.28) 45%,
+    rgba(230, 57, 96, 0.22) 45%,
     transparent 72%
   );
-  filter: blur(30px);
+  filter: blur(38px);
   animation: pulseGlow 4.5s ease-in-out infinite;
-  z-index: -1;
+  z-index: 0;
 }
 
 @keyframes pulseGlow {
-  0%,
-  100% {
-    transform: scale(1);
-    opacity: 0.7;
-  }
-  50% {
-    transform: scale(1.15);
-    opacity: 1;
-  }
+  0%, 100% { transform: translateX(-50%) scale(1);    opacity: 0.7; }
+  50%       { transform: translateX(-50%) scale(1.18); opacity: 1; }
+}
+
+/* ── Horizontal neon accent lines ── */
+.accentLine {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 1.5px;
+  width: 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, var(--accent), rgba(255,100,50,0.9), var(--accent), transparent);
+  animation: lineExpand 1.2s 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  z-index: 1;
+}
+
+.accentLine.top    { top: 0; }
+.accentLine.bottom { bottom: 0; }
+
+@keyframes lineExpand {
+  to { width: min(640px, 90vw); }
+}
+
+/* ── Logo icon ── */
+.iconWrap {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .icon {
   border-radius: 50%;
-  filter: drop-shadow(0 0 20px var(--accent-glow)) drop-shadow(0 0 34px rgba(230, 57, 96, 0.3));
-  transition: transform 0.3s ease;
+  filter:
+    drop-shadow(0 0 24px var(--accent-glow))
+    drop-shadow(0 0 48px rgba(230, 57, 96, 0.28));
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
 }
 
 .icon:hover {
-  transform: scale(1.06) rotate(-4deg);
+  transform: scale(1.1) rotate(-5deg);
+  filter:
+    drop-shadow(0 0 32px var(--accent-glow))
+    drop-shadow(0 0 64px rgba(230, 57, 96, 0.5));
 }
 
+/* ── Ring orbit glow on hover ── */
+.iconWrap::after {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 1.5px solid transparent;
+  background:
+    linear-gradient(var(--bg), var(--bg)) padding-box,
+    conic-gradient(from 0deg, var(--accent), rgba(255,100,50,0.8), transparent 60%, var(--accent)) border-box;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  animation: orbitSpin 4s linear infinite;
+}
+
+.iconWrap:hover::after {
+  opacity: 1;
+}
+
+@keyframes orbitSpin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Title ── */
 .title {
-  font-size: 40px;
-  letter-spacing: 0.04em;
+  position: relative;
+  z-index: 2;
+  font-size: 52px;
+  letter-spacing: 0.06em;
   color: var(--text);
+  transition: letter-spacing 0.4s ease;
+}
+
+.title:hover {
+  letter-spacing: 0.1em;
 }
 
 .titleAccent {
@@ -62,14 +172,54 @@
   animation: gradientShift 6s ease infinite;
 }
 
+/* ── Tagline ── */
 .tagline {
-  font-size: 15px;
+  position: relative;
+  z-index: 2;
+  font-size: 18px;
   color: var(--text-muted);
-  letter-spacing: 0.02em;
+  letter-spacing: 0.05em;
+  max-width: 440px;
+  line-height: 1.5;
+}
+
+/* ── Decorative dots pattern ── */
+.dots {
+  position: absolute;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-image: radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events: none;
+}
+
+@media (max-width: 860px) {
+  .banner {
+    padding: 44px 24px 56px;
+  }
+  .title {
+    font-size: 40px;
+  }
+  .tagline {
+    font-size: 16px;
+  }
 }
 
 @media (max-width: 640px) {
+  .banner {
+    padding: 36px 16px 48px;
+  }
   .title {
-    font-size: 30px;
+    font-size: 32px;
+  }
+  .tagline {
+    font-size: 15px;
+  }
+  .glowRing {
+    width: 220px;
+    height: 220px;
   }
 }

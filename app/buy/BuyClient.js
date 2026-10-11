@@ -74,6 +74,49 @@ function BuyClientContent({ initialAccounts }) {
         </p>
       </section>
 
+      {/* Budget Range Section */}
+      <section className={styles.budgetTierSection}>
+        <div className={styles.budgetHeader}>
+          <span className={styles.budgetBadge}>BUDGET RANGE</span>
+          <h2 className={styles.budgetHeading}>Filter By Price Tier</h2>
+          <p className={styles.budgetSub}>Select a tier below or use the filter chips to discover listings within your target budget.</p>
+        </div>
+
+        <div className={styles.budgetGrid}>
+          {BUDGET_TIERS.map((tier) => {
+            const isSelected = activeBudget === tier.id;
+            return (
+              <button
+                key={tier.id}
+                type="button"
+                onClick={() => setActiveBudget(isSelected ? null : tier.id)}
+                className={`${styles.budgetCard} ${isSelected ? styles.budgetCardActive : ""}`}
+              >
+                <div className={styles.budgetCardTop}>
+                  <span className={styles.budgetCardPrice}>{tier.label}</span>
+                  {isSelected && <span className={styles.activeCheck}>✓ Active</span>}
+                </div>
+                <h4 className={styles.budgetCardTitle}>
+                  {tier.id === "3-4k" && "Starter & Clean Ranks"}
+                  {tier.id === "5-7k" && "Mid Tier & Stacked Vaults"}
+                  {tier.id === "8-10k" && "High Profile & Premium Bundles"}
+                </h4>
+                <p className={styles.budgetCardDesc}>
+                  {tier.id === "3-4k" && "Entry-level ranks, clean histories & budget smurfs."}
+                  {tier.id === "5-7k" && "Competitive ranks, stacked inventories & popular skins."}
+                  {tier.id === "8-10k" && "Radiant/Conqueror accounts, legacy badges & maxed stats."}
+                </p>
+                <div className={styles.budgetCardFooter}>
+                  <span className={styles.budgetActionText}>
+                    {isSelected ? "Filter Applied (Click to Clear)" : "Browse Tier Listings →"}
+                  </span>
+                </div>
+              </button>
+            );
+          })}
+        </div>
+      </section>
+
       <section className={styles.controls}>
         <input
           className={styles.search}

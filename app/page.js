@@ -52,30 +52,35 @@ const GAME_CARDS = [
   },
 ];
 
-const BUDGET_OPTIONS = [
+const FEATURES = [
   {
-    id: "3-4k",
-    priceRange: "₹3k – ₹4k",
-    title: "Starter Ranks & Clean History",
-    desc: "Budget smurfs, entry-level ranks, and clean account histories.",
+    icon: "💎",
+    title: "Platinum & Elite Skins",
+    subtitle: "Stacked Inventories",
+    desc: "Vandal & Phantom skins vaults, Champions bundles, Glacier M416, rare upgradable gun labs, and mythic outfits curated for collectors.",
   },
   {
-    id: "5-7k",
-    priceRange: "₹5k – ₹7k",
-    title: "Mid Ranks & Stacked Skins",
-    desc: "Competitive ranks, stacked inventories, and popular skin bundles.",
+    icon: "👑",
+    title: "High-Profile Accounts",
+    subtitle: "Peak Competitiveness",
+    desc: "Immortal to Radiant, Conqueror, and Grandmaster ranked accounts with high KD, legacy badges, maxed town halls, and clean records.",
   },
   {
-    id: "8-10k",
-    priceRange: "₹8k – ₹10k",
-    title: "High Rank & Premium Bundles",
-    desc: "Top-tier high rank accounts, exclusive collections, and maxed accounts.",
+    icon: "🛡️",
+    title: "Safe & Secured Trading",
+    subtitle: "Middleman Escrow",
+    desc: "100% human-verified escrow. Payment is safely held until you verify and change email, 2FA, and full account credentials.",
+  },
+  {
+    icon: "⚡",
+    title: "Instant Handover",
+    subtitle: "Fast & Smooth Support",
+    desc: "Direct coordination over WhatsApp middleman desk. Zero bots, prompt delivery, and end-to-end guidance from start to finish.",
   },
 ];
 
 export default function HomePage() {
   const [selectedGameId, setSelectedGameId] = useState("valorant");
-  const selectedGame = GAME_CARDS.find((g) => g.id === selectedGameId) || GAME_CARDS[0];
 
   return (
     <div className={styles.page}>
@@ -92,10 +97,10 @@ export default function HomePage() {
         </p>
       </section>
 
-      {/* Step 1: Select Game */}
+      {/* Game Selection */}
       <section className={styles.gamesSection}>
         <div className={styles.sectionHeader}>
-          <span className={styles.stepBadge}>STEP 1</span>
+          <span className={styles.stepBadge}>EXPLORE</span>
           <h2 className={styles.sectionTitle}>Select a Game</h2>
         </div>
 
@@ -103,9 +108,9 @@ export default function HomePage() {
           {GAME_CARDS.map((g) => {
             const isSelected = selectedGameId === g.id;
             return (
-              <button
+              <Link
                 key={g.id}
-                type="button"
+                href={`/buy?game=${g.id}`}
                 onClick={() => setSelectedGameId(g.id)}
                 className={`${styles.gameCard} ${isSelected ? styles.gameCardSelected : ""}`}
                 style={{
@@ -125,11 +130,7 @@ export default function HomePage() {
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={g.logoUrl} alt={`${g.label} Logo`} className={styles.gameCardLogoImg} />
                   </span>
-                  {isSelected ? (
-                    <span className={styles.selectedTag}>✓ Selected</span>
-                  ) : (
-                    <span className={styles.gameTag}>{g.tag}</span>
-                  )}
+                  <span className={styles.gameTag}>{g.tag}</span>
                 </div>
 
                 <div className={styles.gameCardBody}>
@@ -139,18 +140,18 @@ export default function HomePage() {
 
                 <div className={styles.gameCardFooter}>
                   <span className={styles.selectBtnText}>
-                    {isSelected ? "Game Selected — Choose Budget Below ↓" : "Select Game →"}
+                    Explore {g.label} Accounts →
                   </span>
                 </div>
 
                 <div className={`${styles.gameCardGlow} ${isSelected ? styles.glowActive : ""}`} />
-              </button>
+              </Link>
             );
           })}
         </div>
       </section>
 
-      {/* CTA Row — centered between game selection and budget */}
+      {/* CTA Row */}
       <div className={styles.ctaBetweenSection}>
         <Link href="/buy" className="btn-primary">
           Browse All Accounts
@@ -160,53 +161,29 @@ export default function HomePage() {
         </Link>
       </div>
 
-      {/* Step 2: Choose Budget Tier for Selected Game */}
-      <section className={styles.budgetSection}>
-        <div className={styles.budgetSectionHeader}>
-          <div className={styles.stepTitleRow}>
-            <span className={styles.stepBadgeAccent}>STEP 2</span>
-            <h2 className={styles.budgetTitle}>
-              Select Budget for <span style={{ color: selectedGame.accent }}>{selectedGame.label}</span>
-            </h2>
-          </div>
-          <p className={styles.budgetSubtext}>
-            Click a price range below to filter live <strong>{selectedGame.label}</strong> accounts within your budget:
+      {/* Features Section */}
+      <section className={styles.featuresSection}>
+        <div className={styles.featuresHeader}>
+          <div className={styles.heroEyebrow}>WHY CHOOSE PHYNIX STORE</div>
+          <h2 className={styles.featuresHeading}>
+            What Every <span className={styles.headingAccent}>Phynix Store</span> Account Delivers
+          </h2>
+          <p className={styles.featuresSubtext}>
+            We verify skins, security, and credentials before listing so you get premium accounts without the risk.
           </p>
         </div>
 
-        <div className={styles.tiersGrid}>
-          {BUDGET_OPTIONS.map((tier) => (
-            <Link
-              key={tier.id}
-              href={`/buy?game=${selectedGame.id}&budget=${tier.id}`}
-              className={styles.tierCard}
-              style={{ "--tier-accent": selectedGame.accent, "--tier-glow": selectedGame.glow }}
-            >
-              <div className={styles.tierTop}>
-                <span className={styles.tierPrice}>{tier.priceRange}</span>
-                <span className={styles.tierGameBadge} style={{ color: selectedGame.accent }}>
-                  {selectedGame.label}
-                </span>
+        <div className={styles.featuresGrid}>
+          {FEATURES.map((item, idx) => (
+            <div key={idx} className={styles.featureCard}>
+              <div className={styles.featureIconWrap}>
+                <span className={styles.featureIcon}>{item.icon}</span>
               </div>
-              <h4 className={styles.tierTitle}>{tier.title}</h4>
-              <p className={styles.tierDesc}>{tier.desc}</p>
-              <div className={styles.tierActionRow}>
-                <span className={styles.tierActionText} style={{ color: selectedGame.accent }}>
-                  Browse {tier.priceRange} {selectedGame.label} Accounts →
-                </span>
-              </div>
-            </Link>
+              <span className={styles.featureSubtitle}>{item.subtitle}</span>
+              <h3 className={styles.featureTitle}>{item.title}</h3>
+              <p className={styles.featureDesc}>{item.desc}</p>
+            </div>
           ))}
-        </div>
-
-        <div className={styles.viewAllRow}>
-          <Link
-            href={`/buy?game=${selectedGame.id}`}
-            className="btn-ghost"
-            style={{ borderColor: selectedGame.accent, color: "#fff" }}
-          >
-            Browse All {selectedGame.label} Listings →
-          </Link>
         </div>
       </section>
     </div>

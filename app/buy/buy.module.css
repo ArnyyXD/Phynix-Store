@@ -7,12 +7,12 @@
 }
 
 .hero {
-  max-width: 640px;
-  margin-bottom: 40px;
+  max-width: 720px;
+  margin-bottom: 36px;
 }
 
 .heading {
-  font-size: 40px;
+  font-size: 44px;
   line-height: 1.1;
   color: var(--text);
   margin-bottom: 12px;
@@ -20,7 +20,8 @@
 
 .subheading {
   color: var(--text-muted);
-  font-size: 15px;
+  font-size: 16px;
+  line-height: 1.5;
 }
 
 .fallbackNote {
@@ -29,6 +30,147 @@
   margin-top: 10px;
 }
 
+/* ── Budget Tier Range Section ── */
+.budgetTierSection {
+  margin-bottom: 32px;
+  background: linear-gradient(180deg, var(--bg-panel) 0%, rgba(14, 10, 12, 0.95) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 30px 26px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+}
+
+.budgetHeader {
+  margin-bottom: 22px;
+}
+
+.budgetBadge {
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--accent-bright);
+  background: var(--accent-soft);
+  border: 1px solid var(--accent);
+  padding: 4px 10px;
+  border-radius: 6px;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.budgetHeading {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 900;
+  color: var(--text);
+  margin-bottom: 6px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.budgetSub {
+  font-size: 15px;
+  color: var(--text-muted);
+}
+
+.budgetGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.budgetCard {
+  background: rgba(18, 12, 16, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  padding: 22px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: left;
+  cursor: pointer;
+  color: inherit;
+  transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+}
+
+.budgetCard:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+  box-shadow: 0 10px 28px rgba(230, 57, 96, 0.22), 0 0 0 1px var(--accent);
+}
+
+.budgetCardActive {
+  border-color: var(--accent) !important;
+  background: rgba(230, 57, 96, 0.1) !important;
+  box-shadow: 0 10px 32px rgba(230, 57, 96, 0.3), 0 0 0 1.5px var(--accent) !important;
+  transform: translateY(-2px);
+}
+
+.budgetCardTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.budgetCardPrice {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 900;
+  color: #FFFFFF;
+  letter-spacing: 0.03em;
+}
+
+.budgetCard:hover .budgetCardPrice {
+  color: var(--accent-bright);
+}
+
+.activeCheck {
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 700;
+  color: #FFFFFF;
+  background: var(--accent);
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.budgetCardTitle {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+}
+
+.budgetCardDesc {
+  font-size: 14px;
+  color: #C7B5B3;
+  line-height: 1.45;
+  margin: 0;
+  flex: 1;
+}
+
+.budgetCardFooter {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 10px;
+  margin-top: 4px;
+}
+
+.budgetActionText {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.budgetCard:hover .budgetActionText {
+  transform: translateX(4px);
+}
+
+/* ── Filter Controls ── */
 .controls {
   display: flex;
   flex-direction: column;
@@ -36,14 +178,15 @@
   padding: 24px;
   background: var(--bg-panel);
   border: 1px solid var(--line);
+  border-radius: 16px;
   margin-bottom: 24px;
-  clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
 }
 
 .search {
   width: 100%;
   background: var(--bg);
   border: 1px solid var(--line-bright);
+  border-radius: 8px;
   color: var(--text);
   padding: 13px 16px;
   font-size: 15px;
@@ -79,10 +222,12 @@
 .chip {
   background: transparent;
   border: 1px solid var(--line-bright);
+  border-radius: 8px;
   color: var(--text-muted);
   font-size: 13px;
   font-weight: 500;
   padding: 8px 16px;
+  cursor: pointer;
   transition: border-color 0.18s ease, color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
 }
 
@@ -128,6 +273,7 @@
 .sortSelect {
   background: var(--bg-panel);
   border: 1px solid var(--line-bright);
+  border-radius: 8px;
   color: var(--text);
   font-family: var(--font-body);
   font-size: 13px;
@@ -151,12 +297,20 @@
   padding: 60px 20px;
   text-align: center;
   border: 1px dashed var(--line-bright);
+  border-radius: 12px;
 }
 
 .emptySub {
   color: var(--text-muted);
   font-size: 14px;
   margin-top: 8px;
+}
+
+@media (max-width: 860px) {
+  .budgetGrid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
 }
 
 @media (max-width: 640px) {
@@ -166,9 +320,21 @@
   .heading {
     font-size: 28px;
   }
+  .budgetTierSection {
+    padding: 20px 16px;
+    border-radius: 14px;
+  }
+  .budgetHeading {
+    font-size: 22px;
+  }
+  .budgetGrid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
   .controls {
     padding: 16px;
     gap: 16px;
+    border-radius: 12px;
   }
   .search {
     font-size: 16px; /* Prevents auto-zoom on mobile */

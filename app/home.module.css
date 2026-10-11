@@ -1,7 +1,7 @@
 .page {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 90px 32px;
+  padding: 80px 28px;
   position: relative;
   z-index: 1;
 }
@@ -9,7 +9,7 @@
 /* ── Hero ── */
 .hero {
   max-width: 720px;
-  margin-bottom: 72px;
+  margin-bottom: 64px;
 }
 
 .heroEyebrow {
@@ -62,20 +62,39 @@
 
 /* ── Game Cards Section ── */
 .gamesSection {
-  margin-bottom: 64px;
+  margin-bottom: 56px;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.stepBadge {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--accent-bright);
+  background: var(--accent-soft);
+  border: 1px solid var(--accent);
+  padding: 5px 12px;
+  border-radius: 6px;
 }
 
 .sectionTitle {
   font-family: var(--font-display);
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 700;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--text);
-  margin-bottom: 24px;
   display: flex;
   align-items: center;
   gap: 12px;
+  flex: 1;
 }
 
 .sectionTitle::after {
@@ -85,10 +104,11 @@
   background: var(--line);
 }
 
+/* ── Game Cards Grid: Tighter spacing, rounded corners, clean responsive ── */
 .gamesGrid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
+  gap: 14px;
 }
 
 .gameCard {
@@ -97,15 +117,15 @@
   display: flex;
   flex-direction: column;
   background: var(--bg-panel);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
-  padding: 20px;
-  gap: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 18px 16px;
+  gap: 12px;
   text-decoration: none;
   color: inherit;
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, box-shadow 0.25s ease;
   cursor: pointer;
-  min-height: 240px;
+  min-height: 210px;
 }
 
 .gameCardImageWrap {
@@ -113,6 +133,7 @@
   inset: 0;
   z-index: 0;
   overflow: hidden;
+  border-radius: 16px;
 }
 
 .gameCardImage {
@@ -120,14 +141,14 @@
   height: 100%;
   object-fit: cover;
   opacity: 0.85;
-  filter: saturate(1.3) contrast(1.1) brightness(0.95);
+  filter: saturate(1.25) contrast(1.1) brightness(0.9);
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, filter 0.3s ease;
 }
 
 .gameCard:hover .gameCardImage {
   transform: scale(1.08);
   opacity: 1;
-  filter: saturate(1.4) contrast(1.15) brightness(1.2);
+  filter: saturate(1.4) contrast(1.15) brightness(1.15);
 }
 
 .gameCardOverlay {
@@ -135,9 +156,9 @@
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(10, 8, 8, 0.1) 0%,
-    rgba(10, 8, 8, 0.4) 50%,
-    rgba(10, 8, 8, 0.78) 100%
+    rgba(10, 8, 8, 0.15) 0%,
+    rgba(10, 8, 8, 0.45) 45%,
+    rgba(10, 8, 8, 0.85) 100%
   );
   transition: background 0.3s ease;
 }
@@ -146,8 +167,8 @@
   background: linear-gradient(
     180deg,
     rgba(10, 8, 8, 0.05) 0%,
-    rgba(10, 8, 8, 0.25) 50%,
-    rgba(10, 8, 8, 0.65) 100%
+    rgba(10, 8, 8, 0.3) 45%,
+    rgba(10, 8, 8, 0.75) 100%
   );
 }
 
@@ -159,12 +180,13 @@
   opacity: 0;
   transition: opacity 0.3s ease;
   z-index: 1;
+  border-radius: 16px;
 }
 
 .gameCard:hover {
-  transform: translateY(-7px);
+  transform: translateY(-6px);
   border-color: var(--game-accent, var(--accent));
-  box-shadow: 0 16px 50px var(--game-glow, var(--accent-soft)), 0 0 25px var(--game-glow, var(--accent-soft)), 0 0 0 1.5px var(--game-accent, var(--accent));
+  box-shadow: 0 16px 40px var(--game-glow, var(--accent-soft)), 0 0 20px var(--game-glow, var(--accent-soft)), 0 0 0 1.5px var(--game-accent, var(--accent));
 }
 
 .gameCard:hover .gameCardGlow {
@@ -184,15 +206,15 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 54px;
-  height: 54px;
-  border-radius: 14px;
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
   background: rgba(18, 12, 16, 0.95);
   backdrop-filter: blur(12px);
   border: 1.5px solid var(--game-accent, var(--accent));
-  box-shadow: 0 0 22px var(--game-glow, rgba(230,57,96,0.6)), 0 4px 14px rgba(0, 0, 0, 0.7);
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease;
-  padding: 6px;
+  box-shadow: 0 0 20px var(--game-glow, rgba(230,57,96,0.5)), 0 4px 12px rgba(0, 0, 0, 0.7);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 5px;
   overflow: hidden;
 }
 
@@ -200,28 +222,28 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
-  border-radius: 8px;
+  border-radius: 6px;
   filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.4));
   display: block;
 }
 
 .gameCard:hover .gameIconWrap {
-  transform: scale(1.12) rotate(-3deg);
+  transform: scale(1.1) rotate(-3deg);
 }
 
 .gameTag {
   position: relative;
   z-index: 2;
   font-family: var(--font-body);
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--text);
-  background: rgba(0, 0, 0, 0.75);
+  background: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(8px);
-  padding: 5px 11px;
-  border-radius: 4px;
+  padding: 4px 9px;
+  border-radius: 6px;
   border: 1px solid rgba(255, 255, 255, 0.16);
 }
 
@@ -233,10 +255,10 @@
 
 .gameLabel {
   font-family: var(--font-display);
-  font-size: 28px;
+  font-size: 26px;
   font-weight: 900;
   color: #FFFFFF;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
@@ -249,243 +271,46 @@
 }
 
 .gameDesc {
-  font-size: 16px;
+  font-size: 15px;
   color: #D6C7C5;
-  line-height: 1.5;
+  line-height: 1.45;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
 }
 
 .gameCardFooter {
   position: relative;
   z-index: 2;
-  border-top: 1px solid rgba(255,255,255,0.12);
-  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding-top: 10px;
 }
 
-.sectionHeader {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 24px;
-}
-
-.stepBadge {
+.selectBtnText {
   font-family: var(--font-display);
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
-  letter-spacing: 0.12em;
-  color: var(--text-faint);
-  background: var(--bg-panel);
-  border: 1px solid var(--line-bright);
-  padding: 5px 12px;
-  border-radius: 4px;
+  letter-spacing: 0.05em;
+  color: var(--game-accent, var(--accent));
+  transition: transform 0.2s ease;
+  display: inline-block;
 }
 
-.stepBadgeAccent {
-  font-family: var(--font-display);
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  color: var(--accent-bright);
-  background: var(--accent-soft);
-  border: 1px solid var(--accent);
-  padding: 5px 12px;
-  border-radius: 4px;
+.gameCard:hover .selectBtnText {
+  transform: translateX(4px);
 }
 
 .gameCardSelected {
   border-color: var(--game-accent, var(--accent)) !important;
   box-shadow: 0 0 35px var(--game-glow, var(--accent-soft)), 0 0 0 2px var(--game-accent, var(--accent)) !important;
-  transform: translateY(-4px) !important;
 }
 
-.gameCardSelected .gameCardImage {
-  opacity: 0.65 !important;
-  transform: scale(1.08) !important;
-}
-
-.glowActive {
-  opacity: 1 !important;
-}
-
-.selectedTag {
-  position: relative;
-  z-index: 2;
-  font-family: var(--font-display);
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #fff;
-  background: var(--game-accent, var(--accent));
-  padding: 5px 12px;
-  border-radius: 4px;
-  box-shadow: 0 0 14px var(--game-glow, var(--accent-soft));
-}
-
-.selectBtnText {
-  font-family: var(--font-display);
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  color: var(--game-accent, var(--accent));
-}
-
-/* ── Budget Tier Options Section ── */
-.budgetSection {
-  margin-top: 64px;
-  background: linear-gradient(180deg, var(--bg-panel) 0%, rgba(10, 8, 8, 0.95) 100%);
-  border: 1px solid var(--line-bright);
-  border-radius: 12px;
-  padding: 36px 32px;
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-}
-
-.budgetSectionHeader {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.stepTitleRow {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.budgetTitle {
-  font-family: var(--font-display);
-  font-size: 32px;
-  font-weight: 900;
-  color: var(--text);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
-.budgetSubtext {
-  font-size: 17px;
-  color: var(--text-muted);
-}
-
-.tiersGrid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
-
-.tierCard {
-  background: var(--bg);
-  border: 1px solid var(--line-bright);
-  padding: 26px;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  text-decoration: none;
-  color: inherit;
-  cursor: pointer;
-  position: relative;
-}
-
-.tierCard:hover {
-  border-color: var(--tier-accent, var(--accent));
-  box-shadow: 0 12px 35px var(--tier-glow, var(--accent-soft)), 0 0 0 1px var(--tier-accent, var(--accent));
-  transform: translateY(-6px);
-}
-
-.tierTop {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-}
-
-.tierPrice {
-  font-family: var(--font-display);
-  font-size: 36px;
-  font-weight: 900;
-  color: var(--text);
-  letter-spacing: 0.02em;
-  transition: color 0.2s ease;
-}
-
-.tierCard:hover .tierPrice {
-  color: var(--tier-accent, var(--accent));
-  text-shadow: 0 0 20px var(--tier-glow, var(--accent-glow));
-}
-
-.tierGameBadge {
-  font-family: var(--font-display);
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  padding: 4px 10px;
-  border-radius: 4px;
-}
-
-.tierTitle {
-  font-family: var(--font-display);
-  font-size: 19px;
-  font-weight: 700;
-  color: var(--text);
-  margin: 0;
-}
-
-.tierDesc {
-  font-size: 15px;
-  color: #C7B5B3;
-  line-height: 1.5;
-  margin: 0;
-  flex: 1;
-}
-
-.tierActionRow {
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
-  padding-top: 14px;
-}
-
-.tierActionText {
-  font-family: var(--font-display);
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  transition: transform 0.2s ease;
-  display: inline-block;
-}
-
-.tierCard:hover .tierActionText {
-  transform: translateX(4px);
-}
-
-.viewAllRow {
-  display: flex;
-  justify-content: center;
-  margin-top: 14px;
-}
-
-.viewAllRow a {
-  font-size: 18px;
-  letter-spacing: 0.05em;
-  padding: 14px 28px;
-}
-
-/* ── CTA between game grid and budget section ── */
+/* ── CTA Row between sections ── */
 .ctaBetweenSection {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 18px;
   flex-wrap: wrap;
-  margin: 0 0 52px;
+  margin: 0 0 68px;
 }
 
 .ctaBetweenSection a {
@@ -494,19 +319,128 @@
   padding: 14px 28px;
 }
 
+/* ── Features Section (Replaces budget range on Home) ── */
+.featuresSection {
+  background: linear-gradient(180deg, var(--bg-panel) 0%, rgba(14, 10, 12, 0.95) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 48px 36px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
+}
+
+.featuresHeader {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 40px;
+}
+
+.featuresHeader .heroEyebrow {
+  justify-content: center;
+}
+
+.featuresHeader .heroEyebrow::before {
+  display: none;
+}
+
+.featuresHeading {
+  font-size: 38px;
+  line-height: 1.15;
+  color: var(--text);
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+.featuresSubtext {
+  font-size: 17px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.featuresGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.featureCard {
+  background: rgba(18, 14, 16, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  position: relative;
+}
+
+.featureCard:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent);
+  box-shadow: 0 12px 30px rgba(230, 57, 96, 0.18), 0 0 0 1px var(--accent);
+}
+
+.featureIconWrap {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 16px var(--accent-soft);
+  margin-bottom: 4px;
+}
+
+.featureIcon {
+  font-size: 24px;
+}
+
+.featureSubtitle {
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-bright);
+}
+
+.featureTitle {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 900;
+  color: #FFFFFF;
+  margin: 0;
+  letter-spacing: 0.03em;
+  line-height: 1.2;
+}
+
+.featureDesc {
+  font-size: 15px;
+  color: #C7B5B3;
+  line-height: 1.55;
+  margin: 0;
+  flex: 1;
+}
+
 /* ── Responsive ── */
 @media (max-width: 1024px) {
   .gamesGrid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
   }
-  .tiersGrid {
+  .featuresGrid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
   }
 }
 
 @media (max-width: 860px) {
   .page {
-    padding: 60px 24px;
+    padding: 60px 20px;
   }
   .heading {
     font-size: 42px;
@@ -514,93 +448,75 @@
   .subheading {
     font-size: 18px;
   }
-  .gameLabel {
-    font-size: 26px;
-  }
-  .gameDesc {
-    font-size: 15px;
-  }
-  .budgetSection {
-    padding: 28px 22px;
-  }
-  .budgetTitle {
-    font-size: 26px;
-  }
-  .budgetSubtext {
-    font-size: 16px;
+  .featuresHeading {
+    font-size: 32px;
   }
 }
 
 @media (max-width: 640px) {
   .page {
-    padding: 56px 16px 72px;
+    padding: 48px 14px 64px;
   }
   .hero {
-    margin-bottom: 48px;
+    margin-bottom: 40px;
   }
   .heading {
     font-size: 34px;
     margin-bottom: 14px;
   }
   .subheading {
-    font-size: 17px;
-    margin-bottom: 28px;
+    font-size: 16px;
+    margin-bottom: 24px;
   }
   .gamesSection {
-    margin-bottom: 36px;
+    margin-bottom: 32px;
   }
   .ctaBetweenSection {
     flex-direction: column;
     gap: 12px;
-    margin-bottom: 36px;
+    margin-bottom: 40px;
   }
   .ctaBetweenSection a {
     width: 100%;
     text-align: center;
-    font-size: 18px;
+    font-size: 17px;
   }
   .gamesGrid {
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 12px;
   }
   .gameCard {
-    min-height: 220px;
-    padding: 22px;
+    min-height: 180px;
+    padding: 16px 14px;
+    border-radius: 14px;
   }
   .gameLabel {
-    font-size: 26px;
-  }
-  .gameDesc {
-    font-size: 16px;
-  }
-  .gameTag {
-    font-size: 12px;
-  }
-  .tiersGrid {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-  .tierCard {
-    padding: 22px;
-  }
-  .tierPrice {
-    font-size: 30px;
-  }
-  .tierTitle {
-    font-size: 18px;
-  }
-  .tierDesc {
-    font-size: 15px;
-  }
-  .budgetSection {
-    padding: 24px 18px;
-    gap: 22px;
-  }
-  .budgetTitle {
     font-size: 24px;
   }
-  .budgetSubtext {
-    font-size: 16px;
+  .gameDesc {
+    font-size: 14px;
+  }
+  .featuresSection {
+    padding: 28px 18px;
+    border-radius: 16px;
+  }
+  .featuresHeading {
+    font-size: 26px;
+  }
+  .featuresSubtext {
+    font-size: 15px;
+  }
+  .featuresGrid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .featureCard {
+    padding: 18px 16px;
+  }
+  .featureTitle {
+    font-size: 20px;
+  }
+  .featureDesc {
+    font-size: 14px;
   }
 }
-

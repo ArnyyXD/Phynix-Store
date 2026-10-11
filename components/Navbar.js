@@ -9,10 +9,10 @@ import { isAdminEmail } from "../lib/admin";
 import styles from "./Navbar.module.css";
 
 const LINKS = [
+  { href: "/", label: "Home" },
   { href: "/buy", label: "Buy" },
   { href: "/sell", label: "Sell" },
-  { href: "/policies/payment-security", label: "Payment Security" },
-  { href: "/policies/privacy-refund", label: "Privacy & Refunds" },
+  { href: "/faq", label: "FAQ" },
   { href: "/contact", label: "Contact" },
 ];
 
