@@ -119,14 +119,14 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.35;
-  filter: saturate(1.2) contrast(1.1);
+  opacity: 0.75;
+  filter: saturate(1.3) contrast(1.05) brightness(0.9);
   transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
 }
 
 .gameCard:hover .gameCardImage {
-  transform: scale(1.1);
-  opacity: 0.5;
+  transform: scale(1.08);
+  opacity: 0.9;
 }
 
 .gameCardOverlay {
@@ -134,9 +134,9 @@
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(10, 8, 8, 0.45) 0%,
-    rgba(10, 8, 8, 0.85) 60%,
-    rgba(10, 8, 8, 0.98) 100%
+    rgba(10, 8, 8, 0.15) 0%,
+    rgba(10, 8, 8, 0.55) 55%,
+    rgba(10, 8, 8, 0.82) 100%
   );
 }
 
@@ -456,6 +456,16 @@
   margin-top: 12px;
 }
 
+/* ── CTA between game grid and budget section ── */
+.ctaBetweenSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin: 0 0 48px;
+}
+
 /* ── Responsive ── */
 @media (max-width: 1024px) {
   .gamesGrid {
@@ -483,20 +493,28 @@
 
 @media (max-width: 640px) {
   .page {
-    padding: 40px 18px 60px;
+    padding: 56px 16px 72px;
+  }
+  .hero {
+    margin-bottom: 48px;
   }
   .heading {
-    font-size: 28px;
+    font-size: 30px;
+    margin-bottom: 14px;
   }
   .subheading {
     font-size: 15px;
-    margin-bottom: 24px;
+    margin-bottom: 28px;
   }
-  .ctaRow {
+  .gamesSection {
+    margin-bottom: 36px;
+  }
+  .ctaBetweenSection {
     flex-direction: column;
-    width: 100%;
+    gap: 12px;
+    margin-bottom: 36px;
   }
-  .ctaRow a {
+  .ctaBetweenSection a {
     width: 100%;
     text-align: center;
   }
@@ -514,4 +532,15 @@
   .tierPrice {
     font-size: 26px;
   }
+  .budgetSection {
+    padding: 20px 16px;
+    gap: 20px;
+  }
+  .budgetTitle {
+    font-size: 20px;
+  }
+  .gameCard {
+    min-height: 200px;
+  }
 }
+

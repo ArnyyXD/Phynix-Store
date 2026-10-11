@@ -90,14 +90,6 @@ export default function HomePage() {
           Valorant · Clash of Clans · BGMI · Free Fire — verified sellers, a
           middleman that holds payment until everything checks out.
         </p>
-        <div className={styles.ctaRow}>
-          <Link href="/buy" className="btn-primary">
-            Browse All Accounts
-          </Link>
-          <Link href="/sell" className="btn-ghost">
-            List Your Account
-          </Link>
-        </div>
       </section>
 
       {/* Step 1: Select Game */}
@@ -157,6 +149,16 @@ export default function HomePage() {
           })}
         </div>
       </section>
+
+      {/* CTA Row — centered between game selection and budget */}
+      <div className={styles.ctaBetweenSection}>
+        <Link href="/buy" className="btn-primary">
+          Browse All Accounts
+        </Link>
+        <Link href="/sell" className="btn-ghost">
+          List Your Account
+        </Link>
+      </div>
 
       {/* Step 2: Choose Budget Tier for Selected Game */}
       <section className={styles.budgetSection}>
