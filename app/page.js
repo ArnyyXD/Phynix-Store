@@ -9,8 +9,8 @@ const GAME_CARDS = [
   {
     id: "valorant",
     label: "Valorant",
-    banner: "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=80",
-    logoUrl: "/icons/valorant.svg",
+    banner: "/banners/valorant.jpg",
+    logoUrl: "/icons/valorant.png",
     accent: "#E63960",
     glow: "rgba(230,57,96,0.5)",
     bg: "rgba(230,57,96,0.12)",
@@ -20,8 +20,8 @@ const GAME_CARDS = [
   {
     id: "clash_of_clans",
     label: "Clash of Clans",
-    banner: "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=800&q=80",
-    logoUrl: "/icons/clash_of_clans.svg",
+    banner: "/banners/coc.jpg",
+    logoUrl: "/icons/coc.png",
     accent: "#F2A93B",
     glow: "rgba(242,169,59,0.5)",
     bg: "rgba(242,169,59,0.12)",
@@ -31,8 +31,8 @@ const GAME_CARDS = [
   {
     id: "bgmi",
     label: "BGMI",
-    banner: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=800&q=80",
-    logoUrl: "/icons/bgmi.svg",
+    banner: "/banners/bgmi.jpg",
+    logoUrl: "/icons/bgmi.png",
     accent: "#FF8A3D",
     glow: "rgba(255,138,61,0.5)",
     bg: "rgba(255,138,61,0.12)",
@@ -42,8 +42,8 @@ const GAME_CARDS = [
   {
     id: "free_fire",
     label: "Free Fire",
-    banner: "https://images.unsplash.com/photo-1563089145-599997674d42?auto=format&fit=crop&w=800&q=80",
-    logoUrl: "/icons/free_fire.svg",
+    banner: "/banners/freefire.jpg",
+    logoUrl: "/icons/freefire.png",
     accent: "#FF4500",
     glow: "rgba(255,69,0,0.5)",
     bg: "rgba(255,69,0,0.12)",
