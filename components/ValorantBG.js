@@ -255,7 +255,7 @@ export default function ValorantBG() {
   }, []);
 
   return (
-    <div className={styles.wrap} aria-hidden="true">
+    <div className={styles.wrap} aria-hidden="true" suppressHydrationWarning>
       {hasVideo && !videoError && (
         <video
           ref={videoRef}
