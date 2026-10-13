@@ -19,7 +19,7 @@ export default function Banner() {
         />
       </div>
       <h1 className={styles.title}>
-        PHYNIX<span className={styles.titleAccent}>STORE</span>
+        PHYNIX <span className={styles.titleAccent}>STORE</span>
       </h1>
       <p className={styles.tagline}>Rise into your next rank — secure, verified, escrow-backed.</p>
       

@@ -44,7 +44,7 @@ export default function Navbar() {
             className={styles.logoMark}
             priority
           />
-          PHYNIX<span className={styles.logoAccent}>STORE</span>
+          PHYNIX <span className={styles.logoAccent}>STORE</span>
         </Link>
 
         <nav className={`${styles.links} ${menuOpen ? styles.linksOpen : ""}`}>
