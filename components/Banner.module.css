@@ -198,10 +198,11 @@
 
 @media (max-width: 860px) {
   .banner {
-    padding: 44px 24px 56px;
+    padding: 44px 24px 50px;
+    gap: 14px;
   }
   .title {
-    font-size: 40px;
+    font-size: 42px;
   }
   .tagline {
     font-size: 16px;
@@ -210,16 +211,39 @@
 
 @media (max-width: 640px) {
   .banner {
-    padding: 36px 16px 48px;
+    padding: 28px 14px 38px;
+    gap: 12px;
   }
   .title {
     font-size: 32px;
+    letter-spacing: 0.04em;
   }
   .tagline {
-    font-size: 15px;
+    font-size: 14px;
+    max-width: 320px;
   }
   .glowRing {
-    width: 220px;
-    height: 220px;
+    width: 200px;
+    height: 200px;
+  }
+  .icon {
+    width: 84px;
+    height: 84px;
+  }
+}
+
+@media (max-width: 390px) {
+  .banner {
+    padding: 24px 10px 32px;
+  }
+  .title {
+    font-size: 28px;
+  }
+  .tagline {
+    font-size: 13px;
+  }
+  .icon {
+    width: 74px;
+    height: 74px;
   }
 }
