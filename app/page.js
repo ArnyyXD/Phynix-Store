@@ -8,47 +8,35 @@ import styles from "./home.module.css";
 const GAME_CARDS = [
   {
     id: "valorant",
-    label: "Valorant",
     banner: "/banners/valorant.jpg",
     logoUrl: "/icons/valorant.png",
     accent: "#E63960",
     glow: "rgba(230,57,96,0.5)",
     bg: "rgba(230,57,96,0.12)",
-    tag: "Ranked · Skins · Agents",
-    desc: "Immortal to Radiant accounts with Vandal/Phantom skin vaults.",
   },
   {
     id: "clash_of_clans",
-    label: "Clash of Clans",
     banner: "/banners/coc.jpg",
     logoUrl: "/icons/coc.png",
     accent: "#F2A93B",
     glow: "rgba(242,169,59,0.5)",
     bg: "rgba(242,169,59,0.12)",
-    tag: "Town Hall 9–17 · Heroes",
-    desc: "Maxed heroes, champion leagues, and rare war bases.",
   },
   {
     id: "bgmi",
-    label: "BGMI",
     banner: "/banners/bgmi.jpg",
     logoUrl: "/icons/bgmi.png",
     accent: "#FF8A3D",
     glow: "rgba(255,138,61,0.5)",
     bg: "rgba(255,138,61,0.12)",
-    tag: "Ace · Conqueror · Skins",
-    desc: "High-tier ranked accounts with M416 glaciers and mythic outfits.",
   },
   {
     id: "free_fire",
-    label: "Free Fire",
     banner: "/banners/freefire.jpg",
     logoUrl: "/icons/freefire.png",
     accent: "#FF4500",
     glow: "rgba(255,69,0,0.5)",
     bg: "rgba(255,69,0,0.12)",
-    tag: "Heroic · Grandmaster · Bundles",
-    desc: "Premium bundles, evo guns, and Grandmaster rank accounts.",
   },
 ];
 
@@ -124,29 +112,15 @@ export default function HomePage() {
               >
                 <div className={styles.gameCardImageWrap}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={g.banner} alt={g.label} className={styles.gameCardImage} />
+                  <img src={g.banner} alt={g.id} className={styles.gameCardImage} />
                   <div className={styles.gameCardOverlay} />
                 </div>
 
                 <div className={styles.gameCardContent}>
-                  <div className={styles.gameCardTop}>
-                    <span className={styles.gameIconWrap}>
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={g.logoUrl} alt={`${g.label} Logo`} className={styles.gameCardLogoImg} />
-                    </span>
-                    <span className={styles.gameTag}>{g.tag}</span>
-                  </div>
-
-                  <div className={styles.gameCardBody}>
-                    <h3 className={styles.gameLabel}>{g.label}</h3>
-                    <p className={styles.gameDesc}>{g.desc}</p>
-                  </div>
-
-                  <div className={styles.gameCardFooter}>
-                    <span className={styles.selectBtnText}>
-                      Explore {g.label} Accounts →
-                    </span>
-                  </div>
+                  <span className={styles.gameIconWrap}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={g.logoUrl} alt={g.id} className={styles.gameCardLogoImg} />
+                  </span>
                 </div>
 
                 <div className={`${styles.gameCardGlow} ${isSelected ? styles.glowActive : ""}`} />

@@ -216,28 +216,38 @@
   opacity: 1;
 }
 
-.gameCardTop {
+/* Content wrapper — icon centred at bottom over the bg image */
+.gameCardContent {
   position: relative;
   z-index: 2;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 8px;
+  justify-content: center;
+  padding: 16px;
+  margin-top: auto;
+  width: 100%;
+  background: linear-gradient(
+    0deg,
+    rgba(8, 6, 8, 0.82) 0%,
+    rgba(8, 6, 8, 0.4) 55%,
+    transparent 100%
+  );
+  border-radius: 0 0 16px 16px;
 }
 
 .gameIconWrap {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 46px;
-  height: 46px;
-  border-radius: 12px;
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
   background: rgba(18, 12, 16, 0.95);
   backdrop-filter: blur(12px);
   border: 1.5px solid var(--game-accent, var(--accent));
   box-shadow: 0 0 20px var(--game-glow, rgba(230,57,96,0.5)), 0 4px 12px rgba(0, 0, 0, 0.7);
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  padding: 5px;
+  padding: 6px;
   overflow: hidden;
   flex-shrink: 0;
 }
@@ -252,99 +262,14 @@
 }
 
 .gameCard:hover .gameIconWrap {
-  transform: scale(1.1) rotate(-3deg);
-}
-
-.gameTag {
-  position: relative;
-  z-index: 2;
-  font-family: var(--font-body);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--text);
-  background: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(8px);
-  padding: 4px 9px;
-  border-radius: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  white-space: nowrap;
-}
-
-.gameCardBody {
-  position: relative;
-  z-index: 2;
-  flex: 1;
-}
-
-.gameLabel {
-  font-family: var(--font-display);
-  font-size: 26px;
-  font-weight: 900;
-  color: #FFFFFF;
-  margin-bottom: 4px;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
-  transition: color 0.2s ease, text-shadow 0.2s ease;
-}
-
-.gameCard:hover .gameLabel {
-  color: var(--game-accent, var(--accent));
-  text-shadow: 0 0 16px var(--game-glow, var(--accent-glow)), 0 2px 8px rgba(0, 0, 0, 0.8);
-}
-
-.gameDesc {
-  font-size: 15px;
-  color: #D6C7C5;
-  line-height: 1.45;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
-}
-
-.gameCardFooter {
-  position: relative;
-  z-index: 2;
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
-  padding-top: 10px;
-}
-
-.selectBtnText {
-  font-family: var(--font-display);
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  color: var(--game-accent, var(--accent));
-  transition: transform 0.2s ease;
-  display: inline-block;
-}
-
-.gameCard:hover .selectBtnText {
-  transform: translateX(4px);
-}
-
-.gameCardContent {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 14px 14px 14px;
-  margin-top: auto;
-  width: 100%;
-  background: linear-gradient(
-    0deg,
-    rgba(8, 6, 8, 0.96) 0%,
-    rgba(8, 6, 8, 0.68) 60%,
-    transparent 100%
-  );
-  border-radius: 0 0 16px 16px;
+  transform: scale(1.12) rotate(-4deg);
 }
 
 .gameCardSelected {
   border-color: var(--game-accent, var(--accent)) !important;
   box-shadow: 0 0 35px var(--game-glow, var(--accent-soft)), 0 0 0 2px var(--game-accent, var(--accent)) !important;
 }
+
 
 /* ── CTA Row between sections ── */
 .ctaBetweenSection {
@@ -570,42 +495,14 @@
     border-radius: 12px;
   }
   .gameCardContent {
-    padding: 10px 10px 12px;
-    gap: 7px;
+    padding: 12px;
     border-radius: 0 0 12px 12px;
   }
-  .gameCardTop {
-    gap: 6px;
-  }
   .gameIconWrap {
-    width: 36px;
-    height: 36px;
-    border-radius: 9px;
-    padding: 3px;
-  }
-  .gameTag {
-    font-size: 10px;
-    padding: 3px 6px;
-    letter-spacing: 0.04em;
-    border-radius: 4px;
-  }
-  .gameLabel {
-    font-size: 19px;
-    margin-bottom: 2px;
-  }
-  .gameDesc {
-    font-size: 12px;
-    line-height: 1.35;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-  .gameCardFooter {
-    padding-top: 6px;
-  }
-  .selectBtnText {
-    font-size: 12px;
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    padding: 5px;
   }
 
   /* CTA row */
@@ -675,26 +572,13 @@
     border-radius: 10px;
   }
   .gameCardContent {
-    padding: 8px 8px 10px;
-    gap: 6px;
+    padding: 10px;
     border-radius: 0 0 10px 10px;
   }
   .gameIconWrap {
-    width: 32px;
-    height: 32px;
-  }
-  .gameTag {
-    font-size: 9px;
-    padding: 2px 4px;
-  }
-  .gameLabel {
-    font-size: 17px;
-  }
-  .gameDesc {
-    font-size: 11px;
-    -webkit-line-clamp: 2;
-  }
-  .selectBtnText {
-    font-size: 11px;
+    width: 36px;
+    height: 36px;
+    border-radius: 9px;
+    padding: 4px;
   }
 }
