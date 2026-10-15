@@ -216,20 +216,21 @@
   opacity: 1;
 }
 
-/* Content wrapper — icon centred at bottom over the bg image */
+/* Content wrapper — icon centred and explore button below over the bg image */
 .gameCardContent {
   position: relative;
   z-index: 2;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 16px;
+  gap: 12px;
+  padding: 16px 14px 14px;
   margin-top: auto;
   width: 100%;
   background: linear-gradient(
     0deg,
-    rgba(8, 6, 8, 0.82) 0%,
-    rgba(8, 6, 8, 0.4) 55%,
+    rgba(8, 6, 8, 0.94) 0%,
+    rgba(8, 6, 8, 0.55) 60%,
     transparent 100%
   );
   border-radius: 0 0 16px 16px;
@@ -263,6 +264,31 @@
 
 .gameCard:hover .gameIconWrap {
   transform: scale(1.12) rotate(-4deg);
+}
+
+.gameCardFooter {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 10px;
+}
+
+.selectBtnText {
+  font-family: var(--font-display);
+  font-size: 13.5px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--game-accent, var(--accent));
+  transition: transform 0.2s ease, filter 0.2s ease;
+  display: inline-block;
+  text-transform: uppercase;
+}
+
+.gameCard:hover .selectBtnText {
+  transform: translateX(4px);
+  filter: brightness(1.25);
 }
 
 .gameCardSelected {
@@ -495,14 +521,22 @@
     border-radius: 12px;
   }
   .gameCardContent {
-    padding: 12px;
+    padding: 10px 8px;
+    gap: 8px;
     border-radius: 0 0 12px 12px;
   }
   .gameIconWrap {
-    width: 44px;
-    height: 44px;
+    width: 42px;
+    height: 42px;
     border-radius: 10px;
-    padding: 5px;
+    padding: 4px;
+  }
+  .gameCardFooter {
+    padding-top: 6px;
+  }
+  .selectBtnText {
+    font-size: 11px;
+    letter-spacing: 0.03em;
   }
 
   /* CTA row */
@@ -572,13 +606,21 @@
     border-radius: 10px;
   }
   .gameCardContent {
-    padding: 10px;
+    padding: 8px 6px;
+    gap: 6px;
     border-radius: 0 0 10px 10px;
   }
   .gameIconWrap {
-    width: 36px;
-    height: 36px;
-    border-radius: 9px;
-    padding: 4px;
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    padding: 3px;
+  }
+  .gameCardFooter {
+    padding-top: 5px;
+  }
+  .selectBtnText {
+    font-size: 9.5px;
+    letter-spacing: 0.02em;
   }
 }

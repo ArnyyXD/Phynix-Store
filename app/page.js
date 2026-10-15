@@ -8,6 +8,7 @@ import styles from "./home.module.css";
 const GAME_CARDS = [
   {
     id: "valorant",
+    label: "Valorant",
     banner: "/banners/valorant.jpg",
     logoUrl: "/icons/valorant.png",
     accent: "#E63960",
@@ -16,6 +17,7 @@ const GAME_CARDS = [
   },
   {
     id: "clash_of_clans",
+    label: "Clash of Clans",
     banner: "/banners/coc.jpg",
     logoUrl: "/icons/coc.png",
     accent: "#F2A93B",
@@ -24,6 +26,7 @@ const GAME_CARDS = [
   },
   {
     id: "bgmi",
+    label: "BGMI",
     banner: "/banners/bgmi.jpg",
     logoUrl: "/icons/bgmi.png",
     accent: "#FF8A3D",
@@ -32,6 +35,7 @@ const GAME_CARDS = [
   },
   {
     id: "free_fire",
+    label: "Free Fire",
     banner: "/banners/freefire.jpg",
     logoUrl: "/icons/freefire.png",
     accent: "#FF4500",
@@ -121,6 +125,11 @@ export default function HomePage() {
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={g.logoUrl} alt={g.id} className={styles.gameCardLogoImg} />
                   </span>
+                  <div className={styles.gameCardFooter}>
+                    <span className={styles.selectBtnText}>
+                      Explore {g.label} Accounts →
+                    </span>
+                  </div>
                 </div>
 
                 <div className={`${styles.gameCardGlow} ${isSelected ? styles.glowActive : ""}`} />
