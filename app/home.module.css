@@ -12,28 +12,45 @@
   margin-bottom: 64px;
 }
 
+/* ── Eyebrow: badge + divider + sub label (all left-aligned, no weird centering) ── */
 .heroEyebrow {
-  font-family: var(--font-display);
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  color: var(--accent);
-  text-transform: uppercase;
-  margin-bottom: 16px;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 12px;
-  line-height: 1.3;
+  margin-bottom: 20px;
   flex-wrap: wrap;
 }
 
-.heroEyebrow::before {
-  content: "";
-  display: inline-block;
+.eyebrowBadge {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--accent);
+  padding: 5px 14px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.eyebrowLine {
+  display: block;
   width: 28px;
   height: 2px;
-  background: var(--accent);
+  background: var(--line-bright);
+  border-radius: 2px;
   flex-shrink: 0;
+}
+
+.eyebrowSub {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  white-space: normal;
 }
 
 .heading {
@@ -108,7 +125,7 @@
   background: var(--line);
 }
 
-/* ── Game Cards Grid: Tighter spacing, rounded corners, clean responsive ── */
+/* ── Game Cards Grid ── */
 .gamesGrid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -121,16 +138,17 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  justify-content: flex-end;
   background: var(--bg-panel);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 16px;
-  padding: 18px 16px;
-  gap: 12px;
+  padding: 0;
+  gap: 0;
   text-decoration: none;
   color: inherit;
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, box-shadow 0.25s ease;
   cursor: pointer;
-  min-height: 210px;
+  min-height: 220px;
 }
 
 .gameCardImageWrap {
@@ -303,6 +321,24 @@
 
 .gameCard:hover .selectBtnText {
   transform: translateX(4px);
+}
+
+.gameCardContent {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px 14px 14px;
+  margin-top: auto;
+  width: 100%;
+  background: linear-gradient(
+    0deg,
+    rgba(8, 6, 8, 0.96) 0%,
+    rgba(8, 6, 8, 0.68) 60%,
+    transparent 100%
+  );
+  border-radius: 0 0 16px 16px;
 }
 
 .gameCardSelected {
@@ -502,9 +538,6 @@
     gap: 8px;
     line-height: 1.4;
   }
-  .heroEyebrow::before {
-    width: 18px;
-  }
   .heading {
     font-size: 32px;
     line-height: 1.15;
@@ -528,13 +561,18 @@
     gap: 10px;
   }
   .gameCard {
-    min-height: 165px;
-    padding: 12px 10px;
+    min-height: 200px;
+    padding: 0;
     border-radius: 12px;
-    gap: 8px;
+    gap: 0;
   }
   .gameCardImageWrap {
     border-radius: 12px;
+  }
+  .gameCardContent {
+    padding: 10px 10px 12px;
+    gap: 7px;
+    border-radius: 0 0 12px 12px;
   }
   .gameCardTop {
     gap: 6px;
@@ -618,9 +656,6 @@
     font-size: 10.5px;
     letter-spacing: 0.07em;
   }
-  .heroEyebrow::before {
-    display: none;
-  }
   .heading {
     font-size: 27px;
   }
@@ -632,9 +667,17 @@
     gap: 8px;
   }
   .gameCard {
-    min-height: 155px;
-    padding: 10px 8px;
+    min-height: 175px;
+    padding: 0;
     border-radius: 10px;
+  }
+  .gameCardImageWrap {
+    border-radius: 10px;
+  }
+  .gameCardContent {
+    padding: 8px 8px 10px;
+    gap: 6px;
+    border-radius: 0 0 10px 10px;
   }
   .gameIconWrap {
     width: 32px;

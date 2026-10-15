@@ -87,13 +87,16 @@ export default function HomePage() {
       <Banner />
 
       <section className={styles.hero}>
-        <div className={styles.heroEyebrow}>TRUSTED GAME ACCOUNT MARKETPLACE</div>
+        <div className={styles.heroEyebrow}>
+          <span className={styles.eyebrowBadge}>🎮 Game Marketplace</span>
+          <span className={styles.eyebrowLine} />
+          <span className={styles.eyebrowSub}>Valorant · COC · BGMI · Free Fire</span>
+        </div>
         <h1 className={styles.heading}>
           Buy, sell &amp; trade game accounts — <span className={styles.headingAccent}>safely</span>.
         </h1>
         <p className={styles.subheading}>
-          Valorant · Clash of Clans · BGMI · Free Fire — verified sellers, a
-          middleman that holds payment until everything checks out.
+          Verified sellers, real accounts, and a middleman that holds your payment until everything checks out.
         </p>
       </section>
 
@@ -125,23 +128,25 @@ export default function HomePage() {
                   <div className={styles.gameCardOverlay} />
                 </div>
 
-                <div className={styles.gameCardTop}>
-                  <span className={styles.gameIconWrap}>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={g.logoUrl} alt={`${g.label} Logo`} className={styles.gameCardLogoImg} />
-                  </span>
-                  <span className={styles.gameTag}>{g.tag}</span>
-                </div>
+                <div className={styles.gameCardContent}>
+                  <div className={styles.gameCardTop}>
+                    <span className={styles.gameIconWrap}>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={g.logoUrl} alt={`${g.label} Logo`} className={styles.gameCardLogoImg} />
+                    </span>
+                    <span className={styles.gameTag}>{g.tag}</span>
+                  </div>
 
-                <div className={styles.gameCardBody}>
-                  <h3 className={styles.gameLabel}>{g.label}</h3>
-                  <p className={styles.gameDesc}>{g.desc}</p>
-                </div>
+                  <div className={styles.gameCardBody}>
+                    <h3 className={styles.gameLabel}>{g.label}</h3>
+                    <p className={styles.gameDesc}>{g.desc}</p>
+                  </div>
 
-                <div className={styles.gameCardFooter}>
-                  <span className={styles.selectBtnText}>
-                    Explore {g.label} Accounts →
-                  </span>
+                  <div className={styles.gameCardFooter}>
+                    <span className={styles.selectBtnText}>
+                      Explore {g.label} Accounts →
+                    </span>
+                  </div>
                 </div>
 
                 <div className={`${styles.gameCardGlow} ${isSelected ? styles.glowActive : ""}`} />
