@@ -14,6 +14,7 @@ const GAME_CARDS = [
     accent: "#E63960",
     glow: "rgba(230,57,96,0.5)",
     bg: "rgba(230,57,96,0.12)",
+    tag: "Ranked · Skins · Agents",
   },
   {
     id: "clash_of_clans",
@@ -23,6 +24,7 @@ const GAME_CARDS = [
     accent: "#F2A93B",
     glow: "rgba(242,169,59,0.5)",
     bg: "rgba(242,169,59,0.12)",
+    tag: "Town Hall 9–17 · Heroes",
   },
   {
     id: "bgmi",
@@ -32,6 +34,7 @@ const GAME_CARDS = [
     accent: "#FF8A3D",
     glow: "rgba(255,138,61,0.5)",
     bg: "rgba(255,138,61,0.12)",
+    tag: "Ace · Conqueror · Skins",
   },
   {
     id: "free_fire",
@@ -41,6 +44,7 @@ const GAME_CARDS = [
     accent: "#FF4500",
     glow: "rgba(255,69,0,0.5)",
     bg: "rgba(255,69,0,0.12)",
+    tag: "Heroic · Grandmaster · Bundles",
   },
 ];
 
@@ -120,11 +124,15 @@ export default function HomePage() {
                   <div className={styles.gameCardOverlay} />
                 </div>
 
-                <div className={styles.gameCardContent}>
+                <div className={styles.gameCardTop}>
                   <span className={styles.gameIconWrap}>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={g.logoUrl} alt={g.id} className={styles.gameCardLogoImg} />
+                    <img src={g.logoUrl} alt={`${g.label} Logo`} className={styles.gameCardLogoImg} />
                   </span>
+                  <span className={styles.gameTag}>{g.tag}</span>
+                </div>
+
+                <div className={styles.gameCardContent}>
                   <div className={styles.gameCardFooter}>
                     <span className={styles.selectBtnText}>
                       Explore {g.label} Accounts →

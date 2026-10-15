@@ -138,7 +138,7 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: space-between;
   background: var(--bg-panel);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 16px;
@@ -179,9 +179,9 @@
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(10, 8, 8, 0.15) 0%,
+    rgba(10, 8, 8, 0.2) 0%,
     rgba(10, 8, 8, 0.45) 45%,
-    rgba(10, 8, 8, 0.85) 100%
+    rgba(10, 8, 8, 0.88) 100%
   );
   transition: background 0.3s ease;
 }
@@ -189,9 +189,9 @@
 .gameCard:hover .gameCardOverlay {
   background: linear-gradient(
     180deg,
-    rgba(10, 8, 8, 0.05) 0%,
-    rgba(10, 8, 8, 0.3) 45%,
-    rgba(10, 8, 8, 0.75) 100%
+    rgba(10, 8, 8, 0.1) 0%,
+    rgba(10, 8, 8, 0.35) 45%,
+    rgba(10, 8, 8, 0.8) 100%
   );
 }
 
@@ -216,39 +216,31 @@
   opacity: 1;
 }
 
-/* Content wrapper — icon centred and explore button below over the bg image */
-.gameCardContent {
+/* ── Top Bar inside Card: Icon on top-left, Tag badge on top-right ── */
+.gameCardTop {
   position: relative;
   z-index: 2;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 12px;
-  padding: 16px 14px 14px;
-  margin-top: auto;
+  justify-content: space-between;
+  padding: 14px 14px 0;
   width: 100%;
-  background: linear-gradient(
-    0deg,
-    rgba(8, 6, 8, 0.94) 0%,
-    rgba(8, 6, 8, 0.55) 60%,
-    transparent 100%
-  );
-  border-radius: 0 0 16px 16px;
+  gap: 8px;
 }
 
 .gameIconWrap {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 56px;
-  height: 56px;
-  border-radius: 14px;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
   background: rgba(18, 12, 16, 0.95);
   backdrop-filter: blur(12px);
   border: 1.5px solid var(--game-accent, var(--accent));
   box-shadow: 0 0 20px var(--game-glow, rgba(230,57,96,0.5)), 0 4px 12px rgba(0, 0, 0, 0.7);
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  padding: 6px;
+  padding: 5px;
   overflow: hidden;
   flex-shrink: 0;
 }
@@ -266,13 +258,47 @@
   transform: scale(1.12) rotate(-4deg);
 }
 
+.gameTag {
+  position: relative;
+  z-index: 2;
+  font-family: var(--font-body);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text);
+  background: rgba(10, 8, 10, 0.85);
+  backdrop-filter: blur(8px);
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  white-space: nowrap;
+}
+
+/* ── Content wrapper — explore button at the bottom ── */
+.gameCardContent {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 14px;
+  margin-top: auto;
+  width: 100%;
+  background: linear-gradient(
+    0deg,
+    rgba(8, 6, 8, 0.94) 0%,
+    rgba(8, 6, 8, 0.55) 60%,
+    transparent 100%
+  );
+  border-radius: 0 0 16px 16px;
+}
+
 .gameCardFooter {
   position: relative;
   z-index: 2;
   width: 100%;
   text-align: center;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding-top: 10px;
 }
 
 .selectBtnText {
@@ -520,19 +546,25 @@
   .gameCardImageWrap {
     border-radius: 12px;
   }
-  .gameCardContent {
-    padding: 10px 8px;
-    gap: 8px;
-    border-radius: 0 0 12px 12px;
+  .gameCardTop {
+    padding: 10px 10px 0;
+    gap: 6px;
   }
   .gameIconWrap {
-    width: 42px;
-    height: 42px;
-    border-radius: 10px;
-    padding: 4px;
+    width: 38px;
+    height: 38px;
+    border-radius: 9px;
+    padding: 3px;
   }
-  .gameCardFooter {
-    padding-top: 6px;
+  .gameTag {
+    font-size: 9px;
+    padding: 2px 6px;
+    letter-spacing: 0.03em;
+    border-radius: 4px;
+  }
+  .gameCardContent {
+    padding: 10px 8px;
+    border-radius: 0 0 12px 12px;
   }
   .selectBtnText {
     font-size: 11px;
@@ -605,19 +637,24 @@
   .gameCardImageWrap {
     border-radius: 10px;
   }
-  .gameCardContent {
-    padding: 8px 6px;
-    gap: 6px;
-    border-radius: 0 0 10px 10px;
+  .gameCardTop {
+    padding: 8px 8px 0;
+    gap: 4px;
   }
   .gameIconWrap {
-    width: 34px;
-    height: 34px;
-    border-radius: 8px;
-    padding: 3px;
+    width: 30px;
+    height: 30px;
+    border-radius: 7px;
+    padding: 2px;
   }
-  .gameCardFooter {
-    padding-top: 5px;
+  .gameTag {
+    font-size: 8px;
+    padding: 2px 4px;
+    letter-spacing: 0.02em;
+  }
+  .gameCardContent {
+    padding: 8px 6px;
+    border-radius: 0 0 10px 10px;
   }
   .selectBtnText {
     font-size: 9.5px;
