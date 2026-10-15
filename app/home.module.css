@@ -125,11 +125,11 @@
   background: var(--line);
 }
 
-/* ── Game Cards Grid ── */
+/* ── Game Cards Grid (Vertical Showcase Layout) ── */
 .gamesGrid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 14px;
+  grid-template-columns: 1fr;
+  gap: 28px;
   width: 100%;
 }
 
@@ -141,14 +141,14 @@
   justify-content: space-between;
   background: var(--bg-panel);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
+  border-radius: 20px;
   padding: 0;
   gap: 0;
   text-decoration: none;
   color: inherit;
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, box-shadow 0.25s ease;
   cursor: pointer;
-  min-height: 220px;
+  min-height: 260px;
 }
 
 .gameCardImageWrap {
@@ -156,22 +156,22 @@
   inset: 0;
   z-index: 0;
   overflow: hidden;
-  border-radius: 16px;
+  border-radius: 20px;
 }
 
 .gameCardImage {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.85;
-  filter: saturate(1.25) contrast(1.1) brightness(0.9);
+  opacity: 0.88;
+  filter: saturate(1.25) contrast(1.1) brightness(0.92);
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, filter 0.3s ease;
 }
 
 .gameCard:hover .gameCardImage {
-  transform: scale(1.08);
+  transform: scale(1.05);
   opacity: 1;
-  filter: saturate(1.4) contrast(1.15) brightness(1.15);
+  filter: saturate(1.35) contrast(1.15) brightness(1.1);
 }
 
 .gameCardOverlay {
@@ -179,8 +179,8 @@
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(10, 8, 8, 0.2) 0%,
-    rgba(10, 8, 8, 0.45) 45%,
+    rgba(10, 8, 8, 0.25) 0%,
+    rgba(10, 8, 8, 0.35) 45%,
     rgba(10, 8, 8, 0.88) 100%
   );
   transition: background 0.3s ease;
@@ -189,8 +189,8 @@
 .gameCard:hover .gameCardOverlay {
   background: linear-gradient(
     180deg,
-    rgba(10, 8, 8, 0.1) 0%,
-    rgba(10, 8, 8, 0.35) 45%,
+    rgba(10, 8, 8, 0.12) 0%,
+    rgba(10, 8, 8, 0.25) 45%,
     rgba(10, 8, 8, 0.8) 100%
   );
 }
@@ -203,11 +203,11 @@
   opacity: 0;
   transition: opacity 0.3s ease;
   z-index: 1;
-  border-radius: 16px;
+  border-radius: 20px;
 }
 
 .gameCard:hover {
-  transform: translateY(-6px);
+  transform: translateY(-5px);
   border-color: var(--game-accent, var(--accent));
   box-shadow: 0 16px 40px var(--game-glow, var(--accent-soft)), 0 0 20px var(--game-glow, var(--accent-soft)), 0 0 0 1.5px var(--game-accent, var(--accent));
 }
@@ -223,24 +223,24 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 14px 0;
+  padding: 20px 24px 0;
   width: 100%;
-  gap: 8px;
+  gap: 12px;
 }
 
 .gameIconWrap {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
   background: rgba(18, 12, 16, 0.95);
   backdrop-filter: blur(12px);
   border: 1.5px solid var(--game-accent, var(--accent));
   box-shadow: 0 0 20px var(--game-glow, rgba(230,57,96,0.5)), 0 4px 12px rgba(0, 0, 0, 0.7);
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  padding: 5px;
+  padding: 6px;
   overflow: hidden;
   flex-shrink: 0;
 }
@@ -262,15 +262,15 @@
   position: relative;
   z-index: 2;
   font-family: var(--font-body);
-  font-size: 11.5px;
+  font-size: 12.5px;
   font-weight: 700;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--text);
   background: rgba(10, 8, 10, 0.85);
   backdrop-filter: blur(8px);
-  padding: 4px 10px;
-  border-radius: 6px;
+  padding: 6px 14px;
+  border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.16);
   white-space: nowrap;
 }
@@ -280,41 +280,54 @@
   position: relative;
   z-index: 2;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  padding: 14px;
+  justify-content: flex-end;
+  padding: 20px 24px;
   margin-top: auto;
   width: 100%;
   background: linear-gradient(
     0deg,
     rgba(8, 6, 8, 0.94) 0%,
-    rgba(8, 6, 8, 0.55) 60%,
+    rgba(8, 6, 8, 0.5) 60%,
     transparent 100%
   );
-  border-radius: 0 0 16px 16px;
+  border-radius: 0 0 20px 20px;
 }
 
 .gameCardFooter {
   position: relative;
   z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
   width: 100%;
-  text-align: center;
 }
 
 .selectBtnText {
   font-family: var(--font-display);
-  font-size: 13.5px;
+  font-size: 15px;
   font-weight: 700;
-  letter-spacing: 0.05em;
-  color: var(--game-accent, var(--accent));
-  transition: transform 0.2s ease, filter 0.2s ease;
-  display: inline-block;
+  letter-spacing: 0.06em;
+  color: #FFFFFF;
+  background: rgba(18, 12, 16, 0.82);
+  backdrop-filter: blur(10px);
+  padding: 9px 20px;
+  border-radius: 9px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   text-transform: uppercase;
 }
 
 .gameCard:hover .selectBtnText {
   transform: translateX(4px);
-  filter: brightness(1.25);
+  color: var(--game-accent, var(--accent));
+  border-color: var(--game-accent, var(--accent));
+  box-shadow: 0 0 22px var(--game-glow, var(--accent-soft)), 0 4px 16px rgba(0, 0, 0, 0.6);
+  background: rgba(22, 14, 18, 0.95);
 }
 
 .gameCardSelected {
@@ -459,8 +472,11 @@
     font-size: 50px;
   }
   .gamesGrid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .gameCard {
+    min-height: 240px;
   }
   .featuresGrid {
     grid-template-columns: repeat(2, 1fr);
@@ -481,9 +497,6 @@
     letter-spacing: 0.14em;
     gap: 10px;
   }
-  .heroEyebrow::before {
-    width: 22px;
-  }
   .heading {
     font-size: 42px;
     margin-bottom: 18px;
@@ -493,8 +506,11 @@
     margin-bottom: 28px;
   }
   .gamesGrid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .gameCard {
+    min-height: 220px;
   }
   .featuresHeading {
     font-size: 32px;
@@ -532,43 +548,45 @@
     font-size: 18px;
   }
 
-  /* Two clean, compact columns on mobile rather than 1 giant stretched card */
+  /* Single full-width showcase banner on mobile with clean spacing */
   .gamesGrid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    grid-template-columns: 1fr;
+    gap: 16px;
   }
   .gameCard {
-    min-height: 200px;
+    min-height: 190px;
     padding: 0;
-    border-radius: 12px;
+    border-radius: 14px;
     gap: 0;
   }
   .gameCardImageWrap {
-    border-radius: 12px;
+    border-radius: 14px;
   }
   .gameCardTop {
-    padding: 10px 10px 0;
-    gap: 6px;
+    padding: 12px 14px 0;
+    gap: 8px;
   }
   .gameIconWrap {
-    width: 38px;
-    height: 38px;
-    border-radius: 9px;
-    padding: 3px;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    padding: 4px;
   }
   .gameTag {
-    font-size: 9px;
-    padding: 2px 6px;
+    font-size: 10px;
+    padding: 3px 8px;
     letter-spacing: 0.03em;
-    border-radius: 4px;
+    border-radius: 5px;
   }
   .gameCardContent {
-    padding: 10px 8px;
-    border-radius: 0 0 12px 12px;
+    padding: 12px 14px;
+    border-radius: 0 0 14px 14px;
   }
   .selectBtnText {
-    font-size: 11px;
-    letter-spacing: 0.03em;
+    font-size: 12px;
+    padding: 7px 14px;
+    letter-spacing: 0.04em;
+    border-radius: 7px;
   }
 
   /* CTA row */
@@ -626,38 +644,39 @@
     font-size: 14.5px;
   }
   .gamesGrid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
+    grid-template-columns: 1fr;
+    gap: 14px;
   }
   .gameCard {
     min-height: 175px;
     padding: 0;
-    border-radius: 10px;
+    border-radius: 12px;
   }
   .gameCardImageWrap {
-    border-radius: 10px;
+    border-radius: 12px;
   }
   .gameCardTop {
-    padding: 8px 8px 0;
-    gap: 4px;
+    padding: 10px 10px 0;
+    gap: 6px;
   }
   .gameIconWrap {
-    width: 30px;
-    height: 30px;
-    border-radius: 7px;
-    padding: 2px;
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    padding: 3px;
   }
   .gameTag {
-    font-size: 8px;
-    padding: 2px 4px;
+    font-size: 8.5px;
+    padding: 2px 6px;
     letter-spacing: 0.02em;
   }
   .gameCardContent {
-    padding: 8px 6px;
-    border-radius: 0 0 10px 10px;
+    padding: 10px;
+    border-radius: 0 0 12px 12px;
   }
   .selectBtnText {
-    font-size: 9.5px;
-    letter-spacing: 0.02em;
+    font-size: 10.5px;
+    padding: 6px 12px;
+    letter-spacing: 0.03em;
   }
 }

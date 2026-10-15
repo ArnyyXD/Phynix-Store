@@ -120,7 +120,7 @@ export default function HomePage() {
               >
                 <div className={styles.gameCardImageWrap}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={g.banner} alt={g.id} className={styles.gameCardImage} />
+                  <img src={g.banner} alt={g.label} className={styles.gameCardImage} />
                   <div className={styles.gameCardOverlay} />
                 </div>
 
