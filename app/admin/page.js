@@ -161,7 +161,7 @@ export default function AdminPage() {
             Manage account listings, mark sold items, or delete listings.
           </p>
         </div>
-        <button className={styles.refreshBtn} onClick={fetchAccounts} disabled={loading}>
+        <button type="button" className={styles.refreshBtn} onClick={fetchAccounts} disabled={loading}>
           {loading ? "Refreshing..." : "🔄 Refresh"}
         </button>
       </div>
@@ -190,18 +190,21 @@ export default function AdminPage() {
       <div className={styles.controlsRow}>
         <div className={styles.filterGroup}>
           <button
+            type="button"
             className={`${styles.filterBtn} ${filter === "all" ? styles.filterActive : ""}`}
             onClick={() => setFilter("all")}
           >
             All ({totalCount})
           </button>
           <button
+            type="button"
             className={`${styles.filterBtn} ${filter === "live" ? styles.filterActive : ""}`}
             onClick={() => setFilter("live")}
           >
             Live ({liveCount})
           </button>
           <button
+            type="button"
             className={`${styles.filterBtn} ${filter === "sold" ? styles.filterActive : ""}`}
             onClick={() => setFilter("sold")}
           >
@@ -311,6 +314,7 @@ export default function AdminPage() {
                     <td>
                       <div className={styles.actionGroup}>
                         <button
+                          type="button"
                           className={styles.toggleBtn}
                           onClick={() => handleToggleStatus(acc.id, acc.status)}
                           disabled={isProcessing}
@@ -320,6 +324,7 @@ export default function AdminPage() {
                         </button>
 
                         <button
+                          type="button"
                           className={styles.deleteBtn}
                           onClick={() => handleDelete(acc.id, acc.title)}
                           disabled={isProcessing}

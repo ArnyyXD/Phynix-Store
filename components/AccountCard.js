@@ -102,7 +102,13 @@ export default function AccountCard({ account, onDelete }) {
       {thumbSrc && (
         <div className={styles.thumbWrap}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={thumbSrc} alt={title || "Screenshot"} className={styles.cardThumb} />
+          <img
+            src={thumbSrc}
+            alt={title || "Screenshot"}
+            className={styles.cardThumb}
+            loading="lazy"
+            decoding="async"
+          />
           {images && images.length > 1 && (
             <span className={styles.thumbCountBadge}>
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

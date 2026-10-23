@@ -9,6 +9,8 @@
   overflow: hidden;
   clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 18px 100%, 0 calc(100% - 18px));
   transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+  content-visibility: auto;
+  contain-intrinsic-size: 320px;
 }
 
 .cardSold {

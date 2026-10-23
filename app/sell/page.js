@@ -455,7 +455,7 @@ export default function SellPage() {
               {images.length > 0 && (
                 <div className={styles.imagePreviewGrid}>
                   {images.map((img, i) => (
-                    <div key={i} className={styles.imagePreviewItem}>
+                    <div key={`${img.name}-${i}`} className={styles.imagePreviewItem}>
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={img.dataUrl}

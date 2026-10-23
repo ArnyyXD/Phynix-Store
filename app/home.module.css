@@ -151,6 +151,9 @@
   cursor: pointer;
   aspect-ratio: 16 / 7;
   min-height: 230px;
+  contain: content;
+  content-visibility: auto;
+  contain-intrinsic-size: 230px;
 }
 
 .gameCardImageWrap {
@@ -479,7 +482,7 @@
   }
   .gamesGrid {
     grid-template-columns: 1fr;
-    gap: 18px;
+    gap: 26px;
   }
   .gameCard {
     aspect-ratio: 16 / 7;
@@ -517,7 +520,7 @@
   }
   .gamesGrid {
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 24px;
   }
   .gameCard {
     aspect-ratio: 16 / 7;
@@ -581,7 +584,7 @@
   /* Compact full-width banner on mobile with clean proportion */
   .gamesGrid {
     grid-template-columns: 1fr;
-    gap: 14px;
+    gap: 20px;
   }
   .gameCard {
     aspect-ratio: 16 / 7.2;
@@ -677,7 +680,7 @@
   }
   .gamesGrid {
     grid-template-columns: 1fr;
-    gap: 12px;
+    gap: 18px;
   }
   .gameCard {
     aspect-ratio: 16 / 7.5;

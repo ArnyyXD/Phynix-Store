@@ -27,10 +27,12 @@ export default function CursorGlow() {
       target.current = { x: e.clientX, y: e.clientY };
     }
 
-    window.addEventListener("mousemove", handlePointerMove);
-    window.addEventListener("touchmove", (e) => {
+    function handleTouchMove(e) {
       if (e.touches[0]) handlePointerMove(e.touches[0]);
-    });
+    }
+
+    window.addEventListener("mousemove", handlePointerMove);
+    window.addEventListener("touchmove", handleTouchMove, { passive: true });
 
     const speeds = [0.1, 0.06, 0.035];
     let raf;
@@ -57,15 +59,16 @@ export default function CursorGlow() {
 
     return () => {
       window.removeEventListener("mousemove", handlePointerMove);
+      window.removeEventListener("touchmove", handleTouchMove);
       cancelAnimationFrame(raf);
     };
   }, []);
 
   return (
-    <div className={styles.wrap} aria-hidden="true" suppressHydrationWarning>
-      <div ref={(el) => (blobRefs.current[0] = el)} className={`${styles.blob} ${styles.purple}`} suppressHydrationWarning />
-      <div ref={(el) => (blobRefs.current[1] = el)} className={`${styles.blob} ${styles.crimson}`} suppressHydrationWarning />
-      <div ref={(el) => (blobRefs.current[2] = el)} className={`${styles.blob} ${styles.violet}`} suppressHydrationWarning />
+    <div className={styles.wrap} aria-hidden="true">
+      <div ref={(el) => (blobRefs.current[0] = el)} className={`${styles.blob} ${styles.purple}`} />
+      <div ref={(el) => (blobRefs.current[1] = el)} className={`${styles.blob} ${styles.crimson}`} />
+      <div ref={(el) => (blobRefs.current[2] = el)} className={`${styles.blob} ${styles.violet}`} />
     </div>
   );
 }

@@ -132,7 +132,7 @@ export default function AccountDetailPage() {
             {account.images.map((src, i) => (
               /* eslint-disable-next-line @next/next/no-img-element */
               <img
-                key={i}
+                key={src || i}
                 src={src}
                 alt={`Listing screenshot ${i + 1}`}
                 className={styles.galleryImg}

@@ -4,13 +4,13 @@ import styles from "./faq.module.css";
 export default function FAQPage() {
   return (
     <div className={styles.page}>
-      <header className={styles.hero}>
+      <section className={styles.hero}>
         <div className={styles.badge}>SUPPORT &amp; LEGAL</div>
         <h1 className={styles.heading}>Frequently Asked Questions &amp; Policies</h1>
         <p className={styles.subheading}>
           Everything you need to know about trading safely on Phynix Store — Payment Security, Escrow, ToS, and Privacy &amp; Refunds.
         </p>
-      </header>
+      </section>
 
       {/* Middleman Priority Alert */}
       <div className={styles.mmBanner}>

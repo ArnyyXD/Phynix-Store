@@ -4,102 +4,38 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 16px;
-  padding: 56px 40px 68px;
+  gap: 14px;
+  padding: 48px 40px 40px;
   width: 100%;
   max-width: 100%;
   overflow: hidden;
 }
 
-/* ── Animated ambient background blobs ── */
-.banner::before,
-.banner::after {
-  content: "";
-  position: absolute;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.banner::before {
-  width: 480px;
-  height: 480px;
-  top: -120px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: radial-gradient(
-    circle,
-    rgba(230, 57, 96, 0.22) 0%,
-    rgba(230, 57, 96, 0.08) 45%,
-    transparent 72%
-  );
-  filter: blur(50px);
-  animation: blobPulse 6s ease-in-out infinite;
-}
-
-.banner::after {
-  width: 320px;
-  height: 320px;
-  bottom: -60px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: radial-gradient(
-    circle,
-    rgba(255, 100, 50, 0.12) 0%,
-    transparent 70%
-  );
-  filter: blur(40px);
-  animation: blobPulse 8s ease-in-out infinite reverse;
-}
-
-@keyframes blobPulse {
-  0%, 100% { transform: translateX(-50%) scale(1); opacity: 0.8; }
-  50%       { transform: translateX(-50%) scale(1.18); opacity: 1; }
-}
-
-/* ── Glow Ring behind logo ── */
+/* ── Neon glow ring behind logo — blends into bg ── */
 .glowRing {
   position: absolute;
-  top: 24px;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
-  width: 300px;
-  height: 300px;
+  transform: translate(-50%, -50%);
+  width: 280px;
+  height: 280px;
   border-radius: 50%;
   background: radial-gradient(
     circle,
-    var(--accent-glow) 0%,
-    rgba(230, 57, 96, 0.22) 45%,
+    rgba(230, 57, 96, 0.5) 0%,
+    rgba(230, 57, 96, 0.2) 35%,
+    rgba(230, 57, 96, 0.05) 58%,
     transparent 72%
   );
-  filter: blur(38px);
+  filter: blur(26px);
   animation: pulseGlow 4.5s ease-in-out infinite;
   z-index: 0;
+  pointer-events: none;
 }
 
 @keyframes pulseGlow {
-  0%, 100% { transform: translateX(-50%) scale(1);    opacity: 0.7; }
-  50%       { transform: translateX(-50%) scale(1.18); opacity: 1; }
-}
-
-/* ── Horizontal neon accent lines ── */
-.accentLine {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  height: 1.5px;
-  width: 0;
-  border-radius: 999px;
-  background: linear-gradient(90deg, transparent, var(--accent), rgba(255,100,50,0.9), var(--accent), transparent);
-  animation: lineExpand 1.2s 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  z-index: 1;
-}
-
-.accentLine.top    { top: 0; }
-.accentLine.bottom { bottom: 0; }
-
-@keyframes lineExpand {
-  to { width: min(640px, 90vw); }
+  0%, 100% { transform: translate(-50%, -50%) scale(1);    opacity: 0.75; }
+  50%       { transform: translate(-50%, -50%) scale(1.2);  opacity: 1; }
 }
 
 /* ── Logo icon ── */
@@ -114,8 +50,8 @@
 .icon {
   border-radius: 50%;
   filter:
-    drop-shadow(0 0 24px var(--accent-glow))
-    drop-shadow(0 0 48px rgba(230, 57, 96, 0.28));
+    drop-shadow(0 0 20px var(--accent-glow))
+    drop-shadow(0 0 44px rgba(230, 57, 96, 0.3));
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
 }
 
@@ -126,7 +62,7 @@
     drop-shadow(0 0 64px rgba(230, 57, 96, 0.5));
 }
 
-/* ── Ring orbit glow on hover ── */
+/* ── Orbit ring on hover ── */
 .iconWrap::after {
   content: "";
   position: absolute;
@@ -146,7 +82,14 @@
 }
 
 @keyframes orbitSpin {
+  from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .iconWrap::after {
+    animation: none;
+  }
 }
 
 /* ── Title ── */
@@ -157,6 +100,7 @@
   letter-spacing: 0.06em;
   color: var(--text);
   transition: letter-spacing 0.4s ease;
+  margin: 0;
 }
 
 .title:hover {
@@ -172,6 +116,11 @@
   animation: gradientShift 6s ease infinite;
 }
 
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50%       { background-position: 100% 50%; }
+}
+
 /* ── Tagline ── */
 .tagline {
   position: relative;
@@ -181,25 +130,17 @@
   letter-spacing: 0.05em;
   max-width: 440px;
   line-height: 1.5;
+  margin: 0;
 }
 
-/* ── Decorative dots pattern ── */
-.dots {
-  position: absolute;
-  z-index: 0;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  background-image: radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
-  background-size: 28px 28px;
-  pointer-events: none;
-}
-
+/* ── Responsive ── */
 @media (max-width: 860px) {
   .banner {
-    padding: 44px 24px 50px;
-    gap: 14px;
+    padding: 36px 24px 32px;
+  }
+  .glowRing {
+    width: 240px;
+    height: 240px;
   }
   .title {
     font-size: 42px;
@@ -211,8 +152,15 @@
 
 @media (max-width: 640px) {
   .banner {
-    padding: 28px 14px 38px;
-    gap: 12px;
+    padding: 28px 14px 28px;
+  }
+  .glowRing {
+    width: 190px;
+    height: 190px;
+  }
+  .icon {
+    width: 84px;
+    height: 84px;
   }
   .title {
     font-size: 32px;
@@ -222,28 +170,24 @@
     font-size: 14px;
     max-width: 320px;
   }
-  .glowRing {
-    width: 200px;
-    height: 200px;
-  }
-  .icon {
-    width: 84px;
-    height: 84px;
-  }
 }
 
 @media (max-width: 390px) {
   .banner {
-    padding: 24px 10px 32px;
+    padding: 22px 10px 22px;
+  }
+  .glowRing {
+    width: 160px;
+    height: 160px;
+  }
+  .icon {
+    width: 74px;
+    height: 74px;
   }
   .title {
     font-size: 28px;
   }
   .tagline {
     font-size: 13px;
-  }
-  .icon {
-    width: 74px;
-    height: 74px;
   }
 }

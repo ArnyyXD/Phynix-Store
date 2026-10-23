@@ -131,6 +131,7 @@ function BuyClientContent({ initialAccounts }) {
           <div className={styles.chips}>
             {GAMES.map((g) => (
               <button
+                type="button"
                 key={g.id}
                 className={
                   activeGame === g.id
@@ -150,6 +151,7 @@ function BuyClientContent({ initialAccounts }) {
           <div className={styles.chips}>
             {BUDGET_TIERS.map((tier) => (
               <button
+                type="button"
                 key={tier.id}
                 className={
                   activeBudget === tier.id
@@ -171,6 +173,7 @@ function BuyClientContent({ initialAccounts }) {
           <div className={styles.chips}>
             {LISTING_TYPES.map((type) => (
               <button
+                type="button"
                 key={type.id}
                 className={
                   activeType === type.id

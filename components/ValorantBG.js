@@ -255,7 +255,7 @@ export default function ValorantBG() {
   }, []);
 
   return (
-    <div className={styles.wrap} aria-hidden="true" suppressHydrationWarning>
+    <div className={styles.wrap} aria-hidden="true">
       {hasVideo && !videoError && (
         <video
           ref={videoRef}
@@ -265,11 +265,10 @@ export default function ValorantBG() {
           muted
           playsInline
           preload="metadata"
-          controls={false}
           disablePictureInPicture
           disableRemotePlayback
           aria-hidden="true"
-          tabIndex="-1"
+          tabIndex={-1}
           onError={() => setVideoError(true)}
         >
           {videoSources.map((src) => (

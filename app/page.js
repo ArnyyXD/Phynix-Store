@@ -120,14 +120,26 @@ export default function HomePage() {
               >
                 <div className={styles.gameCardImageWrap}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={g.banner} alt={g.label} className={styles.gameCardImage} />
+                  <img
+                    src={g.banner}
+                    alt={g.label}
+                    className={styles.gameCardImage}
+                    loading={g.id === "valorant" ? "eager" : "lazy"}
+                    decoding="async"
+                  />
                   <div className={styles.gameCardOverlay} />
                 </div>
 
                 <div className={styles.gameCardTop}>
                   <span className={styles.gameIconWrap}>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={g.logoUrl} alt={`${g.label} Logo`} className={styles.gameCardLogoImg} />
+                    <img
+                      src={g.logoUrl}
+                      alt={`${g.label} Logo`}
+                      className={styles.gameCardLogoImg}
+                      loading="lazy"
+                      decoding="async"
+                    />
                   </span>
                   <span className={styles.gameTag}>{g.tag}</span>
                 </div>
