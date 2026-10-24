@@ -16,6 +16,7 @@
   mix-blend-mode: screen;
   will-change: transform;
   transition: opacity 0.4s ease;
+  pointer-events: none;
 }
 
 .purple {
