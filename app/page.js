@@ -145,9 +145,15 @@ export default function HomePage() {
                 </div>
 
                 <div className={styles.gameCardContent}>
+                  <span className={styles.gameCardName}>{g.label}</span>
                   <div className={styles.gameCardFooter}>
                     <span className={styles.selectBtnText}>
-                      Explore {g.label} Accounts →
+                      <span className={styles.selectBtnFull}>
+                        Explore {g.label} Accounts →
+                      </span>
+                      <span className={styles.selectBtnShort}>
+                        Explore →
+                      </span>
                     </span>
                   </div>
                 </div>
