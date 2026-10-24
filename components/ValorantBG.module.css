@@ -61,6 +61,7 @@
   display: block;
   mix-blend-mode: screen;
   pointer-events: none;
+  will-change: contents;
 }
 
 .overlay {

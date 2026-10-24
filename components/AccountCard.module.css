@@ -11,6 +11,8 @@
   transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
   content-visibility: auto;
   contain-intrinsic-size: 320px;
+  contain: layout paint;
+  will-change: transform;
 }
 
 .cardSold {

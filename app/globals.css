@@ -59,6 +59,8 @@ html {
   overflow-x: hidden;
   scroll-behavior: smooth;
   text-rendering: optimizeLegibility;
+  overscroll-behavior: none;
+  overscroll-behavior-y: none;
 }
 
 html,
@@ -79,6 +81,8 @@ body {
   line-height: 1.5;
   letter-spacing: 0.03em;
   -webkit-font-smoothing: antialiased;
+  touch-action: pan-y;
+  overscroll-behavior: none;
 }
 
 /* Grid + scanlines now handled by the ValorantBG canvas component */
@@ -200,4 +204,68 @@ textarea {
 
 .btn-ghost:active {
   transform: translateY(0);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   MOBILE SCROLL PERFORMANCE
+   backdrop-filter triggers a full GPU rasterisation on every
+   scroll frame. Removing it on small screens gives back a huge
+   chunk of GPU bandwidth for smooth compositing.
+   ═══════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  /* Kill all backdrop-filter blurs — use solid fallback backgrounds */
+  * {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  /* Navbar — solid bg instead of blur */
+  header {
+    background: rgba(14, 11, 15, 0.97) !important;
+  }
+
+  /* Mobile dropdown menu — already opaque, remove blur */
+  nav {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  /* Disable hover lift/shadow on cards (touch devices don't hover anyway) */
+  .card:hover {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Put images on their own GPU compositor layer */
+  img {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+}
+
+/* Touch devices: strip expensive transitions for max-FPS scroll */
+@media (hover: none) and (pointer: coarse) {
+  /* Cards & game cards: instant state changes, no transition overhead */
+  .card,
+  .gameCard {
+    transition: border-color 0.15s ease !important;
+  }
+
+  .card:hover,
+  .gameCard:hover {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Active tap feedback instead of hover */
+  .card:active {
+    transform: scale(0.985) !important;
+    transition: transform 0.08s ease !important;
+  }
+
+  .gameCard:active {
+    transform: scale(0.97) !important;
+    transition: transform 0.08s ease !important;
+  }
 }

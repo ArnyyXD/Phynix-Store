@@ -77,13 +77,31 @@ export default function ValorantBG() {
     const ctx = canvas.getContext("2d");
     let animId;
     let t = 0;
+    let isScrolling = false;
+    let scrollTimer = null;
 
     // Detect mobile or reduced motion preference to save CPU/GPU cycles
     const isMobile = window.innerWidth < 768;
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     
-    // Reduce particles drastically on mobile (20 vs 80) to avoid lag
-    const PARTICLE_COUNT = isMobile || prefersReducedMotion ? 20 : 70;
+    // On mobile: only 10 particles during scroll, 20 at rest. Desktop: 70
+    const PARTICLE_COUNT_IDLE   = isMobile || prefersReducedMotion ? 20 : 70;
+    const PARTICLE_COUNT_SCROLL = isMobile ? 0 : PARTICLE_COUNT_IDLE;
+
+    // Pause canvas animation while user is actively scrolling on mobile
+    // to free GPU for compositing the page content (the biggest scroll-lag cause)
+    function handleScroll() {
+      isScrolling = true;
+      if (scrollTimer) clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        isScrolling = false;
+        // Resume animation after scroll settles
+        if (!animId && !document.hidden) {
+          animId = requestAnimationFrame(render);
+        }
+      }, 150);
+    }
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     function resize() {
       canvas.width = window.innerWidth;
@@ -93,7 +111,7 @@ export default function ValorantBG() {
     window.addEventListener("resize", resize);
 
     // ── Particle Sparks ──────────────────────────────────────────────────
-    const particles = Array.from({ length: PARTICLE_COUNT }, () => ({
+    const particles = Array.from({ length: PARTICLE_COUNT_IDLE }, () => ({
       x: Math.random() * window.innerWidth,
       y: Math.random() * window.innerHeight,
       r: 0.8 + Math.random() * 2.2,
@@ -201,6 +219,13 @@ export default function ValorantBG() {
     }
 
     function render() {
+      // On mobile: completely skip frame during scroll — let browser use
+      // all GPU for compositing scroll layers (biggest scroll-lag fix)
+      if (isMobile && isScrolling) {
+        animId = null;
+        return;
+      }
+
       // Pause completely if tab is not visible to prevent CPU burn
       if (document.hidden) {
         animId = requestAnimationFrame(render);
@@ -266,7 +291,9 @@ export default function ValorantBG() {
     return () => {
       if (animId) cancelAnimationFrame(animId);
       document.removeEventListener("visibilitychange", handleVisChange);
+      window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", resize);
+      if (scrollTimer) clearTimeout(scrollTimer);
     };
   }, []);
 
