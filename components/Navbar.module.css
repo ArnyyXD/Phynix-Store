@@ -5,6 +5,8 @@
   background: rgba(15, 17, 23, 0.9);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--line);
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 .inner {

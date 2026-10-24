@@ -4,9 +4,8 @@ import { useEffect, useRef } from "react";
 import styles from "./CursorGlow.module.css";
 
 // Three blurred color blobs, each easing toward the cursor at a different
-// speed, so they trail behind one another and overlap/blend as they move --
-// this is what gives the "mixing like water" feel. mix-blend-mode: screen
-// makes overlapping colors lighten into each other instead of just stacking.
+// speed, with dormant idle-detection (0% CPU when mouse is idle) and automatic
+// touch-device disabling (silky-smooth 60/120fps scrolling on mobile).
 export default function CursorGlow() {
   const blobRefs = useRef([]);
   const target = useRef({ x: 0, y: 0 });
@@ -15,34 +14,34 @@ export default function CursorGlow() {
     { x: 0, y: 0 },
     { x: 0, y: 0 },
   ]);
-  const hasMoved = useRef(false);
 
   useEffect(() => {
+    // Disable on touch-only devices to save battery and maximize 120Hz scroll performance
+    if (window.matchMedia("(hover: none) and (pointer: coarse)").matches) {
+      return;
+    }
+
     const initial = { x: window.innerWidth * 0.5, y: window.innerHeight * 0.4 };
     target.current = initial;
     current.current = current.current.map(() => ({ ...initial }));
 
-    function handlePointerMove(e) {
-      hasMoved.current = true;
-      target.current = { x: e.clientX, y: e.clientY };
-    }
-
-    function handleTouchMove(e) {
-      if (e.touches[0]) handlePointerMove(e.touches[0]);
-    }
-
-    window.addEventListener("mousemove", handlePointerMove);
-    window.addEventListener("touchmove", handleTouchMove, { passive: true });
-
+    let rafId = null;
+    let isRunning = false;
     const speeds = [0.1, 0.06, 0.035];
-    let raf;
 
-    function animate() {
+    function step() {
+      let maxDelta = 0;
+
       current.current = current.current.map((pos, i) => {
         const speed = speeds[i] ?? 0.08;
+        const dx = (target.current.x - pos.x) * speed;
+        const dy = (target.current.y - pos.y) * speed;
+        const absD = Math.abs(dx) + Math.abs(dy);
+        if (absD > maxDelta) maxDelta = absD;
+
         return {
-          x: pos.x + (target.current.x - pos.x) * speed,
-          y: pos.y + (target.current.y - pos.y) * speed,
+          x: pos.x + dx,
+          y: pos.y + dy,
         };
       });
 
@@ -52,15 +51,32 @@ export default function CursorGlow() {
         el.style.transform = `translate3d(${pos.x}px, ${pos.y}px, 0) translate(-50%, -50%)`;
       });
 
-      raf = requestAnimationFrame(animate);
+      // If blobs have caught up within 0.1px, sleep until next mousemove to keep 0% idle CPU
+      if (maxDelta > 0.1) {
+        rafId = requestAnimationFrame(step);
+      } else {
+        isRunning = false;
+      }
     }
 
-    raf = requestAnimationFrame(animate);
+    function startAnimation() {
+      if (!isRunning) {
+        isRunning = true;
+        rafId = requestAnimationFrame(step);
+      }
+    }
+
+    function handlePointerMove(e) {
+      target.current = { x: e.clientX, y: e.clientY };
+      startAnimation();
+    }
+
+    window.addEventListener("mousemove", handlePointerMove, { passive: true });
+    startAnimation();
 
     return () => {
       window.removeEventListener("mousemove", handlePointerMove);
-      window.removeEventListener("touchmove", handleTouchMove);
-      cancelAnimationFrame(raf);
+      if (rafId) cancelAnimationFrame(rafId);
     };
   }, []);
 

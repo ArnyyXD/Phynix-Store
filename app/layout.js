@@ -18,12 +18,15 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+        <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
           href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap"
           rel="stylesheet"
         />
+        <link rel="preload" href="/logo.png" as="image" type="image/png" />
       </head>
       <body suppressHydrationWarning>
         <Providers>

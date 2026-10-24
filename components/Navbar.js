@@ -35,7 +35,7 @@ export default function Navbar() {
   return (
     <header className={styles.nav}>
       <div className={styles.inner}>
-        <Link href="/" className={styles.logo}>
+        <Link href="/" className={styles.logo} prefetch={true}>
           <Image
             src="/logo.png"
             alt="Phynix Store"
@@ -52,6 +52,7 @@ export default function Navbar() {
             <Link
               key={link.href}
               href={link.href}
+              prefetch={true}
               onClick={() => setMenuOpen(false)}
               className={
                 pathname === link.href ? `${styles.link} ${styles.active}` : styles.link
@@ -115,7 +116,7 @@ export default function Navbar() {
                 </button>
               </div>
             ) : (
-              <Link href="/auth/signin" className={styles.signIn}>
+              <Link href="/auth/signin" className={styles.signIn} prefetch={true}>
                 Sign in
               </Link>
             )}

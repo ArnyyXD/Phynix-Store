@@ -10,9 +10,7 @@ export default function ValorantBG() {
 
   // Check if custom video file exists in public/
   const videoSources = [
-    "/valorant-bg.mp4",
-    "/valorant.mp4",
-    "/bg.mp4"
+    "/valorant-bg.mp4"
   ];
 
   // Mobile browsers routinely pause a background <video> when the screen
@@ -114,6 +112,21 @@ export default function ValorantBG() {
       p.r = 0.8 + Math.random() * 2.2;
       p.life = 0;
       p.maxLife = 0.003 + Math.random() * 0.005;
+    }
+
+    // Pre-rendered particle glow sprite (avoids thousands of gradient allocations per second)
+    const spriteSize = 32;
+    const sprite = document.createElement("canvas");
+    sprite.width = spriteSize;
+    sprite.height = spriteSize;
+    const sCtx = sprite.getContext("2d");
+    if (sCtx) {
+      const sGrad = sCtx.createRadialGradient(spriteSize / 2, spriteSize / 2, 0, spriteSize / 2, spriteSize / 2, spriteSize / 2);
+      sGrad.addColorStop(0, "#FF6B85");
+      sGrad.addColorStop(0.4, "rgba(230, 57, 96, 0.65)");
+      sGrad.addColorStop(1, "rgba(230, 57, 96, 0)");
+      sCtx.fillStyle = sGrad;
+      sCtx.fillRect(0, 0, spriteSize, spriteSize);
     }
 
     const beams = isMobile ? [] : [
@@ -227,19 +240,11 @@ export default function ValorantBG() {
         if (p.y < -20) resetParticle(p);
 
         const fade = p.life < 0.15 ? p.life / 0.15 : p.life > 0.8 ? 1 - (p.life - 0.8) / 0.2 : 1;
-
-        ctx.save();
         ctx.globalAlpha = p.alpha * fade;
-        const pGlow = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 2.5);
-        pGlow.addColorStop(0, "#FF6B85");
-        pGlow.addColorStop(0.5, "rgba(230, 57, 96, 0.6)");
-        pGlow.addColorStop(1, "rgba(230, 57, 96, 0)");
-        ctx.fillStyle = pGlow;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r * 2.5, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.restore();
+        const size = p.r * 5;
+        ctx.drawImage(sprite, p.x - size * 0.5, p.y - size * 0.5, size, size);
       }
+      ctx.globalAlpha = 1.0;
 
       drawHUDAccents();
 
@@ -248,8 +253,19 @@ export default function ValorantBG() {
 
     render();
 
+    function handleVisChange() {
+      if (document.hidden) {
+        if (animId) cancelAnimationFrame(animId);
+        animId = null;
+      } else if (!animId) {
+        animId = requestAnimationFrame(render);
+      }
+    }
+    document.addEventListener("visibilitychange", handleVisChange);
+
     return () => {
-      cancelAnimationFrame(animId);
+      if (animId) cancelAnimationFrame(animId);
+      document.removeEventListener("visibilitychange", handleVisChange);
       window.removeEventListener("resize", resize);
     };
   }, []);

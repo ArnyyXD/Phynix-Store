@@ -56,3 +56,9 @@
     height: 280px;
   }
 }
+
+@media (hover: none) and (pointer: coarse) {
+  .wrap {
+    display: none;
+  }
+}

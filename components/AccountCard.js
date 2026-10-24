@@ -218,7 +218,7 @@ export default function AccountCard({ account, onDelete }) {
             </button>
           )}
           {id !== "preview" ? (
-            <Link href={`/accounts/${id}`} className={styles.viewBtn}>
+            <Link href={`/accounts/${id}`} className={styles.viewBtn} prefetch={true}>
               View listing →
             </Link>
           ) : (

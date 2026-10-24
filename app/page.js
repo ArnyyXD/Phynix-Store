@@ -110,6 +110,7 @@ export default function HomePage() {
               <Link
                 key={g.id}
                 href={`/buy?game=${g.id}`}
+                prefetch={true}
                 onClick={() => setSelectedGameId(g.id)}
                 className={`${styles.gameCard} ${isSelected ? styles.gameCardSelected : ""}`}
                 style={{
@@ -167,10 +168,10 @@ export default function HomePage() {
 
       {/* CTA Row */}
       <div className={styles.ctaBetweenSection}>
-        <Link href="/buy" className="btn-primary">
+        <Link href="/buy" className="btn-primary" prefetch={true}>
           Browse All Accounts
         </Link>
-        <Link href="/sell" className="btn-ghost">
+        <Link href="/sell" className="btn-ghost" prefetch={true}>
           List Your Account
         </Link>
       </div>
