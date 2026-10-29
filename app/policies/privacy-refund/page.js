@@ -7,23 +7,19 @@ export default function PrivacyRefundPage() {
       <p className={styles.updated}>Last updated: [DATE] · Applies to all users of Phynix Store</p>
 
       <div className={styles.notice}>
-        This template is written to align with India's Digital Personal Data
-        Protection Act, 2023 (DPDP Act) and general e-commerce/consumer
+        This template is written to align with general e-commerce and consumer
         protection practice, but it is not legal advice. Have an actual
-        lawyer review it — particularly the Grievance Officer appointment and
-        the refund terms — before you publish it live and start collecting
-        payments from real users.
+        lawyer review it — particularly the refund terms — before you publish
+        it live and start collecting payments from real users.
       </div>
 
       <section className={styles.section}>
         <h2 className={styles.sectionTitle}>1. Who this policy covers</h2>
         <p className={styles.body}>
-          Phynix Store ("we", "us", "the platform") operates this
-          website to connect buyers and sellers of Valorant game accounts. As
-          the entity that decides why and how your personal data is
-          processed, we act as the "Data Fiduciary" under the DPDP Act, 2023.
-          By creating an account or using the platform, you ("Data
-          Principal") agree to the practices described here.
+          Phynix Store (&quot;we&quot;, &quot;us&quot;, &quot;the platform&quot;) operates this
+          website to connect buyers and sellers of Valorant game accounts.
+          By creating an account or using the platform, you agree to the
+          practices described here.
         </p>
       </section>
 
@@ -88,7 +84,7 @@ export default function PrivacyRefundPage() {
             the document image.
           </li>
           <li>
-            Any ID or credential data we do retain is deleted once the
+            <strong>Information Deletion:</strong> Any ID or credential data we do retain is deleted once the
             transaction or dispute it relates to is closed, and no later than
             [RETENTION PERIOD, e.g. 90 days] afterward.
           </li>
@@ -170,9 +166,8 @@ export default function PrivacyRefundPage() {
             handover for a refund or partial refund.
           </li>
           <li>
-            <strong>How refunds are processed:</strong> approved refunds are
-            returned to the original UPI payment method within [PERIOD, e.g.
-            5–7 business days].
+            <strong>How refunds are processed:</strong> Refund requests may take 10–15 days to resolve. Where applicable, a replacement may be offered instead, subject to eligibility and the deal terms. Approved refunds are
+            returned to the original UPI payment method.
           </li>
           <li>
             <strong>Disputes:</strong> contact us through the{" "}

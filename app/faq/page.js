@@ -16,8 +16,8 @@ export default function FAQPage() {
       <div className={styles.mmBanner}>
         <span className={styles.mmAlertIcon}>⚠️</span>
         <div className={styles.mmAlertText}>
-          <strong>MIDDLEMAN (MM) IS MANDATORY FOR EVERY DEAL</strong>
-          <p>Middleman fees are only ₹75–₹100 per person. Never deal directly with anyone outside our verified admin team.</p>
+          <strong>MIDDLEMAN (MM) IS AVAILABLE FOR DEALS</strong>
+          <p>We charge a specified fee for our middleman service. This fee applies only when the middleman service is used.</p>
         </div>
       </div>
 
@@ -28,6 +28,7 @@ export default function FAQPage() {
         <a href="#tos" className={styles.navChip}>Terms of Service</a>
         <a href="#refund-policy" className={styles.navChip}>Refund Policy</a>
         <a href="#privacy" className={styles.navChip}>Privacy &amp; Data</a>
+        <a href="#faq-extra" className={styles.navChip}>More FAQs</a>
       </nav>
 
       {/* ── SECTION 1: HOW TRADES WORK ── */}
@@ -65,10 +66,10 @@ export default function FAQPage() {
             <strong>100% Escrow Protection:</strong> Funds are locked securely in our escrow account during credential exchange.
           </li>
           <li>
-            <strong>Verified Sellers Only:</strong> High-value accounts require KYC ownership proofs (original emails, transaction receipts, creation details).
+            <strong>Verified Sellers Only:</strong> High-value accounts require ID card proof (original emails, transaction receipts, creation details).
           </li>
           <li>
-            <strong>Middleman Fee:</strong> Standard fee is strictly ₹75–₹100 per person to cover fraud monitoring and transaction oversight.
+            <strong>Middleman Fee:</strong> A middleman fee applies only when a middleman service is used. Buyers purchasing directly from the community owner do not pay a middleman fee.
           </li>
           <li>
             <strong>Zero Direct Transfers:</strong> Paying a seller directly without our Middleman voids all buyer protection and is done entirely at your own risk.
@@ -85,9 +86,6 @@ export default function FAQPage() {
           </li>
           <li>
             <strong>Sales Final:</strong> All sales are final after successful credential handover and confirmation by the buyer.
-          </li>
-          <li>
-            <strong>No Dropshipping:</strong> Reselling accounts purchased on Phynix Store across third-party marketplaces is strictly prohibited.
           </li>
           <li>
             <strong>Publisher Independence:</strong> Phynix Store is an independent peer-to-peer marketplace and is not affiliated with Riot Games, Supercell, Krafton, or Garena.
@@ -116,7 +114,7 @@ export default function FAQPage() {
               <strong>Misleading Listings:</strong> If account details (rank, skins, town hall, items) do not match the listing, you may reject the deal immediately for a 100% refund before credential acceptance.
             </li>
             <li>
-              <strong>Resolution Timeline:</strong> Dispute investigations are initiated within 1 hour of receipt. Refund payouts are processed via UPI within 24 hours of approval.
+              <strong>Resolution Timeline:</strong> Refund requests may take 10–15 days to resolve. Where applicable, a replacement may be offered instead, subject to eligibility and the deal terms.
             </li>
           </ul>
         </div>
@@ -124,9 +122,9 @@ export default function FAQPage() {
 
       {/* ── SECTION 5: PRIVACY & DATA PROTECTION ── */}
       <section id="privacy" className={styles.section}>
-        <h2 className={styles.sectionTitle}>5. Privacy &amp; Data Protection (DPDP Act)</h2>
+        <h2 className={styles.sectionTitle}>5. Privacy &amp; Data Protection</h2>
         <p className={styles.body}>
-          Phynix Store operates in accordance with India&apos;s Digital Personal Data Protection Act, 2023.
+          Phynix Store is committed to protecting your personal data and privacy.
         </p>
         <ul className={styles.list}>
           <li>
@@ -136,12 +134,85 @@ export default function FAQPage() {
             <strong>No Data Selling:</strong> We never sell, rent, or trade your personal information with external advertisers or marketers.
           </li>
           <li>
-            <strong>KYC Document Deletion:</strong> Any identity or credential records gathered during fraud disputes are permanently erased after resolution.
+            <strong>Information Deletion:</strong> Any identity or credential records gathered during fraud disputes are permanently erased after resolution.
           </li>
           <li>
             <strong>Your Rights:</strong> You can request data access, correction, or deletion anytime by contacting our support team.
           </li>
         </ul>
+      </section>
+
+      {/* ── SECTION 6: ADDITIONAL FAQs ── */}
+      <section id="faq-extra" className={styles.section}>
+        <h2 className={styles.sectionTitle}>6. More Frequently Asked Questions</h2>
+        <div className={styles.faqList}>
+
+          <div className={styles.faqItem}>
+            <p className={styles.faqQuestion}>How does a deal work?</p>
+            <p className={styles.faqAnswer}>
+              Deals can be completed through a middleman or directly with the community owner. If a middleman is used, the applicable middleman service fee applies. Direct deals with the community owner do not require a middleman fee.
+            </p>
+          </div>
+
+          <div className={styles.faqItem}>
+            <p className={styles.faqQuestion}>What is Phynix Store?</p>
+            <p className={styles.faqAnswer}>
+              Phynix Store is a community where gamers trade smart, deal safely, and build their dream collection.
+            </p>
+          </div>
+
+          <div className={styles.faqItem}>
+            <p className={styles.faqQuestion}>Is buying an account safe?</p>
+            <p className={styles.faqAnswer}>
+              At Phynix Store, every deal prioritizes trust and security. Buy, sell, or trade accounts with proper precautions and enjoy more value without starting from zero.
+            </p>
+          </div>
+
+          <div className={styles.faqItem}>
+            <p className={styles.faqQuestion}>How does EMI work?</p>
+            <p className={styles.faqAnswer}>
+              Pay a fixed down payment upfront and clear the remaining balance within the agreed tenure. Account access and email-transfer terms will be explained before the deal. Full email access is provided only after all payments are completed.
+            </p>
+          </div>
+
+          <div className={styles.faqItem}>
+            <p className={styles.faqQuestion}>What is Revoke &amp; Lock?</p>
+            <p className={styles.faqAnswer}>
+              <span className={styles.faqAnswerLabel}>Revoke:</span> When the original creator recovers a sold account, the seller may offer a refund or replacement, depending on the deal terms.
+              <br />
+              <span className={styles.faqAnswerLabel}>Lock:</span> Riot may restrict access to an account for certain reasons. Refunds or replacements depend on the reason for the lock. Buyer-caused locks are generally not covered.
+            </p>
+          </div>
+
+          <div className={styles.faqItem}>
+            <p className={styles.faqQuestion}>Can I use PHP VP on an Indian account?</p>
+            <p className={styles.faqAnswer}>
+              No. PHP VP is region-locked to Filipino accounts and cannot be used on Indian-region accounts.
+            </p>
+          </div>
+
+          <div className={styles.faqItem}>
+            <p className={styles.faqQuestion}>Can I return an account I purchased?</p>
+            <p className={styles.faqAnswer}>
+              No. Purchased accounts are non-refundable. However, you may resell your account at a lower price.
+            </p>
+          </div>
+
+          <div className={styles.faqItem}>
+            <p className={styles.faqQuestion}>Can I become a seller?</p>
+            <p className={styles.faqAnswer}>
+              Yes. You need a valid ID and proof of account ownership to get started as a seller with Phynix Store.
+            </p>
+          </div>
+
+          <div className={styles.faqItem}>
+            <p className={styles.faqQuestion}>Does Phynix Store offer anything besides gaming accounts and coin/VP top-ups?</p>
+            <p className={styles.faqAnswer}>
+              Yes. Join our official community through the links in our Contact section to explore more services, deals, gaming-related offers, and giveaways.
+            </p>
+          </div>
+
+        </div>
       </section>
 
       {/* Need More Help Box */}

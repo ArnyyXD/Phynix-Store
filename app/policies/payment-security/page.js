@@ -8,7 +8,7 @@ export default function PaymentSecurityPage() {
 
       {/* ── Middleman Banner ── */}
       <div className={styles.mmBanner}>
-        ⚠️ MIDDLEMAN IS A MUST IN EVERY SINGLE DEAL —
+        ⚠️ A MIDDLEMAN SERVICE FEE APPLIES ONLY WHEN A MIDDLEMAN IS USED —
         MIDDLEMAN FEES: <strong>₹75–₹100 per person</strong>
       </div>
 
@@ -54,10 +54,6 @@ export default function PaymentSecurityPage() {
             here. Ignorance of the rules is not an excuse.
           </li>
           <li>
-            <strong>Dropshipping is banned.</strong> You may not relist accounts
-            purchased here on any other platform.
-          </li>
-          <li>
             All deals involving account locks or revokes are eligible for a{" "}
             <strong>refund or satisfactory replacement</strong>, unless a special
             agreement has been made beforehand or the issue is the buyer&apos;s fault.
@@ -89,9 +85,9 @@ export default function PaymentSecurityPage() {
             and skins are checked against screenshots before buyers can see a listing.
           </li>
           <li>
-            <strong>Sellers verify with our middleman on WhatsApp.</strong> After
+            Sellers verify with our middleman on WhatsApp. After
             submitting a listing, a &quot;Contact now for verification&quot; button opens a
-            WhatsApp chat with our middleman for KYC before the listing goes live.
+            WhatsApp chat with our middleman for ID card proof before the listing goes live.
           </li>
           <li>
             <strong>Buyers contact the same middleman to purchase.</strong> &quot;Contact
