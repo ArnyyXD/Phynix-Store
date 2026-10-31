@@ -1,0 +1,420 @@
+/* ── Page Layout & Typography ── */
+.page {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 72px 32px 100px;
+  position: relative;
+  z-index: 1;
+}
+
+.heading {
+  font-size: 44px;
+  line-height: 1.15;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+
+.updated {
+  font-size: 15px;
+  color: var(--text-faint);
+  margin-bottom: 36px;
+}
+
+.section {
+  margin-bottom: 40px;
+}
+
+.sectionTitle {
+  font-size: 24px;
+  color: var(--text);
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line);
+  letter-spacing: 0.03em;
+}
+
+.body {
+  color: #D6C7C5;
+  font-size: 17px;
+  line-height: 1.75;
+  margin-bottom: 14px;
+}
+
+/* ── Support Grid ── */
+.supportGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.supportCard {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--bg-panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 16px 18px;
+  text-decoration: none;
+  color: var(--text);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+  cursor: pointer;
+}
+
+.supportCard:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent-soft);
+  transform: translateY(-2px);
+}
+
+.infoCard {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--bg-panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 16px 18px;
+  color: var(--text);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.supportCardIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.supportIcon {
+  width: 26px;
+  height: 26px;
+  color: #fff;
+}
+
+.supportCardBody {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.supportCardTitle {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.supportCardSub {
+  font-size: 13px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.supportCardArrow {
+  font-size: 16px;
+  color: var(--accent-bright);
+  flex-shrink: 0;
+}
+
+/* ── Community Grid ── */
+.communityGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.communityCard {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--bg-panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 16px 18px;
+  text-decoration: none;
+  color: var(--text);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+}
+
+.communityCard:hover {
+  border-color: var(--card-border, var(--accent));
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--card-border, var(--accent)) 20%, transparent);
+  transform: translateY(-2px);
+}
+
+.communityCardIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.platformIcon {
+  width: 26px;
+  height: 26px;
+  color: #fff;
+}
+
+.communityCardBody {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.communityCardTitle {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.communityCardPlatform {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.communityCardArrow {
+  font-size: 16px;
+  color: var(--accent-bright);
+  flex-shrink: 0;
+}
+
+.communityLoading {
+  color: var(--text-muted);
+  font-size: 15px;
+  padding: 24px 0;
+}
+
+/* ── Grievance Action ── */
+.grievanceAction {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+
+.grievanceBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--bg-panel);
+  border: 1px solid var(--line-bright);
+  border-radius: 12px;
+  padding: 12px 18px;
+  text-decoration: none;
+  color: var(--text);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.grievanceBtn:hover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  box-shadow: 0 4px 16px var(--accent-glow);
+  transform: translateY(-2px);
+}
+
+.grievanceIcon {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #EA4335 0%, #B31412 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(234, 67, 53, 0.35);
+}
+
+.grievanceText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.grievanceTitle {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text);
+}
+
+.grievanceSub {
+  font-size: 13px;
+  color: var(--accent-bright);
+}
+
+.grievanceArrow {
+  font-size: 16px;
+  color: var(--accent-bright);
+  margin-left: 4px;
+}
+
+.gmailWebLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-muted);
+  font-size: 13px;
+  text-decoration: none;
+  padding: 10px 14px;
+  border: 1px dashed var(--line-bright);
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.gmailWebLink:hover {
+  color: var(--text);
+  border-color: var(--accent-bright);
+  background: var(--bg-panel);
+}
+
+/* ── Social Section & Dock (Centered) ── */
+.socialSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.sectionTitleCenter {
+  font-size: 24px;
+  color: var(--text);
+  margin-bottom: 12px;
+  letter-spacing: 0.03em;
+  text-align: center;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 12px;
+  width: 100%;
+}
+
+.bodyCenter {
+  color: #D6C7C5;
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 24px;
+  text-align: center;
+  max-width: 520px;
+}
+
+.dockWrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 8px;
+  width: 100%;
+}
+
+.dockGlass {
+  position: relative;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
+  padding: 12px 18px;
+  margin: 0 auto;
+}
+
+.dockRow {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 10px;
+}
+
+.dockItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+}
+
+.dockIcon {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transform: translateY(0);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dockItem:hover .dockIcon {
+  transform: scale(1.1) translateY(-8px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+}
+
+.dockLabel {
+  font-size: 11px;
+  color: var(--text-muted);
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  white-space: nowrap;
+}
+
+.dockItem:hover .dockLabel {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .page {
+    padding: 40px 16px 64px;
+  }
+
+  .heading {
+    font-size: 32px;
+  }
+
+  .sectionTitle {
+    font-size: 20px;
+  }
+
+  .body {
+    font-size: 16px;
+  }
+
+  .supportGrid,
+  .communityGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .dockIcon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .dockIcon svg {
+    width: 26px !important;
+    height: 26px !important;
+  }
+}

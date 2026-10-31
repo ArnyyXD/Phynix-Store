@@ -7,6 +7,258 @@ import { isAdminEmail } from "../../lib/admin";
 import { getGameConfig } from "../../lib/games";
 import styles from "./admin.module.css";
 
+// ── Community Links sub-component ──────────────────────────────────
+function CommunityLinksPanel({ showToast }) {
+  const [links, setLinks] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(null);
+  const [adding, setAdding] = useState(false);
+  const [newLink, setNewLink] = useState({ platform: "whatsapp", displayName: "", url: "", enabled: true, order: 0 });
+
+  useEffect(() => {
+    fetchAll();
+  }, []);
+
+  async function fetchAll() {
+    setLoading(true);
+    try {
+      const res = await fetch("/api/community-links?all=true");
+      const data = await res.json();
+      if (Array.isArray(data)) setLinks(data);
+    } catch {}
+    setLoading(false);
+  }
+
+  async function handleToggle(link) {
+    setSaving(link.id);
+    try {
+      const res = await fetch(`/api/community-links/${link.id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ enabled: !link.enabled }),
+      });
+      if (res.ok) {
+        const updated = await res.json();
+        setLinks((prev) => prev.map((l) => (l.id === updated.id ? updated : l)));
+        showToast(`${link.displayName} ${updated.enabled ? "enabled" : "disabled"}`);
+      }
+    } catch {}
+    setSaving(null);
+  }
+
+  async function handleUpdate(link, changes) {
+    setSaving(link.id);
+    try {
+      const res = await fetch(`/api/community-links/${link.id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(changes),
+      });
+      if (res.ok) {
+        const updated = await res.json();
+        setLinks((prev) => prev.map((l) => (l.id === updated.id ? updated : l)));
+        showToast(`Saved changes for ${updated.displayName}`);
+      }
+    } catch {}
+    setSaving(null);
+  }
+
+  async function handleDelete(link) {
+    if (!window.confirm(`Delete "${link.displayName}"?`)) return;
+    setSaving(link.id);
+    try {
+      const res = await fetch(`/api/community-links/${link.id}`, { method: "DELETE" });
+      if (res.ok) {
+        setLinks((prev) => prev.filter((l) => l.id !== link.id));
+        showToast(`${link.displayName} deleted`);
+      }
+    } catch {}
+    setSaving(null);
+  }
+
+  async function handleAdd() {
+    if (!newLink.displayName.trim()) return;
+    setSaving("new");
+    try {
+      const res = await fetch("/api/community-links", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newLink),
+      });
+      if (res.ok) {
+        const created = await res.json();
+        setLinks((prev) => [...prev, created]);
+        setNewLink({ platform: "whatsapp", displayName: "", url: "", enabled: true, order: 0 });
+        setAdding(false);
+        showToast(`${created.displayName} added`);
+      }
+    } catch {}
+    setSaving(null);
+  }
+
+  if (loading) return <div className={styles.emptyBox}>Loading community links…</div>;
+
+  return (
+    <div className={styles.communityPanel}>
+      <div className={styles.communityHeader}>
+        <div>
+          <h2 className={styles.communityTitle}>Community Links</h2>
+          <p className={styles.subtext}>Manage links shown on the Contact page. Changes are live immediately.</p>
+        </div>
+        <button className={styles.refreshBtn} onClick={() => setAdding((v) => !v)}>
+          {adding ? "✕ Cancel" : "+ Add Link"}
+        </button>
+      </div>
+
+      {adding && (
+        <div className={styles.addLinkForm}>
+          <select
+            className={styles.addLinkSelect}
+            value={newLink.platform}
+            onChange={(e) => setNewLink((f) => ({ ...f, platform: e.target.value }))}
+          >
+            {["whatsapp", "discord", "telegram", "facebook", "instagram", "youtube"].map((p) => (
+              <option key={p} value={p}>{p.charAt(0).toUpperCase() + p.slice(1)}</option>
+            ))}
+          </select>
+          <input
+            className={styles.addLinkInput}
+            placeholder="Display name (e.g. WhatsApp Community)"
+            value={newLink.displayName}
+            onChange={(e) => setNewLink((f) => ({ ...f, displayName: e.target.value }))}
+          />
+          <input
+            className={styles.addLinkInput}
+            placeholder="URL (leave blank if pending)"
+            value={newLink.url}
+            onChange={(e) => setNewLink((f) => ({ ...f, url: e.target.value }))}
+          />
+          <button
+            className={styles.saveLinkBtn}
+            onClick={handleAdd}
+            disabled={saving === "new" || !newLink.displayName.trim()}
+          >
+            {saving === "new" ? "Saving…" : "Save"}
+          </button>
+        </div>
+      )}
+
+      <div className={styles.communityTable}>
+        {links.length === 0 ? (
+          <div className={styles.emptyBox}>No community links yet.</div>
+        ) : (
+          links.map((link) => (
+            <CommunityRow
+              key={link.id}
+              link={link}
+              saving={saving}
+              onToggle={handleToggle}
+              onUpdate={handleUpdate}
+              onDelete={handleDelete}
+            />
+          ))
+        )}
+      </div>
+    </div>
+  );
+}
+
+function CommunityRow({ link, saving, onToggle, onUpdate, onDelete }) {
+  const [isEditing, setIsEditing] = useState(false);
+  const [formData, setFormData] = useState({
+    platform: link.platform,
+    displayName: link.displayName,
+    url: link.url,
+  });
+  const isProcessing = saving === link.id;
+
+  function handleSave() {
+    onUpdate(link, formData);
+    setIsEditing(false);
+  }
+
+  if (isEditing) {
+    return (
+      <div className={styles.communityRowEdit}>
+        <div className={styles.editRowFields}>
+          <select
+            className={styles.addLinkSelect}
+            value={formData.platform}
+            onChange={(e) => setFormData((f) => ({ ...f, platform: e.target.value }))}
+          >
+            {["whatsapp", "discord", "telegram", "facebook", "instagram", "youtube"].map((p) => (
+              <option key={p} value={p}>{p.charAt(0).toUpperCase() + p.slice(1)}</option>
+            ))}
+          </select>
+          <input
+            className={styles.addLinkInput}
+            value={formData.displayName}
+            placeholder="Display Name"
+            onChange={(e) => setFormData((f) => ({ ...f, displayName: e.target.value }))}
+          />
+          <input
+            className={styles.communityUrlInput}
+            value={formData.url}
+            placeholder="URL (leave blank if pending)"
+            onChange={(e) => setFormData((f) => ({ ...f, url: e.target.value }))}
+          />
+        </div>
+        <div className={styles.communityRowActions}>
+          <button className={styles.saveLinkBtn} onClick={handleSave} disabled={isProcessing}>
+            {isProcessing ? "Saving…" : "Save"}
+          </button>
+          <button className={styles.filterBtn} onClick={() => setIsEditing(false)}>
+            Cancel
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className={`${styles.communityRow} ${!link.enabled ? styles.communityRowDisabled : ""}`}>
+      <div className={styles.communityRowLeft}>
+        <span className={styles.communityPlatformBadge} data-platform={link.platform}>
+          {link.platform.toUpperCase()}
+        </span>
+        <span className={styles.communityName}>{link.displayName}</span>
+        {!link.enabled && <span className={styles.pendingBadge}>PENDING / DISABLED</span>}
+      </div>
+      <div className={styles.communityRowCenter}>
+        <span className={styles.urlDisplay} title={link.url}>
+          {link.url ? link.url : <em style={{ color: "var(--text-faint)" }}>Pending URL — owner to provide</em>}
+        </span>
+      </div>
+      <div className={styles.communityRowActions}>
+        <button
+          className={styles.toggleBtn}
+          onClick={() => {
+            setFormData({ platform: link.platform, displayName: link.displayName, url: link.url });
+            setIsEditing(true);
+          }}
+          disabled={isProcessing}
+        >
+          ✏️ Edit
+        </button>
+        <button
+          className={`${styles.toggleBtn} ${link.enabled ? "" : styles.enableBtn}`}
+          onClick={() => onToggle(link)}
+          disabled={isProcessing}
+        >
+          {link.enabled ? "Disable" : "Enable"}
+        </button>
+        <button
+          className={styles.deleteBtn}
+          onClick={() => onDelete(link)}
+          disabled={isProcessing}
+        >
+          {isProcessing ? "…" : "🗑️"}
+        </button>
+      </div>
+    </div>
+  );
+}
+
 export default function AdminPage() {
   const { data: session, status } = useSession();
   const [accounts, setAccounts] = useState([]);
@@ -341,6 +593,11 @@ export default function AdminPage() {
           </table>
         </div>
       )}
+
+      {/* Community Links Management */}
+      <div style={{ marginTop: 48 }}>
+        <CommunityLinksPanel showToast={showToast} />
+      </div>
     </div>
   );
 }
