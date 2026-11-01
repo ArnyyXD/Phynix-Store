@@ -319,70 +319,35 @@
   max-width: 520px;
 }
 
-.dockWrap {
+/* ── Social Links (pill row) ── */
+.socialLinksWrap {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 8px;
-  width: 100%;
-}
-
-.dockGlass {
-  position: relative;
-  background: rgba(0, 0, 0, 0.35);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
-  padding: 12px 18px;
-  margin: 0 auto;
-}
-
-.dockRow {
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
+  flex-wrap: wrap;
   gap: 10px;
-}
-
-.dockItem {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  text-decoration: none;
-}
-
-.dockIcon {
-  width: 56px;
-  height: 56px;
-  border-radius: 14px;
-  display: flex;
-  align-items: center;
   justify-content: center;
-  cursor: pointer;
-  transform: translateY(0);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-top: 8px;
 }
 
-.dockItem:hover .dockIcon {
-  transform: scale(1.1) translateY(-8px);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+.socialPill {
+  display: inline-flex;
+  align-items: center;
+  padding: 9px 20px;
+  border-radius: 999px;
+  border: 1px solid var(--line-bright);
+  background: var(--bg-panel);
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
 }
 
-.dockLabel {
-  font-size: 11px;
-  color: var(--text-muted);
-  opacity: 0;
-  transform: translateY(4px);
-  transition: opacity 0.2s ease, transform 0.2s ease;
-  white-space: nowrap;
-}
-
-.dockItem:hover .dockLabel {
-  opacity: 1;
-  transform: translateY(0);
+.socialPill:hover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  box-shadow: 0 0 0 2px var(--accent-glow);
+  transform: translateY(-2px);
+  color: var(--text);
 }
 
 /* ── Responsive ── */
@@ -408,13 +373,12 @@
     grid-template-columns: 1fr;
   }
 
-  .dockIcon {
-    width: 48px;
-    height: 48px;
+  .socialLinksWrap {
+    gap: 8px;
   }
 
-  .dockIcon svg {
-    width: 26px !important;
-    height: 26px !important;
+  .socialPill {
+    font-size: 13px;
+    padding: 8px 16px;
   }
 }

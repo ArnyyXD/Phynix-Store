@@ -325,50 +325,23 @@ export default async function ContactPage() {
         </div>
       </section>
 
-      {/* ── Social Dock ── */}
+      {/* ── Social Links ── */}
       <section className={`${styles.section} ${styles.socialSection}`}>
         <h2 className={styles.sectionTitleCenter}>Find Us On</h2>
         <p className={styles.bodyCenter}>Connect with Phynix Store across all our social platforms.</p>
 
-        {/* Squircle clip path */}
-        <svg width="0" height="0" style={{ position: "absolute" }}>
-          <defs>
-            <clipPath id="squircleClipContact" clipPathUnits="objectBoundingBox">
-              <path d="M 0,0.5 C 0,0 0,0 0.5,0 S 1,0 1,0.5 1,1 0.5,1 0,1 0,0.5" />
-            </clipPath>
-          </defs>
-        </svg>
-
-        <div className={styles.dockWrap}>
-          <div className={styles.dockGlass}>
-            <div className={styles.dockRow}>
-              {SOCIAL_DOCK.map(({ platform, label, href }) => {
-                const cfg = DOCK_ICONS[platform];
-                return (
-                  <a
-                    key={platform}
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    title={label}
-                    className={styles.dockItem}
-                  >
-                    <div
-                      className={styles.dockIcon}
-                      style={{
-                        background: cfg.gradient,
-                        border: `1px solid ${cfg.border}`,
-                        clipPath: "url(#squircleClipContact)",
-                      }}
-                    >
-                      {cfg.icon}
-                    </div>
-                    <span className={styles.dockLabel}>{label}</span>
-                  </a>
-                );
-              })}
-            </div>
-          </div>
+        <div className={styles.socialLinksWrap}>
+          {SOCIAL_DOCK.map(({ platform, label, href }) => (
+            <a
+              key={platform}
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.socialPill}
+            >
+              {label}
+            </a>
+          ))}
         </div>
       </section>
     </div>
