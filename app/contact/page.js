@@ -325,25 +325,6 @@ export default async function ContactPage() {
         </div>
       </section>
 
-      {/* ── Social Links ── */}
-      <section className={`${styles.section} ${styles.socialSection}`}>
-        <h2 className={styles.sectionTitleCenter}>Find Us On</h2>
-        <p className={styles.bodyCenter}>Connect with Phynix Store across all our social platforms.</p>
-
-        <div className={styles.socialLinksWrap}>
-          {SOCIAL_DOCK.map(({ platform, label, href }) => (
-            <a
-              key={platform}
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.socialPill}
-            >
-              {label}
-            </a>
-          ))}
-        </div>
-      </section>
     </div>
   );
 }
